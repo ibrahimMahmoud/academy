@@ -15,16 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('experince', function () {
-    return view('experince.index');
-});
-
-Route::get('project', function () {
-    return view('project.index');
-});
 
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('experince', function () {
+        return view('experince.index');
+    });
+    
+    Route::get('project', function () {
+        return view('project.index');
+    });
+    
+});

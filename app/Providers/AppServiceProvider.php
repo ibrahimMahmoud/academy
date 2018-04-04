@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 use App\Positions;
 use Config;
 use View;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -21,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
             $positions = Config::get($set);
             View::share('positions', $positions['positions']);
         }
+        //
         Schema::defaultStringLength(191);
     }
 
