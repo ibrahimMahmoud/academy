@@ -25,9 +25,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('experince', function () {
         return view('experince.index');
     });
-    
+
     Route::get('project', function () {
         return view('project.index');
     });
-    
+
+    Route::post('addproject', 'ProjectController@store');
+
 });
