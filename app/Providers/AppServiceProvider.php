@@ -22,7 +22,6 @@ class AppServiceProvider extends ServiceProvider
             View::share('positions', $positions['positions']);
         }
         Schema::defaultStringLength(191);
-       
     }
 
     /**
