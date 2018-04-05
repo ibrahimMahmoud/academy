@@ -26,3 +26,10 @@
               App.initHelpers(['datepicker', 'colorpicker', 'select2', 'masked-inputs', 'tags-inputs', 'summernote']);
           });
         </script>
+        <script>
+        // $('#endDate').hide();
+            $("#CurrentlyWork").click(function(){
+                $("#endDate").toggle();
+            });
+      </script>
+       @yield('jsCode')

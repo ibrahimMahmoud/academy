@@ -1,6 +1,9 @@
 
 @extends('layout.master')
-  @section('content')
+@section('style')
+<link src="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+@stop
+@section('content')
     <main id="main-container">
 
         <!-- Page Content -->
@@ -11,56 +14,105 @@
                 <h3 class="block-title">Add Experience</h3>
               </div>
               <div class="block-content block-content-full bg-gray-lighter">
-                  <form class="form-horizontal" action="base_forms_elements.html" method="post" onsubmit="return false;">
-                    <div class="form-group">
-                      <label class="col-md-3 control-label">Title</label>
-                      <div class="col-md-7">
-                        <input class="form-control" type="text" name="">
-                      </div>
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <center><li>{{ $error }}</li></center>
+                            @endforeach
+                        </ul>
                     </div>
-                    <div class="form-group">
-                      <label class="col-md-3 control-label">Company Name</label>
-                      <div class="col-md-7">
-                        <input class="form-control" type="text" name="">
-                      </div>
+                    @endif
+                    @if(Session::flash('success'))
+                    <div class="alert alert-success">
+                    {{Session::get('success')}}
                     </div>
-                    <div class="form-group">
-                      <label class="col-md-3 control-label">Experience</label>
-                      <div class="col-md-7">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <input class="form-control" type="text" name="" placeholder="From">
-                          </div>
-                          <div class="col-md-6">
-                            <input class="form-control" type="text" name="" placeholder="To">
-                          </div>
-                        </div>
-                      </div>
+                    @endif
+                    
+                    <!-- start datatable -->
+        <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Position</th>
+                <th>username</th>
+                <th>company name</th>
+                <th>Start date</th>
+                <th>end date</th>
+                <th>edit</th>
+                <th>delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($experinces as $experince)
+            <tr>
+                <td>{{@$experince->id}}</td>
+                <td>{{@$experince->title}}</td>
+                <td>{{@$experince->user->first_name}}</td>
+                <td>{{@$experince->company_name}}</td>
+                <td>{{@$experince->from_date}}</td>
+                <td>
+                @if($experince->to_date == '')
+                Current Worked Here..
+                @else
+                {{@$experince->to_date}}
+                @endif
+                </td>
+                <th>
+                    <a href="{{URL::to('/')}}/experince/{{@$experince->id}}/edit" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                </th>
+                <th>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete{{@$experince->id}}">
+                    <li class="fa fa-trash"></li>
+                </button>
+                <!-- start model -->
+                <!-- Modal -->
+                <div id="delete{{@$experince->id}}" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Delete Experience</h4>
                     </div>
-                    <div class="form-group">
-                      <label class="col-md-3 control-label">I Currently work here</label>
-                      <div class="col-md-7">
-                        <label class="css-input switch switch-primary">
-                            <input type="checkbox" checked><span></span>
-                        </label>
-                      </div>
+                    <div class="modal-body">
+                        <p>are you sure delete this?</p>
                     </div>
-                    <div class="form-group">
-                      <label class="col-md-3 control-label">Description</label>
-                      <div class="col-md-7">
-                        <textarea name="name" rows="3" class="form-control"></textarea>
-                      </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                        </button>
+                        <a href="{{URL::to('/')}}/experince/{{@$experince->id}}/delete" class="btn btn-danger">
+                        Delete
+                        </a>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-9 col-md-offset-3">
-                            <button class="btn btn-sm btn-primary" type="submit">Done</button>
-                        </div>
                     </div>
-                  </form>
+
+                </div>
+                </div>
+                <!-- end model -->
+                
+                </th>
+
+            </tr>
+           @endforeach
+        </tbody>
+    </table>
+                    <!-- end datatable -->
+
               </div>
           </div><!-- end blcok -->
 
         </div>
         <!-- END Page Content -->
     </main>
-  @endsection  
+  
+  @stop
+  @section('jsCode')
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+    </script>
+  @stop
