@@ -20,3 +20,30 @@
 
         <!-- OneUI CSS framework -->
         <link rel="stylesheet" id="css-main" href="{{asset('assets/css/oneui.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{asset('css/froala_editor.css')}}">
+        <link rel="stylesheet" href="{{asset('css/froala_style.css')}}">
+        <link rel="stylesheet" href="{{asset('css/plugins/code_view.css')}}">
+        <link rel="stylesheet" href="{{asset('css/plugins/image_manager.css')}}">
+        <link rel="stylesheet" href="{{asset('css/plugins/image.css')}}">
+        <link rel="stylesheet" href="{{asset('css/plugins/file.css')}}">
+        <link rel="stylesheet" href="{{asset('css/plugins/table.css')}}">
+        <link rel="stylesheet" href="{{asset('css/plugins/video.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+
+
+        <style>
+          body {
+            text-align: center;
+          }
+
+          div#editor {
+            width: 81%;
+            margin: auto;
+            text-align: left;
+          }
+
+          div#buttons {
+            margin-top: 30px;
+          }
+        </style>

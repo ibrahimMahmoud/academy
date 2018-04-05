@@ -24,5 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('project', function () {
         return view('project.index');
     });
-    
+
+    Route::post('addproject', 'ProjectController@store');
+
 });
