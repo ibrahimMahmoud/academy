@@ -10,8 +10,11 @@
 
         <!-- Page Content -->
         <div class="content">
+        <div class="row">
         @yield('content')
-    </div>
+        </div>
+      
+        </div>
     </main>    
         @include("layout.footer")
        
