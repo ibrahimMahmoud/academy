@@ -14,17 +14,22 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('experince', function () {
-    return view('experince.index');
-});
-
-Route::get('project', function () {
-    return view('project.index');
-});
-
-
-
 Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('login/fb', 'Api\SocialLoginController@redirectToProvider');
+Route::get('login/fb/callback', 'Api\SocialLoginController@handleProviderCallback');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('experince','ExperienceController');
+    Route::post('experince/{id}/update','ExperienceController@update');
+    Route::get('experince/{id}/delete','ExperienceController@destroy');
+    Route::get('project', function () {
+        return view('project.index');
+    });
+
+    Route::post('addproject', 'ProjectController@store');
+    Route::get('post', 'PostController@index');
+    Route::post('addpost', 'PostController@store');
+
+});

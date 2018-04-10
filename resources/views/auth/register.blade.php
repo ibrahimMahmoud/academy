@@ -74,7 +74,7 @@
         </div>
     </div>
 </div> -->
- <section class="sign-intro">
+   <section class="sign-intro">
       <div class="container">
         <h3>Sign up to lorem ipsum</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -86,6 +86,7 @@
         <div class="block">
           <div class="js-wizard-simple block">
               <!-- Step Tabs -->
+              <!-- <ul class="nav nav-tabs nav-justified">
               <ul class="nav nav-tabs nav-justified">
                   <li class="active">
                       <a href="#simple-classic-step1" data-toggle="tab">Step One</a>
@@ -93,44 +94,82 @@
                   <li>
                       <a href="#simple-classic-step2" data-toggle="tab">Step Two</a>
                   </li>
-              </ul>
+              </ul> -->
               <!-- END Step Tabs -->
 
               <!-- Form -->
-              <form class="form-horizontal" action="base_forms_wizard.html" method="post">
+              <form class="form-horizontal" action="{{URL::to('/register')}}" method="post">
                   <!-- Steps Content -->
+                 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
                   <div class="block-content tab-content">
                       <!-- Step 1 -->
                       <div class="tab-pane push-30-t push-50 active" id="simple-classic-step1">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <center><li>{{ $error }}</li></center>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                      <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                <button type="button" name="button" class="btn btn-primary btn-block">Continue by Facebook</button>
+                            </div>
+                        </div>
                           <div class="form-group">
                               <div class="col-sm-8 col-sm-offset-2">
                                   <label for="">Title</label>
-                                  <input class="form-control" type="text" id="" name="">
+                                  <!-- <input class="form-control" type="text" id="" name="title" value="{{Request::old('title')}}"> -->
+                                  <select name="title" class="form-control">
+                                  @foreach($positions as $posision)
+                                    <option value="{{@$posision->id}}">{{@$posision->EN_name}}</option>
+                                  @endforeach
+                                  </select>
                               </div>
                           </div>
                           <div class="form-group">
+                             <!-- first name -->
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <label for="">First Name</label>
+                                    <input class="form-control" type="text" id="" name="fname" value="{{Request::old('fname')}}">
+                                </div>
+                                <!-- seconed name -->
+                                <div class="col-sm-4 ">
+                                    <label for="">Last Name</label>
+                                    <input class="form-control" type="text" id="" name="lname" value="{{Request::old('lname')}}">
+                                </div>
+                          </div>
+                          <div class="form-group">
                               <div class="col-sm-8 col-sm-offset-2">
-                                  <label for="">Name</label>
-                                  <input class="form-control" type="text" id="" name="">
+                                  <label for="">Email</label>
+                                  <input class="form-control" type="email" id="" name="email" value="{{Request::old('email')}}">
                               </div>
                           </div>
                           <div class="form-group">
                               <div class="col-sm-8 col-sm-offset-2">
                                   <label for="">Phone</label>
-                                  <input class="form-control" type="text" id="" name="">
+                                  <input class="form-control" type="text" id="" name="phone" value="{{Request::old('phone')}}">
                               </div>
                           </div>
                           <div class="form-group">
-                              <div class="col-sm-8 col-sm-offset-2">
-                                  <label for="">Email</label>
-                                  <input class="form-control" type="email" id="" name="">
-                              </div>
-                          </div>
+                          <!-- password -->
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <label for="">Password</label>
+                                <input class="form-control" type="password" id="" name="password">
+                            </div>
+                            <!-- repassword -->
+                            <div class="col-sm-4 ">
+                                <label for="">Repassword</label>
+                                <input class="form-control" type="password" id="" name="password_confirmation">
+                            </div>
+                        </div>
                       </div>
                       <!-- END Step 1 -->
 
                       <!-- Step 2 -->
-                      <div class="tab-pane push-30-t push-50" id="simple-classic-step2">
+                      <!-- <div class="tab-pane push-30-t push-50" id="simple-classic-step2">
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
                                 <button type="button" name="button" class="btn btn-primary btn-block">Continue by Facebook</button>
@@ -143,20 +182,9 @@
                                 <input class="form-control" type="text" id="" name="">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-8 col-sm-offset-2">
-                                <label for="">Password</label>
-                                <input class="form-control" type="text" id="" name="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-8 col-sm-offset-2">
-                                <label for="">Repassword</label>
-                                <input class="form-control" type="text" id="" name="">
-                            </div>
-                        </div>
+                        
 
-                      </div>
+                      </div> -->
                       <!-- END Step 2 -->
                   </div>
                   <!-- END Steps Content -->
@@ -168,7 +196,7 @@
                               <button class="wizard-prev btn btn-default" type="button"><i class="fa fa-arrow-left"></i> Previous</button>
                           </div>
                           <div class="col-xs-6 text-right">
-                              <button class="wizard-next btn btn-default" type="button">Next <i class="fa fa-arrow-right"></i></button>
+                              <!-- <button class="wizard-next btn btn-default" type="button">Next <i class="fa fa-arrow-right"></i></button> -->
                               <button class="wizard-finish btn btn-primary" type="submit"><i class="fa fa-check"></i> Sign Up</button>
                           </div>
                       </div>
