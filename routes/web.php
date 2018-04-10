@@ -17,6 +17,9 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('login/fb', 'Api\SocialLoginController@redirectToProvider');
+Route::get('login/fb/callback', 'Api\SocialLoginController@handleProviderCallback');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('experince','ExperienceController');
     Route::post('experince/{id}/update','ExperienceController@update');
