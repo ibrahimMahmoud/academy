@@ -22,6 +22,7 @@
                     <li><a class="active" href="{{URL::to('/experince/create')}}"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Add Experience</span></a></li>
                     <li><a href="evaluation.php"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Evaluation</span></a></li>
                     <li><a href="{{Url('/project')}}"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Add Project</span></a></li>
+                    <li><a href="{{Url('/post')}}"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Add Post</span></a></li>
                 </ul>
             </div>
             <!-- END Side Content -->
@@ -31,4 +32,3 @@
     <!-- END Sidebar Scroll Container -->
 </nav>
 <!-- END Sidebar -->
-

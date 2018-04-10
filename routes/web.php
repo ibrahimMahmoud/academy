@@ -29,5 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::post('addproject', 'ProjectController@store');
+    Route::get('post', 'PostController@index');
+    Route::post('addpost', 'PostController@store');
 
 });

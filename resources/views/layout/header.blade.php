@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="{{asset('assets/js/plugins/bootstrap-datepicker/bootstrap-datepicker3.min.css')}}">
         <link rel="stylesheet" href="{{asset('assets/js/plugins/summernote/summernote.min.css')}}">
         <link rel="stylesheet" href="{{asset('assets/js/plugins/summernote/summernote-bs3.min.css')}}">
+        <link rel="stylesheet" href="{{asset('css/blog-home.css')}}">
 
 
         <!-- OneUI CSS framework -->
@@ -34,16 +35,6 @@
 
         <style>
           body {
-            text-align: center;
-          }
-
-          div#editor {
-            width: 81%;
-            margin: auto;
             text-align: left;
-          }
-
-          div#buttons {
-            margin-top: 30px;
           }
         </style>
