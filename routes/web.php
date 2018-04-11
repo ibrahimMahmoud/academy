@@ -14,6 +14,30 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('academy', function () {
+    return view('academy');
+});
+Route::get('add_ex', function () {
+    return view('add-experience');
+});
+Route::get('add_pro', function () {
+    return view('add-project');
+});
+Route::get('complete', function () {
+    return view('complete-prof');
+});
+Route::get('edit_prof', function () {
+    return view('edit_profile');
+});
+Route::get('index', function () {
+    return view('index');
+});
+Route::get('prof', function () {
+    return view('profile');
+});
+Route::get('signup', function () {
+    return view('signup');
+});
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 

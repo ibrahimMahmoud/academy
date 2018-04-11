@@ -1,4 +1,7 @@
-<meta charset="utf-8">
+<!DOCTYPE html>
+<html class="no-focus">
+    <head>
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
 
         <title>OneUI - shared on GFXFree.Net</title>
@@ -7,7 +10,7 @@
         <link rel="shortcut icon" href="{{asset('assets/img/favicons/favicon.png')}}">
 
         <!-- Web fonts -->
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
+        <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700"> -->
 
         <!-- Pages CSS -->
         <link rel="stylesheet" href="{{asset('assets/js/plugins/slick/slick.min.css')}}">
@@ -16,25 +19,216 @@
         <link rel="stylesheet" href="{{asset('assets/js/plugins/bootstrap-datepicker/bootstrap-datepicker3.min.css')}}">
         <link rel="stylesheet" href="{{asset('assets/js/plugins/summernote/summernote.min.css')}}">
         <link rel="stylesheet" href="{{asset('assets/js/plugins/summernote/summernote-bs3.min.css')}}">
-        <link rel="stylesheet" href="{{asset('css/blog-home.css')}}">
 
 
         <!-- OneUI CSS framework -->
         <link rel="stylesheet" id="css-main" href="{{asset('assets/css/oneui.css')}}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="{{asset('css/froala_editor.css')}}">
-        <link rel="stylesheet" href="{{asset('css/froala_style.css')}}">
-        <link rel="stylesheet" href="{{asset('css/plugins/code_view.css')}}">
-        <link rel="stylesheet" href="{{asset('css/plugins/image_manager.css')}}">
-        <link rel="stylesheet" href="{{asset('css/plugins/image.css')}}">
-        <link rel="stylesheet" href="{{asset('css/plugins/file.css')}}">
-        <link rel="stylesheet" href="{{asset('css/plugins/table.css')}}">
-        <link rel="stylesheet" href="{{asset('css/plugins/video.css')}}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
 
+        <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+        <!-- <link rel="stylesheet" id="css-theme" href="{{asset('assets/css/themes/flat.min.css"> -->
+    </head>
+    <body>
 
-        <style>
-          body {
-            text-align: left;
-          }
-        </style>
+        <div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+
+<!-- Side Overlay-->
+<aside id="side-overlay">
+    <!-- Side Overlay Scroll Container -->
+    <div id="side-overlay-scroll">
+        <!-- Side Header -->
+        <div class="side-header side-content">
+            <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
+            <button class="btn btn-default pull-right" type="button" data-toggle="layout" data-action="side_overlay_close">
+                <i class="fa fa-times"></i>
+            </button>
+            <span>
+                <img class="img-avatar img-avatar32" src="" alt="">
+                <span class="font-w600 push-10-l">Roger Hart</span>
+            </span>
+        </div>
+        <!-- END Side Header -->
+
+        <!-- Side Content -->
+        <div class="side-content remove-padding-t">
+            <!-- Notifications -->
+            <div class="block pull-r-l">
+                <div class="block-header bg-gray-lighter">
+                    <ul class="block-options">
+                        <li>
+                            <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
+                        </li>
+                        <li>
+                            <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
+                        </li>
+                    </ul>
+                    <h3 class="block-title">Recent Activity</h3>
+                </div>
+                <div class="block-content">
+                    <!-- Activity List -->
+                    <ul class="list list-activity">
+                        <li>
+                            <i class="si si-wallet text-success"></i>
+                            <div class="font-w600">New sale ($15)</div>
+                            <div><a href="javascript:void(0)">Admin Template</a></div>
+                            <div><small class="text-muted">3 min ago</small></div>
+                        </li>
+                        <li>
+                            <i class="si si-pencil text-info"></i>
+                            <div class="font-w600">You edited the file</div>
+                            <div><a href="javascript:void(0)"><i class="fa fa-file-text-o"></i> Documentation.doc</a></div>
+                            <div><small class="text-muted">15 min ago</small></div>
+                        </li>
+                        <li>
+                            <i class="si si-close text-danger"></i>
+                            <div class="font-w600">Project deleted</div>
+                            <div><a href="javascript:void(0)">Line Icon Set</a></div>
+                            <div><small class="text-muted">4 hours ago</small></div>
+                        </li>
+                        <li>
+                            <i class="si si-wrench text-warning"></i>
+                            <div class="font-w600">Core v2.5 is available</div>
+                            <div><a href="javascript:void(0)">Update now</a></div>
+                            <div><small class="text-muted">6 hours ago</small></div>
+                        </li>
+                    </ul>
+                    <div class="text-center">
+                        <small><a href="javascript:void(0)">Load More..</a></small>
+                    </div>
+                    <!-- END Activity List -->
+                </div>
+            </div>
+            <!-- END Notifications -->
+
+            <!-- Online Friends -->
+            <div class="block pull-r-l">
+                <div class="block-header bg-gray-lighter">
+                    <ul class="block-options">
+                        <li>
+                            <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
+                        </li>
+                        <li>
+                            <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
+                        </li>
+                    </ul>
+                    <h3 class="block-title">Online Friends</h3>
+                </div>
+                <div class="block-content block-content-full">
+                    <!-- Users Navigation -->
+                    <ul class="nav-users">
+                        <li>
+                            <a href="base_pages_profile.html">
+                                <img class="img-avatar" src="" alt="">
+                                <i class="fa fa-circle text-success"></i> Rebecca Gray
+                                <div class="font-w400 text-muted"><small>Copywriter</small></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="base_pages_profile.html">
+                                <img class="img-avatar" src="" alt="">
+                                <i class="fa fa-circle text-success"></i> Dennis Ross
+                                <div class="font-w400 text-muted"><small>Web Developer</small></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="base_pages_profile.html">
+                                <img class="img-avatar" src="" alt="">
+                                <i class="fa fa-circle text-success"></i> Denise Watson
+                                <div class="font-w400 text-muted"><small>Web Designer</small></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="base_pages_profile.html">
+                                <img class="img-avatar" src="" alt="">
+                                <i class="fa fa-circle text-warning"></i> Denise Watson
+                                <div class="font-w400 text-muted"><small>Photographer</small></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="base_pages_profile.html">
+                                <img class="img-avatar" src="" alt="">
+                                <i class="fa fa-circle text-warning"></i> John Parker
+                                <div class="font-w400 text-muted"><small>Graphic Designer</small></div>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- END Users Navigation -->
+                </div>
+            </div>
+            <!-- END Online Friends -->
+
+            <!-- Quick Settings -->
+            <div class="block pull-r-l">
+                <div class="block-header bg-gray-lighter">
+                    <ul class="block-options">
+                        <li>
+                            <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
+                        </li>
+                    </ul>
+                    <h3 class="block-title">Quick Settings</h3>
+                </div>
+                <div class="block-content">
+                    <!-- Quick Settings Form -->
+                    <form class="form-bordered" action="index.html" method="post" onsubmit="return false;">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <div class="font-s13 font-w600">Online Status</div>
+                                    <div class="font-s13 font-w400 text-muted">Show your status to all</div>
+                                </div>
+                                <div class="col-xs-4 text-right">
+                                    <label class="css-input switch switch-sm switch-primary push-10-t">
+                                        <input type="checkbox"><span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <div class="font-s13 font-w600">Auto Updates</div>
+                                    <div class="font-s13 font-w400 text-muted">Keep up to date</div>
+                                </div>
+                                <div class="col-xs-4 text-right">
+                                    <label class="css-input switch switch-sm switch-primary push-10-t">
+                                        <input type="checkbox"><span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <div class="font-s13 font-w600">Notifications</div>
+                                    <div class="font-s13 font-w400 text-muted">Do you need them?</div>
+                                </div>
+                                <div class="col-xs-4 text-right">
+                                    <label class="css-input switch switch-sm switch-primary push-10-t">
+                                        <input type="checkbox" checked><span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <div class="font-s13 font-w600">API Access</div>
+                                    <div class="font-s13 font-w400 text-muted">Enable/Disable access</div>
+                                </div>
+                                <div class="col-xs-4 text-right">
+                                    <label class="css-input switch switch-sm switch-primary push-10-t">
+                                        <input type="checkbox" checked><span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- END Quick Settings Form -->
+                </div>
+            </div>
+            <!-- END Quick Settings -->
+        </div>
+        <!-- END Side Content -->
+    </div>
+    <!-- END Side Overlay Scroll Container -->
+</aside>
+<!-- END Side Overlay -->
