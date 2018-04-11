@@ -115,7 +115,8 @@
                     @endif
                       <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
-                                <button type="button" name="button" class="btn btn-primary btn-block">Continue by Facebook</button>
+                                <a href="{{URL::to('/login/fb')}}" class="btn btn-primary btn-block">Continue by Facebook</a>
+                                <!-- <button type="button" name="button" class="btn btn-primary btn-block"></button> -->
                             </div>
                         </div>
                           <div class="form-group">

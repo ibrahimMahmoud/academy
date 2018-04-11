@@ -16949,18 +16949,191 @@ Custom
   margin-bottom: 10px;
   font-size: 17px;
 }
+.cover-photo {
+  width: 100;
+  height: 100px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+}
+.profile-img {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 50%;
+  position: relative;
+}
+.profile-img img {
+  width: 100%;
+}
+.profile-img .upload-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #00000094;
+  text-align: center;
+  opacity: 0;
+  transition: all .2s ease;
+}
+.profile-img .upload-img:hover {
+  opacity: 1;
+}
+.profile-img input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 999;
+  cursor: pointer;
+}
+.profile-img i {
+  position: absolute;
+  left: 0;
+  top: 45%;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+}
+.profile-sec {
+  text-align: center;
+}
+.profile-sec a {
+  display: block;
+  text-decoration: none;
+  color: #000;
+  margin: 10px auto 0;
+  font-weight: bold;
+}
+.profile-sec .prof-wrap {
+  margin-top: -50px;
+  padding-bottom: 15px;
+}
 
 
+.post-adder img {
+  width: 60px;
+  float: left;
+}
+.post-adder .te {
+  float: left;
+  padding-left: 10px;
+}
+.post-adder .te h5 {
+  margin: 0;
+  font-weight: 500;
+  color: #000;
+}
+.post-adder .te p {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: .3px;
+}
+.post-img {
+  margin: 15px 0;
+  display: block;
+}
+.desc h4 {
+  color: #000;
+  font-weight: 400;
+  font-size: 18px;
+}
+.actions {
+  border-top: 1px solid #e6e6e6;
+}
+.actions li {
+  display: inline-block;
+}
+.actions li a {
+  color: #555;
+}
 
+.comments {
+  background-color: #f3f6f8;
+  padding: 15px;
+}
+.comments .comment {
+  margin-bottom: 15px;
+}
+.comments .comment h4 {
+  font-weight: 400;
+  font-size: 16px;
+  color: #444;
+  margin: 0;
+}
+.comments .comment p {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: .5px;
+}
+.block.post {
+  margin: 0px 50px 15px 50px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #e6e6e6;
+}
 
-
-
-
-
-
-
-
-
+.personal-info {
+  /* text-align: center; */
+  padding-bottom: 20px;
+}
+.personal-info h4 {
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.personal-info p {
+  margin: 0;
+  line-height: 1.4;
+  letter-spacing: .5px;
+  color: #666;
+  font-size: 14px;
+}
+.personal-info p.p {
+  margin: 5px 0 20px 0 !important;
+  font-size: 13px;
+}
+.project-item {
+  display: block;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  margin-bottom: 15px;
+}
+.project-item .img-container {
+  max-height: 117px;
+}
+.project-item h5 {
+  color: #555;
+  font-weight: 400;
+  margin-top: 5px;
+}
+.note-editor {
+  border-color: #ddd;
+  background-color: #fff;
+}
+.block-options > li > a, .block-options > li > button {
+  color: #171717;
+}
+.block-item {
+  border-top: 1px solid #ccc;
+  padding: 15px 0;
+}
+.block-item:first-child {
+  border: none;
+  padding-top: 0;
+}
+.addmore {
+  float: right;
+  margin-right: 17%;
+}
 
 
 
