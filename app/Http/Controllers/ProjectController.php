@@ -47,8 +47,10 @@ class ProjectController extends Controller
           'caver_url' => $input['filename'],
           'description' => $request['content'],
         ]);
-
-        return view('project.index');
+        //  x = $request['user_id'];
+        // return x;
+        // return redirect()->to(url('prof/'));
+        return redirect()->route('prof', [$request['user_id']]);
     }
 
     /**

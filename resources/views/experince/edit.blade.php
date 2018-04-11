@@ -86,6 +86,6 @@
   <script>
         $('#endDate').hide();
          
-      </script>
+  </script>
   @endif
   @stop
