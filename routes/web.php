@@ -46,6 +46,7 @@ Route::get('login/fb/callback', 'Api\SocialLoginController@handleProviderCallbac
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('experince','ExperienceController');
+
     Route::post('experince/{id}/update','ExperienceController@update');
     Route::get('experince/{id}/delete','ExperienceController@destroy');
     Route::get('project', function () {

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Socialite;
+use App\User;
+use Session;
+use Auth;
 
 class SocialLoginController extends Controller
 {
@@ -29,15 +32,28 @@ class SocialLoginController extends Controller
         $refreshToken = $user->refreshToken; // not always provided
         $expiresIn = $user->expiresIn;
 
-        // OAuth One Providers
         $token = $user->token;
-        $tokenSecret = $user->tokenSecret;
-        dd($user,$user->token);
-        // All Providers
-        $user->getId();
-        $user->getNickname();
-        $user->getName();
-        $user->getEmail();
-        $user->getAvatar();
+       $find_user = User::where('facebook_id',$user->getId())->first();
+    //    dd($find_user);   
+       if(count($find_user) > 0 ){
+   
+        Auth::loginUsingId($find_user->id, true);
+        Session::flash('success','authintcation success..');
+        return redirect('experince');
+
+       }else{
+            $create =  User::create([
+                'facebook_id'=>$user->getId(),
+                'first_name'=>$user->getName(),
+                'email'=> $user->getEmail(),
+                'image'=> $user->getAvatar(),
+                'user_type_id'=>1,
+                'is_active'=>1
+            ]);
+            Auth::loginUsingId($create->id, true);
+            Session::flash('success','authintcation success..');
+            return redirect('experince');
+       }
+
     }
 }
