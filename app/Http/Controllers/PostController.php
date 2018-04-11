@@ -49,7 +49,7 @@ class PostController extends Controller
           'content' => $request['content'],
         ]);
 
-        return view('post.index');
+        return redirect()->to(url('post'));
     }
 
     /**

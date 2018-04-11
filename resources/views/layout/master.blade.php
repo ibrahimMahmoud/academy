@@ -17,6 +17,6 @@
         </div>
     </main>    
         @include("layout.footer")
-       
+        @yield('jsCode')
     </body>
 </html>

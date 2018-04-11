@@ -52,4 +52,4 @@
                 $("#endDate").toggle();
             });
       </script>
-       @yield('jsCode')
+       
