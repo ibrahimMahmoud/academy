@@ -17,7 +17,7 @@
             <!-- Side Content -->
             <div class="side-content">
                 <ul class="nav-main">
-                  <li><a class="active" href="index.php"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Timeline</span></a></li>
+                  <li><a class="active" href="{{Url('/blog')}}"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Timeline</span></a></li>
                   <li><a href="profile.php"><i class="si si-user"></i><span class="sidebar-mini-hide">Profile</span></a></li>
                   <li><a href="evaluation.php"><i class="si si-question"></i><span class="sidebar-mini-hide">Evaluation</span></a></li>
                 </ul>
