@@ -39,7 +39,7 @@ class SocialLoginController extends Controller
    
         Auth::loginUsingId($find_user->id, true);
         Session::flash('success','authintcation success..');
-        return redirect('experince');
+        return redirect('complete/create');
 
        }else{
             $create =  User::create([
@@ -52,7 +52,7 @@ class SocialLoginController extends Controller
             ]);
             Auth::loginUsingId($create->id, true);
             Session::flash('success','authintcation success..');
-            return redirect('experince');
+            return redirect('complete/create');
        }
 
     }

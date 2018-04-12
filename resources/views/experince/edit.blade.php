@@ -88,4 +88,11 @@
          
       </script>
   @endif
-  @stop
+
+<script>
+// $('#endDate').hide();
+$("#CurrentlyWork").click(function(){
+    $("#endDate").toggle();
+});
+</script>
+@stop

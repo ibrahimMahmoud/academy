@@ -79,4 +79,14 @@
         <!-- END Page Content -->
     </main>
   
-  @endsection  
+@stop 
+@section('jsCode')
+<script>
+// $('#endDate').hide();
+$("#CurrentlyWork").click(function(){
+    $("#endDate").toggle();
+});
+</script>
+@stop
+
+

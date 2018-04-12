@@ -23,7 +23,9 @@
                 <!-- END Step Tabs -->
 
                 <!-- Form -->
-                <form class="form-horizontal" action="base_forms_wizard.html" method="post">
+                <form class="form-horizontal" action="{{URL::to('/complete')}}" enctype="multipart/form-data" method="post">
+                <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+                
                   <!-- Steps Progress -->
                   <div class="block-content block-content-mini block-content-full border-b">
                       <div class="wizard-progress progress progress-mini remove-margin-b">
@@ -34,30 +36,40 @@
 
                     <!-- Steps Content -->
                     <div class="block-content tab-content">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <center><li>{{ $error }}</li></center>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                         <!-- Step 1 -->
                         <div class="tab-pane push-30-t push-50 active" id="simple-classic-step1">
-                            <div class="form-group">
-                                <div class="col-sm-8 col-sm-offset-2">
-                                    <label for="">Title</label>
-                                    <input class="form-control" type="text" id="" name="">
+                  
+                        <div class="form-group">
+                             <!-- first name -->
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <label for="">First Name</label>
+                                    <input class="form-control" type="text" id="" name="fname" >
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-8 col-sm-offset-2">
-                                    <label for="">Name</label>
-                                    <input class="form-control" type="text" id="" name="">
+                                <!-- seconed name -->
+                                <div class="col-sm-4 ">
+                                    <label for="">Last Name</label>
+                                    <input class="form-control" type="text" id="" name="lname" >
                                 </div>
-                            </div>
+                          </div>
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-2">
                                     <label for="">Phone</label>
-                                    <input class="form-control" type="text" id="" name="">
+                                    <input class="form-control" type="text" id="" name="phone">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-2">
                                     <label for="">Email</label>
-                                    <input class="form-control" type="email" id="" name="">
+                                    <input class="form-control" type="email" id="" name="email">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -65,25 +77,14 @@
                                     <label for="">i'm ..</label>
                                     <br>
                                     <label class="css-input css-radio css-radio-info push-10-r">
-                                      <input type="radio" name="radio-group3" checked=""><span></span> Employee
+                                      <input type="radio" name="work_status" value="employee" checked=""><span></span> Employee
                                     </label>
                                     <label class="css-input css-radio css-radio-info push-10-r">
-                                      <input type="radio" name="radio-group3"><span></span> Freelance
+                                      <input type="radio" name="work_status" value="freelancer"><span></span> Freelance
                                     </label>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-sm-8 col-sm-offset-2">
-                                    <label for="">Password</label>
-                                    <input class="form-control" type="text" id="" name="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-8 col-sm-offset-2">
-                                    <label for="">Repassword</label>
-                                    <input class="form-control" type="text" id="" name="">
-                                </div>
-                            </div>
+                          
                         </div>
                         <!-- END Step 1 -->
 
@@ -92,40 +93,40 @@
                           <div class="form-group">
                             <label class="col-md-3 control-label">Title</label>
                             <div class="col-md-7">
-                              <input class="form-control" type="text" name="">
+                              <input class="form-control" type="text" name="position[]">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="col-md-3 control-label">Company Name</label>
                             <div class="col-md-7">
-                              <input class="form-control" type="text" name="">
+                              <input class="form-control" type="text" name="company_name[]">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="col-md-3 control-label">Experience</label>
                             <div class="col-md-7">
-                              <div class="row">
-                                <div class="col-md-6">
-                                  <input class="form-control" type="text" name="" placeholder="From">
-                                </div>
-                                <div class="col-md-6">
-                                  <input class="form-control" type="text" name="" placeholder="To">
-                                </div>
-                              </div>
+                            <div class="row">
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" name="start_date[]" placeholder="From" value="" >
+                            </div>
+                            <div class="col-md-6" id="endDate">
+                                <input class="form-control" type="text" name="end_date[]" placeholder="To" value="" >
+                            </div>
+                            </div>
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="col-md-3 control-label">I Currently work here</label>
                             <div class="col-md-7">
                               <label class="css-input switch switch-primary">
-                                  <input type="checkbox" checked><span></span>
+                              <input type="checkbox" name="CurrentlyWork" id="CurrentlyWork" ><span></span><span></span>
                               </label>
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="col-md-3 control-label">Description</label>
                             <div class="col-md-7">
-                              <textarea name="name" rows="3" class="form-control"></textarea>
+                              <textarea name="description" rows="3" class="form-control"></textarea>
                             </div>
                           </div>
                           <button type="button" name="button" class="btn btn-primary addmore push-15">Add More</button>
@@ -136,19 +137,19 @@
                           <div class="form-group">
                             <div class="col-md-8 col-md-offset-2">
                               <h4 class="question">Title</h4>
-                              <input type="text" name="" value="" class="form-control">
+                              <input type="text" name="name_project[]" value="" class="form-control">
                             </div>
                           </div>
                           <div class="form-group">
                             <div class="col-md-8 col-md-offset-2">
                               <h4 class="question">Upload Project Cover Image</h4>
-                              <input type="file" name="" value="" class="form-control">
+                              <input type="file" name="project_cover[]" value="" class="form-control">
                             </div>
                           </div>
                           <div class="form-group">
                             <div class="col-md-8 col-md-offset-2">
                               <h4 class="question">Content</h4>
-                              <div class="js-summernote">Hello Summernote!</div>
+                              <textarea name="project_details[]" id="content"></textarea>
                             </div>
                           </div>
                           <button type="button" name="button" class="btn btn-primary addmore push-15">Add More</button>
@@ -166,6 +167,7 @@
                             <div class="col-xs-6 text-right">
                                 <button class="wizard-next btn btn-default" type="button">Next <i class="fa fa-arrow-right"></i></button>
                                 <!-- done button action in assets/js/pages/base_forms_wizard.js -->
+                                <!-- <input  type="submit" valye="Done"> -->
                                 <button class="wizard-finish btn btn-primary" type="submit"><i class="fa fa-check"></i> Done</button>
                             </div>
                         </div>
@@ -180,5 +182,14 @@
     </main>
   <!-- END Page Content -->
 
-@endsection
+@stop
+@section('jsCode')
+<script>
+// $('#endDate').hide();
+$("#CurrentlyWork").click(function(){
+    $("#endDate").toggle();
+});
+</script>
+@stop
+
 

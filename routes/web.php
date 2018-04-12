@@ -23,9 +23,7 @@ Route::get('add_ex', function () {
 Route::get('add_pro', function () {
     return view('add-project');
 });
-Route::get('complete', function () {
-    return view('complete-prof');
-});
+
 Route::get('edit_prof', function () {
     return view('edit_profile');
 });
@@ -49,6 +47,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('experince/{id}/update','ExperienceController@update');
     Route::get('experince/{id}/delete','ExperienceController@destroy');
+    
+    Route::resource('complete','ProfileExperienceController');
+
     Route::get('project', function () {
         return view('project.index');
     });

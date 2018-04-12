@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('facebook_id')->nullable();
             $table->string('image')->default('img/avatar.png');
             $table->boolean('is_active');
+            $table->enum('work_status',['freelancer','employee']);
             $table->rememberToken();
             $table->timestamps();
         });
