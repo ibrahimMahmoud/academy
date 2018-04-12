@@ -80,13 +80,6 @@
     </main>
   
 @stop 
-@section('jsCode')
-<script>
-// $('#endDate').hide();
-$("#CurrentlyWork").click(function(){
-    $("#endDate").toggle();
-});
-</script>
-@stop
+
 
 

@@ -50,6 +50,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('experince/{id}/delete','ExperienceController@destroy');
     
     Route::resource('complete','ProfileExperienceController');
+    Route::get('complete_freelancer', 'ProfileExperienceController@create');
+    Route::get('complete_employee', 'ProfileExperienceController@EmployeeCreate');
 
     Route::get('project', function () {
         return view('project.index');

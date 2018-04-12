@@ -7,6 +7,9 @@ use  App\Http\Requests\ProfileExperienceRequest;
 use Validator;
 use App\Experience,App\User,App\Project;
 use Auth;
+use Illuminate\Support\Facades\Input;
+use Hash;
+use Session;
 
 class ProfileExperienceController extends Controller
 {
@@ -15,10 +18,23 @@ class ProfileExperienceController extends Controller
         # code...
     }
 
+
+    public function show()
+    {
+        # code...
+    }
+
+    //as frelancer
     public function create()
     {
-        return view('complete-prof');
+      return view('complete-prof-freelancer');
     }
+
+     //as employee
+     public function EmployeeCreate()
+     {
+         return view('complete-prof');
+     }
 
     public function store(ProfileExperienceRequest $request)
     {
@@ -29,7 +45,8 @@ class ProfileExperienceController extends Controller
 
 		foreach(range(0, $nbr) as $index) {
             $rules['work_status'] = 'required';            
-		    $rules['name'] = 'required|string';
+		    $rules['fname'] = 'required|string';
+		    $rules['lname'] = 'required|string';
 		    $rules['phone'] = 'required|numeric';
             $rules['email'] = 'required|email';
             //seconed step
@@ -86,25 +103,28 @@ class ProfileExperienceController extends Controller
         }
         // start User Projects 
         if($request->has('name_project')){
-          foreach ($request->name_project as $key => $project) {
-            if (Input::hasFile('project_cover')) {
-                $time = time();
-                $newname = Hash::make($time);
-    
-                $ext  =Input::file('project_cover')[$key]->getClientOriginalExtension();
-                $fullname = str_replace('/','',$newname) . '.' . $ext;
-                Input::file('project_cover')[$key]->move(public_path() .'/uploads/images/project', $fullname);
-                $path ='/uploads/images/project';
-                $this->attributes['image'] =$path.'/'.$fullname;
-            }
+          foreach ($request->file('project_cover') as $key => $project) {
+            $time = time();
+            $newname = Hash::make($time);
+            $ext  =Input::file('project_cover')[$key]->getClientOriginalExtension();
+            $skip_slash = str_replace('/','',$newname) . '.' . $ext;
+            $fullname = str_replace('.','',$skip_slash) . '.' . $ext;
+            $move = $project->move(public_path() .'/uploads/images/project', $fullname);
+           
+            $path ='/uploads/images/project';
+            $this->attributes['image'] =$path.'/'.$fullname;
+
             Project::create([
                 'user_id'=>Auth::id(),
                 'project_name'=>$request->name_project[$key],
                 'description'=>$request->project_details[$key],
-                'caver_url'=>$this->attributes['image'][$key]
+                'caver_url'=>$this->attributes['image']
             ]);
+
           }
         }
-
+        
+        Session::flash('success','created success..');
+        return redirect()->back();
     }
 }

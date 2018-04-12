@@ -13,9 +13,7 @@
                     <li class="active">
                         <a href="#simple-classic-step1" data-toggle="tab">Personal Information</a>
                     </li>
-                    <li  id="employee">
-                        <a href="#simple-classic-step2" data-toggle="tab">Add Experience</a>
-                    </li>
+                   
                     <li>
                         <a href="#simple-classic-step3" data-toggle="tab">Add Project</a>
                     </li>
@@ -91,50 +89,6 @@
                         </div>
                         <!-- END Step 1 -->
 
-                        <!-- Step 2 -->
-                        <div class="tab-pane push-30-t push-50" id="simple-classic-step2">
-                          <div class="form-group">
-                            <label class="col-md-3 control-label">Title</label>
-                            <div class="col-md-7">
-                              <input class="form-control" type="text" name="position[]">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-md-3 control-label">Company Name</label>
-                            <div class="col-md-7">
-                              <input class="form-control" type="text" name="company_name[]">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-md-3 control-label">Experience</label>
-                            <div class="col-md-7">
-                            <div class="row">
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" name="start_date[]" placeholder="From" value="" >
-                            </div>
-                            <div class="col-md-6" id="endDate">
-                                <input class="form-control" type="text" name="end_date[]" placeholder="To" value="" >
-                            </div>
-                            </div>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-md-3 control-label">I Currently work here</label>
-                            <div class="col-md-7">
-                              <label class="css-input switch switch-primary">
-                              <input type="checkbox" name="CurrentlyWork" id="CurrentlyWork" ><span></span><span></span>
-                              </label>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-md-3 control-label">Description</label>
-                            <div class="col-md-7">
-                              <textarea name="description" rows="3" class="form-control"></textarea>
-                            </div>
-                          </div>
-                          <button type="button" name="button" class="btn btn-primary addmore push-15">Add More</button>
-                        </div>
-                        <!-- END Step 2 -->
                         <!-- Step 3 -->
                         <div class="tab-pane push-30-t push-50" id="simple-classic-step3">
                           <div class="form-group">

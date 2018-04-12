@@ -89,6 +89,7 @@
                                   <input class="form-control" type="text" id="" name="phone" value="{{Request::old('phone')}}">
                               </div>
                           </div>
+
                           <div class="form-group">
                           <!-- password -->
                             <div class="col-sm-4 col-sm-offset-2">
@@ -101,6 +102,19 @@
                                 <input class="form-control" type="password" id="" name="password_confirmation">
                             </div>
                         </div>
+                        <div class="form-group">
+                              <div class="col-sm-8 col-sm-offset-2">
+                                  <label for="">i'm ..</label>
+                                  <br>
+                                  <label class="css-input css-radio css-radio-info push-10-r">
+                                    <input type="radio" name="work_status" value="employee" checked=""><span></span> Employee
+                                  </label>
+                                  <label class="css-input css-radio css-radio-info push-10-r">
+                                    <input type="radio" name="work_status" id="freelancer" value="freelancer"><span></span> Freelance
+                                  </label>
+                              </div>
+                          </div>
+                        
                       </div>
                       <!-- END Step 1 -->
 
