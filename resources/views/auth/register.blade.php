@@ -1,80 +1,24 @@
-@extends('layout.master')
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
 
-@section('content')
-<!-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+    <title>Digi-Sail Academy</title>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
+    <!-- fav icon -->
+    <link rel="shortcut icon" href="{{asset('assets/img/favicons/favicon.png')}}">
 
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+    <!-- Web fonts -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+    <!-- OneUI CSS framework -->
+    <link rel="stylesheet" href="{{asset('assets/css/oneui.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/academy.css')}}">
+  </head>
+  <body>
 
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-   <section class="sign-intro">
+    <section class="sign-intro">
       <div class="container">
         <h3>Sign up to lorem ipsum</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -84,21 +28,12 @@
     <section>
       <div class="container">
         <div class="block">
-          <div class="js-wizard-simple block">
-              <!-- Step Tabs -->
-              <!-- <ul class="nav nav-tabs nav-justified">
-              <ul class="nav nav-tabs nav-justified">
-                  <li class="active">
-                      <a href="#simple-classic-step1" data-toggle="tab">Step One</a>
-                  </li>
-                  <li>
-                      <a href="#simple-classic-step2" data-toggle="tab">Step Two</a>
-                  </li>
-              </ul> -->
-              <!-- END Step Tabs -->
-
-              <!-- Form -->
-              <form class="form-horizontal" action="{{URL::to('/register')}}" method="post">
+          <div class="block-header bg-gray-lighter">
+            <h3 class="block-title"><i class="fa fa-fw fa-user"></i> Signup</h3>
+          </div>
+          <div class="block-content">
+             <!-- Form -->
+             <form class="form-horizontal" action="{{URL::to('/register')}}" method="post">
                   <!-- Steps Content -->
                  <input type="hidden" name="_token" value="{!! csrf_token() !!}">
                   <div class="block-content tab-content">
@@ -154,6 +89,7 @@
                                   <input class="form-control" type="text" id="" name="phone" value="{{Request::old('phone')}}">
                               </div>
                           </div>
+
                           <div class="form-group">
                           <!-- password -->
                             <div class="col-sm-4 col-sm-offset-2">
@@ -166,6 +102,19 @@
                                 <input class="form-control" type="password" id="" name="password_confirmation">
                             </div>
                         </div>
+                        <div class="form-group">
+                              <div class="col-sm-8 col-sm-offset-2">
+                                  <label for="">i'm ..</label>
+                                  <br>
+                                  <label class="css-input css-radio css-radio-info push-10-r">
+                                    <input type="radio" name="work_status" value="employee" checked=""><span></span> Employee
+                                  </label>
+                                  <label class="css-input css-radio css-radio-info push-10-r">
+                                    <input type="radio" name="work_status" id="freelancer" value="freelancer"><span></span> Freelance
+                                  </label>
+                              </div>
+                          </div>
+                        
                       </div>
                       <!-- END Step 1 -->
 
@@ -205,6 +154,7 @@
                   <!-- END Steps Navigation -->
               </form>
               <!-- END Form -->
+    
           </div>
         </div>
       </div>
@@ -292,4 +242,24 @@
             </div>
         </div>
     </div>
-@endsection
+    <!-- END Large Modal -->
+
+    <script src="{{asset('assets/js/core/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/js/core/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/js/core/jquery.slimscroll.min.js')}}"></script>
+    <script src="{{asset('assets/js/core/jquery.scrollLock.min.js')}}"></script>
+    <script src="{{asset('assets/js/core/jquery.appear.min.js')}}"></script>
+    <script src="{{asset('assets/js/core/jquery.countTo.min.js')}}"></script>
+    <script src="{{asset('assets/js/core/jquery.placeholder.min.js')}}"></script>
+    <script src="{{asset('assets/js/core/js.cookie.min.js')}}"></script>
+    <script src="{{asset('assets/js/app.js')}}"></script>
+    <!-- Page JS Plugins -->
+    <script src="{{asset('assets/js/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/jquery-validation/jquery.validate.min.js')}}"></script>
+
+    <!-- Page JS Code -->
+    <script src="{{asset('assets/js/pages/base_forms_wizard.js')}}"></script>
+
+
+  </body>
+</html>

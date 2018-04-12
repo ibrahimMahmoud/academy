@@ -42,13 +42,18 @@
         <!-- Page JS Code -->
         <script src="{{asset('assets/js/pages/base_forms_wizard.js')}}"></script>
 
-
+   @yield('jsCode')
         <script>
             $(function() { $('textarea').froalaEditor();});
            $(function () {
                App.initHelpers(['datepicker', 'colorpicker', 'select2', 'masked-inputs', 'tags-inputs', 'summernote']);
            });
         </script>
-   @yield('jsCode')
+<script>
+// $('#endDate').hide();
+$("#CurrentlyWork").click(function(){
+$("#endDate").toggle();
+});
+</script>
     </body>
 </html>
