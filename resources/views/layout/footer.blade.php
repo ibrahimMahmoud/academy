@@ -33,5 +33,3 @@
    @yield('jsCode')
     </body>
 </html>
-
-    

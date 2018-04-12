@@ -6,3 +6,6 @@
         @yield('content')
 
         @include("layout.footer")
+        @yield('jsCode')
+    </body>
+</html>

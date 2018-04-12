@@ -45,6 +45,7 @@ Route::get('login/fb/callback', 'Api\SocialLoginController@handleProviderCallbac
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('experince','ExperienceController');
 
+    Route::get('addexperience', 'ExperienceController@create');
     Route::post('experince/{id}/update','ExperienceController@update');
     Route::get('experince/{id}/delete','ExperienceController@destroy');
     
@@ -57,5 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('addproject', 'ProjectController@store');
     Route::get('post', 'PostController@index');
     Route::post('addpost', 'PostController@store');
+    Route::get('prof/{id}', 'HomeController@profile')->name("prof");
+
 
 });
