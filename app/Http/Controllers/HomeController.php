@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Experience;
-use App\Project;
+use App\Post;
 use App\User;
+use App\Comment;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class HomeController extends Controller
 {
@@ -37,4 +41,15 @@ class HomeController extends Controller
         //dd($experience);
         return view('profile', compact('project', 'experience','user'));
     }
+
+    public function timeline()
+    {
+        // $experience = Experience::where('user_id', $id)->get();
+         $post = Post::all();
+         $user = Auth::user();
+         $comment = Comment::all();
+        return view('index', compact('post', 'comment','user'));
+    }
+
+
 }

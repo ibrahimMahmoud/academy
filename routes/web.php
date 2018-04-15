@@ -27,7 +27,7 @@ Route::get('add_pro', function () {
 Route::get('edit_prof', function () {
     return view('edit_profile');
 });
-Route::get('index', function () {
+Route::get('blog', function () {
     return view('index');
 });
 Route::get('prof', function () {
@@ -45,7 +45,7 @@ Route::get('login/fb/callback', 'Api\SocialLoginController@handleProviderCallbac
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('experince','ExperienceController');
-
+    Route::get('editexper', 'ExperienceController@edit');
     Route::get('addexperience', 'ExperienceController@create');
     Route::post('experince/{id}/update','ExperienceController@update');
     Route::get('experince/{id}/delete','ExperienceController@destroy');
@@ -62,6 +62,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('post', 'PostController@index');
     Route::post('addpost', 'PostController@store');
     Route::get('prof/{id}', 'HomeController@profile')->name("prof");
+    Route::get('blog', 'HomeController@timeline');
+    Route::post('sendmessage', 'ChatController@store');
+    Route::post('sendcomment', 'CommentController@store');
 
 
 });

@@ -23,7 +23,7 @@
                           </div>
                           <div class="col-md-10">
                             <h4>{{$user[0]->first_name}}</h4>
-                            <p>{{$user[0]->position_id}}</p>
+                            <p>{{$user[0]->position->EN_name}}</p>
                             <p>{{$user[0]->phone}}</p>
                             <p>{{$user[0]->email}}</p>
                           </div>
@@ -45,7 +45,7 @@
                         @foreach($experience as $expr)
                         <div class="block-item">
                           <ul class="block-options">
-                            <li><a href="#!"><i class="fa fa-trash"></i></a></li>
+                            <li><a href="{{URL::to('/')}}/experince/{{@$expr->id}}/delete" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></li>
                             <li><a href="{{URL::to('/')}}/experince/{{@$expr->id}}/edit"><i class="fa fa-pencil"></i></a></li>
                             <li><a href="#" class="btn btn-sm btn-icon btn-success on-default edit-row"
                       data-toggle="modal" data-target="#edit{{ @$expr->id }}" data-original-title="Edit"><i class="icon md-edit" aria-hidden="true"></i></a></li>
@@ -110,7 +110,7 @@
                               </div>
                             </div>
                             <a href="#">{{$user[0]->first_name}}</a>
-                            <span>{{$user[0]->position_id}}</span>
+                            <span>{{$user[0]->position->EN_name}}</span>
                           </div>
                         </div>
                     </div>
@@ -173,10 +173,10 @@
                       <div class="col-md-7">
                         <div class="row">
                           <div class="col-md-6">
-                            <input class="form-control" type="text" name="start_date" placeholder="From" value="{{@$expr->from_date}}" >
+                            <input class="form-control" type="date" name="start_date" placeholder="From" value="{{@$expr->from_date}}" >
                           </div>
                           <div class="col-md-6" id="endDate">
-                            <input class="form-control" type="text" name="end_date" placeholder="To" value="{{@$expr->to_date}}" >
+                            <input class="form-control" type="date" name="end_date" placeholder="To" value="{{@$expr->to_date}}" >
                           </div>
                         </div>
                       </div>
