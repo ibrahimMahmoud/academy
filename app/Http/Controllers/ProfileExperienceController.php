@@ -27,7 +27,8 @@ class ProfileExperienceController extends Controller
     //as frelancer
     public function create()
     {
-      return view('complete-prof-freelancer');
+      $user = User::find(Auth::id());
+      return view('complete-prof-freelancer',compact('user'));
     }
 
      //as employee
@@ -104,7 +105,7 @@ class ProfileExperienceController extends Controller
             }
         }
         // start User Projects 
-        if($request->has('name_project')){
+        if($request->has('project_cover')){
           foreach ($request->file('project_cover') as $key => $project) {
             $time = time();
             $newname = Hash::make($time);

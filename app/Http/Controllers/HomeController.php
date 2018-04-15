@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Experience;
 use App\Post;
+use App\Project;
 use App\User;
 use App\Comment;
 use Illuminate\Support\Facades\Auth;
@@ -36,8 +37,10 @@ class HomeController extends Controller
     public function profile($id)
     {
         $experience = Experience::where('user_id', $id)->get();
+        if (count($experience)) {
         $project = Project::where('user_id', $id)->get();
         $user = User::where('id', $id)->get();
+        }
         //dd($experience);
         return view('profile', compact('project', 'experience','user'));
     }

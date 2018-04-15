@@ -49,28 +49,29 @@
                         <!-- Step 1 -->
                         <div class="tab-pane push-30-t push-50 active" id="simple-classic-step1">
                   
+                        
                         <div class="form-group">
                              <!-- first name -->
                                 <div class="col-sm-4 col-sm-offset-2">
                                     <label for="">First Name</label>
-                                    <input class="form-control" type="text" id="" name="fname" >
+                                    <input class="form-control" type="text" id="" name="fname" value="{{@$user->first_name}}" >
                                 </div>
                                 <!-- seconed name -->
                                 <div class="col-sm-4 ">
                                     <label for="">Last Name</label>
-                                    <input class="form-control" type="text" id="" name="lname" >
+                                    <input class="form-control" type="text" id="" name="lname"  value="{{@$user->last_name}}" >
                                 </div>
                           </div>
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-2">
                                     <label for="">Phone</label>
-                                    <input class="form-control" type="text" id="" name="phone">
+                                    <input class="form-control" type="text" id="" name="phone"  value="{{@$user->phone}}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-2">
                                     <label for="">Email</label>
-                                    <input class="form-control" type="email" id="" name="email">
+                                    <input class="form-control" type="email" id="" name="email"  value="{{@$user->email}}">
                                 </div>
                             </div>
                        <!--      <div class="form-group">

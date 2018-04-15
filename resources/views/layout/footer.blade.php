@@ -42,7 +42,7 @@
         <!-- Page JS Code -->
         <script src="{{asset('assets/js/pages/base_forms_wizard.js')}}"></script>
 
-   @yield('jsCode')
+        @yield('jsCode')
         <script>
             $(function() { $('textarea').froalaEditor();});
            $(function () {
