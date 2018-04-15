@@ -55,88 +55,94 @@
                              <!-- first name -->
                                 <div class="col-sm-4 col-sm-offset-2">
                                     <label for="">First Name</label>
-                                    <input class="form-control" type="text" id="" name="fname" >
+                                    <input class="form-control" type="text" id="" name="fname" value="{{@$user->first_name}}" >
                                 </div>
                                 <!-- seconed name -->
                                 <div class="col-sm-4 ">
                                     <label for="">Last Name</label>
-                                    <input class="form-control" type="text" id="" name="lname" >
+                                    <input class="form-control" type="text" id="" name="lname"  value="{{@$user->last_name}}" >
                                 </div>
                           </div>
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-2">
                                     <label for="">Phone</label>
-                                    <input class="form-control" type="text" id="" name="phone">
+                                    <input class="form-control" type="text" id="" name="phone"  value="{{@$user->phone}}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-2">
                                     <label for="">Email</label>
-                                    <input class="form-control" type="email" id="" name="email">
+                                    <input class="form-control" type="email" id="" name="email"  value="{{@$user->email}}">
                                 </div>
                             </div>
-                            <div class="form-group">
+                        <!--     <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-2">
                                     <label for="">i'm ..</label>
                                     <br>
                                     <label class="css-input css-radio css-radio-info push-10-r">
-                                      <input type="radio" name="work_status" value="employee" checked=""><span></span> Employee
+                                      <input type="radio" name="work_status" value="employee" <?php if(@$user->work_status == 'employee'){echo"checked";}?> ><span></span> Employee
                                     </label>
                                     <label class="css-input css-radio css-radio-info push-10-r">
-                                      <input type="radio" name="work_status" id="freelancer" value="freelancer"><span></span> Freelance
+                                      <input type="radio" name="work_status" id="freelancer" value="freelancer"  <?php if(@$user->work_status == 'freelancer'){echo"checked";}?> ><span></span> Freelance
                                     </label>
                                 </div>
-                            </div>
+                            </div> -->
                           
                         </div>
                         <!-- END Step 1 -->
 
                         <!-- Step 2 -->
-                        <div class="tab-pane push-30-t push-50" id="simple-classic-step2">
-                          <div class="form-group">
-                            <label class="col-md-3 control-label">Title</label>
-                            <div class="col-md-7">
-                              <input class="form-control" type="text" name="position[]">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-md-3 control-label">Company Name</label>
-                            <div class="col-md-7">
-                              <input class="form-control" type="text" name="company_name[]">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-md-3 control-label">Experience</label>
-                            <div class="col-md-7">
-                            <div class="row">
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" name="start_date[]" placeholder="From" value="" >
-                            </div>
-                            <div class="col-md-6" id="endDate">
-                                <input class="form-control" type="text" name="end_date[]" placeholder="To" value="" >
-                            </div>
-                            </div>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-md-3 control-label">I Currently work here</label>
-                            <div class="col-md-7">
-                              <label class="css-input switch switch-primary">
-                              <input type="checkbox" name="CurrentlyWork" id="CurrentlyWork" ><span></span><span></span>
-                              </label>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-md-3 control-label">Description</label>
-                            <div class="col-md-7">
-                              <textarea name="description" rows="3" class="form-control"></textarea>
-                            </div>
-                          </div>
-                          <button type="button" name="button" class="btn btn-primary addmore push-15">Add More</button>
+                       
+                          <div class="tab-pane push-30-t push-50 field " id="simple-classic-step2">
+                            <div class="step-tow-child">
+                              <div class="form-group">
+                                <label class="col-md-3 control-label">Title</label>
+                                <div class="col-md-7">
+                                  <input class="form-control" type="text" name="position[]">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="col-md-3 control-label">Company Name</label>
+                                <div class="col-md-7">
+                                  <input class="form-control" type="text" name="company_name[]">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="col-md-3 control-label">Experience</label>
+                                <div class="col-md-7">
+                                <div class="row">
+                                <div class="col-md-6">
+                                    <input class="form-control" type="text" name="start_date[]" placeholder="From" value="" >
+                                </div>
+                                <div class="col-md-6 endDate" id="endDate">
+                                    <input class="form-control " type="text" name="end_date[]" placeholder="To" value="" >
+                                </div>
+                                </div>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="col-md-3 control-label">I Currently work here</label>
+                                <div class="col-md-7">
+                                  <label class="css-input switch switch-primary">
+                                  <input type="checkbox" class="CurrentlyWork" name="CurrentlyWork[]" id="CurrentlyWork" ><span></span><span></span>
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="col-md-3 control-label">Description</label>
+                                <div class="col-md-7">
+                                  <textarea name="description[]" rows="3" class="form-control"></textarea>
+                                </div>
+                              </div>
+                              <button type="button" name="button" id="generate-new-step-tow" class="btn btn-primary addmore push-15">Add More</button>
+                              <br>
                         </div>
+                       </div>
+
                         <!-- END Step 2 -->
-                        <!-- Step 3 -->
-                        <div class="tab-pane push-30-t push-50" id="simple-classic-step3">
+                           <!-- Step 3 -->
+                           <div class="tab-pane push-30-t push-50 child" id="simple-classic-step3" >
+                           
                           <div class="form-group">
                             <div class="col-md-8 col-md-offset-2">
                               <h4 class="question">Title</h4>
@@ -155,7 +161,7 @@
                               <textarea name="project_details[]" id="content"></textarea>
                             </div>
                           </div>
-                          <button type="button" name="button" class="btn btn-primary addmore push-15">Add More</button>
+                          <button type="button" name="button" value="2555" id="generate_new" class="btn btn-primary addmore push-15">Add More</button>
                         </div>
                         <!-- END Step 3 -->
                     </div>
@@ -188,10 +194,24 @@
 @stop
 
 @section('jsCode')
-    <script>
-    // $('#freelancer').click(function(){
-        // $('#employee, #simple-classic-step2').hide();
+<script>
+   
 
-    // });
+    $("#generate_new").on("click",function() {
+      var htmlData = $("#dive").html();
+        $('.child').append('<div id="dive"><div class="row"><div class="col-9"><div class="form-group"><div class="col-md-8 col-md-offset-2"><h4 class="question">Title</h4><input type="text" name="name_project[]" value="" class="form-control"></div></div><div class="form-group"><div class="col-md-8 col-md-offset-2"><h4 class="question">Upload Project Cover Image</h4><input type="file" name="project_cover[]" value="" class="form-control"></div></div><div class="form-group"><div class="col-md-8 col-md-offset-2"><h4 class="question">Content</h4><textarea name="project_details[]" id="content"></textarea></div></div><button id="remove" class="btn btn-danger">-</button></div></div></div></div>');
+    });
+
+    $("#generate-new-step-tow").on("click",function() {
+
+       $('#simple-classic-step2').append(' <div class="step-tow-child"><div class="form-group"><label class="col-md-3 control-label">Title</label><div class="col-md-7"><input class="form-control" type="text" name="position[]"></div></div><div class="form-group"><label class="col-md-3 control-label">Company Name</label><div class="col-md-7"><input class="form-control" type="text" name="company_name[]"></div></div> <div class="form-group"><label class="col-md-3 control-label">Experience</label><div class="col-md-7"><div class="row"><div class="col-md-6"><input class="form-control" type="text" name="start_date[]" placeholder="From" value="" ></div><div class="col-md-6 endDate" id="endDate"><input class="form-control" type="text" name="end_date[]" placeholder="To" value="" ></div></div></div></div><div class="form-group"><label class="col-md-3 control-label">I Currently work here</label><div class="col-md-7"><label class="css-input switch switch-primary"><input type="checkbox" class="CurrentlyWork" name="CurrentlyWork[]" id="CurrentlyWork" ><span></span><span></span></label></div></div><div class="form-group"><label class="col-md-3 control-label">Description</label><div class="col-md-7"> <textarea name="description[]" rows="3" class="form-control"></textarea> </div></div><button id="remove" class="btn btn-danger addmore push-15">-</button></div>');
+     });
+
+
+ 		
+		$(document).on("click", "#remove", function(e) {
+			var da =$(this).closest('#dive').remove();
+
+		 });
     </script>
 @stop

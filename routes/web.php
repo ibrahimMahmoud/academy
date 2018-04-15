@@ -39,6 +39,7 @@ Route::get('signup', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::post('i/login/', 'Auth\LoginManualyController@postLogin');
 Route::get('login/fb', 'Api\SocialLoginController@redirectToProvider');
 Route::get('login/fb/callback', 'Api\SocialLoginController@handleProviderCallback');
 

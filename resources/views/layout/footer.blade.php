@@ -30,11 +30,19 @@
                 App.initHelpers(['summernote', 'ckeditor', 'datepicker', 'colorpicker', 'select2', 'masked-inputs', 'tags-inputs']);
             });
         </script>
-<script>
-// $('#endDate').hide();
-$("#CurrentlyWork").click(function(){
-$("#endDate").toggle();
-});
-</script>
+        <script>
+        // $('#endDate').hide();
+        $('#CurrentlyWork').on('click',function(){
+
+            $(this).closest('.step-tow-child').find("#endDate").toggle();
+
+        });
+
+        $(document).on('click','.CurrentlyWork',function(){
+
+            $(this).closest('.step-tow-child').find("#endDate").toggle();
+
+        });
+        </script>
     </body>
 </html>

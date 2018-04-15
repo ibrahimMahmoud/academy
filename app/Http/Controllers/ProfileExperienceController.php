@@ -33,7 +33,9 @@ class ProfileExperienceController extends Controller
      //as employee
      public function EmployeeCreate()
      {
-         return view('complete-prof');
+        $user = User::find(Auth::id());
+       
+        return view('complete-prof',compact('user'));
      }
 
     public function store(ProfileExperienceRequest $request)
@@ -44,7 +46,7 @@ class ProfileExperienceController extends Controller
 		$nbr = count($request->get('name_project')) ;
 
 		foreach(range(0, $nbr) as $index) {
-            $rules['work_status'] = 'required';            
+            // $rules['work_status'] = 'required';            
 		    $rules['fname'] = 'required|string';
 		    $rules['lname'] = 'required|string';
 		    $rules['phone'] = 'required|numeric';
@@ -75,7 +77,7 @@ class ProfileExperienceController extends Controller
             'last_name'=>$request->get('lname'),
             'phone'=>$request->get('phone'),
             'email'=>$request->get('email'),
-            'work_status'=>$request->get('work_status'),
+            // 'work_status'=>$request->get('work_status'),
 
         ]);
         // start positions create
@@ -94,7 +96,7 @@ class ProfileExperienceController extends Controller
                     'title'=>$position,
                     'user_id'=>Auth::id(),
                     'company_name'=>$request->company_name[$key],
-                    'from_date'=>$request->start_date[$key],
+                    'from_date'=>@$request->start_date[$key],
                     'to_date'=>$request->end_date[$key],
                     'description'=>$request->description[$key],
                     'currentlyWork'=>$currentlyWork[$key] 
@@ -125,6 +127,6 @@ class ProfileExperienceController extends Controller
         }
         
         Session::flash('success','created success..');
-        return redirect()->back();
+        return redirect('prof/'.Auth::id());
     }
 }

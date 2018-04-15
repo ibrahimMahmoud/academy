@@ -73,7 +73,7 @@
                                     <input class="form-control" type="email" id="" name="email">
                                 </div>
                             </div>
-                            <div class="form-group">
+                       <!--      <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-2">
                                     <label for="">i'm ..</label>
                                     <br>
@@ -85,12 +85,13 @@
                                     </label>
                                 </div>
                             </div>
-                          
+                           -->
                         </div>
                         <!-- END Step 1 -->
 
                         <!-- Step 3 -->
-                        <div class="tab-pane push-30-t push-50" id="simple-classic-step3">
+                        <div class="tab-pane push-30-t push-50 child" id="simple-classic-step3" >
+                           
                           <div class="form-group">
                             <div class="col-md-8 col-md-offset-2">
                               <h4 class="question">Title</h4>
@@ -109,7 +110,7 @@
                               <textarea name="project_details[]" id="content"></textarea>
                             </div>
                           </div>
-                          <button type="button" name="button" class="btn btn-primary addmore push-15">Add More</button>
+                          <button type="button" name="button" value="2555" id="generate_new" class="btn btn-primary addmore push-15">Add More</button>
                         </div>
                         <!-- END Step 3 -->
                     </div>
@@ -142,10 +143,22 @@
 @stop
 
 @section('jsCode')
-    <script>
-    // $('#freelancer').click(function(){
-        // $('#employee, #simple-classic-step2').hide();
+<script>
+    $("#generate_new").on("click",function() {
+      var htmlData = $("#dive").html();
+        $('.child').append('<div id="dive"><div class="row"><div class="col-9"><div class="form-group"><div class="col-md-8 col-md-offset-2"><h4 class="question">Title</h4><input type="text" name="name_project[]" value="" class="form-control"></div></div><div class="form-group"><div class="col-md-8 col-md-offset-2"><h4 class="question">Upload Project Cover Image</h4><input type="file" name="project_cover[]" value="" class="form-control"></div></div><div class="form-group"><div class="col-md-8 col-md-offset-2"><h4 class="question">Content</h4><textarea name="project_details[]" id="content"></textarea></div></div><button id="remove" class="btn btn-danger">-</button></div></div></div></div>');
+    });
 
-    // });
+    $("#generate-new-step-tow").on("click",function() {
+
+       $('#simple-classic-step2').append(' <div class="step-tow-child"><div class="form-group"><label class="col-md-3 control-label">Title</label><div class="col-md-7"><input class="form-control" type="text" name="position[]"></div></div><div class="form-group"><label class="col-md-3 control-label">Company Name</label><div class="col-md-7"><input class="form-control" type="text" name="company_name[]"></div></div> <div class="form-group"><label class="col-md-3 control-label">Experience</label><div class="col-md-7"><div class="row"><div class="col-md-6"><input class="form-control" type="text" name="start_date[]" placeholder="From" value="" ></div><div class="col-md-6 endDate" id="endDate"><input class="form-control" type="text" name="end_date[]" placeholder="To" value="" ></div></div></div></div><div class="form-group"><label class="col-md-3 control-label">I Currently work here</label><div class="col-md-7"><label class="css-input switch switch-primary"><input type="checkbox" class="CurrentlyWork" name="CurrentlyWork[]" id="CurrentlyWork" ><span></span><span></span></label></div></div><div class="form-group"><label class="col-md-3 control-label">Description</label><div class="col-md-7"> <textarea name="description[]" rows="3" class="form-control"></textarea> </div></div><button id="remove" class="btn btn-danger addmore push-15">-</button></div>');
+     });
+
+
+    
+    $(document).on("click", "#remove", function(e) {
+      var da =$(this).closest('#dive').remove();
+
+     });
     </script>
 @stop
