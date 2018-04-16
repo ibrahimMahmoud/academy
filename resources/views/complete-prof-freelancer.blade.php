@@ -54,39 +54,27 @@
                              <!-- first name -->
                                 <div class="col-sm-4 col-sm-offset-2">
                                     <label for="">First Name</label>
-                                    <input class="form-control" type="text" id="" name="fname" value="{{@$user->first_name}}" >
+                                    <input class="form-control" type="text" id="fname" name="fname" value="{{@$user->first_name}}" >
                                 </div>
                                 <!-- seconed name -->
                                 <div class="col-sm-4 ">
                                     <label for="">Last Name</label>
-                                    <input class="form-control" type="text" id="" name="lname"  value="{{@$user->last_name}}" >
+                                    <input class="form-control" type="text" id="lname" name="lname"  value="{{@$user->last_name}}" >
                                 </div>
                           </div>
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-2">
                                     <label for="">Phone</label>
-                                    <input class="form-control" type="text" id="" name="phone"  value="{{@$user->phone}}">
+                                    <input class="form-control" type="text" id="phone" name="phone"  value="{{@$user->phone}}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-2">
                                     <label for="">Email</label>
-                                    <input class="form-control" type="email" id="" name="email"  value="{{@$user->email}}">
+                                    <input class="form-control" type="email" id="email" name="email"  value="{{@$user->email}}">
                                 </div>
                             </div>
-                       <!--      <div class="form-group">
-                                <div class="col-sm-8 col-sm-offset-2">
-                                    <label for="">i'm ..</label>
-                                    <br>
-                                    <label class="css-input css-radio css-radio-info push-10-r">
-                                      <input type="radio" name="work_status" value="employee" checked=""><span></span> Employee
-                                    </label>
-                                    <label class="css-input css-radio css-radio-info push-10-r">
-                                      <input type="radio" name="work_status" id="freelancer" value="freelancer"><span></span> Freelance
-                                    </label>
-                                </div>
-                            </div>
-                           -->
+                      
                         </div>
                         <!-- END Step 1 -->
 
@@ -96,13 +84,13 @@
                           <div class="form-group">
                             <div class="col-md-8 col-md-offset-2">
                               <h4 class="question">Title</h4>
-                              <input type="text" name="name_project[]" value="" class="form-control">
+                              <input type="text" name="name_project[]" id="name_project" value="" class="form-control">
                             </div>
                           </div>
                           <div class="form-group">
                             <div class="col-md-8 col-md-offset-2">
                               <h4 class="question">Upload Project Cover Image</h4>
-                              <input type="file" name="project_cover[]" value="" class="form-control">
+                              <input type="file" name="project_cover[]" id="project_cover" value="" class="form-control">
                             </div>
                           </div>
                           <div class="form-group">
@@ -145,6 +133,26 @@
 
 @section('jsCode')
 <script>
+  $(document).ready(function(){
+    //proje tab
+      $('#generate_new').hide();
+  
+      $('#content, #name_project').each(function(){
+          $(this).keyup(function(){
+            if($('#content').val().length !=0 && $('#name_project').val().length !=0){
+              $('#generate_new').show();       
+            }
+            else {
+              $('#generate_new').hide();
+            }
+          });
+      });
+      
+    });
+
+</script>
+<script>
+
     $("#generate_new").on("click",function() {
       var htmlData = $("#dive").html();
         $('.child').append('<div id="dive"><div class="row"><div class="col-9"><div class="form-group"><div class="col-md-8 col-md-offset-2"><h4 class="question">Title</h4><input type="text" name="name_project[]" value="" class="form-control"></div></div><div class="form-group"><div class="col-md-8 col-md-offset-2"><h4 class="question">Upload Project Cover Image</h4><input type="file" name="project_cover[]" value="" class="form-control"></div></div><div class="form-group"><div class="col-md-8 col-md-offset-2"><h4 class="question">Content</h4><textarea name="project_details[]" id="content"></textarea></div></div><button id="remove" class="btn btn-danger">-</button></div></div></div></div>');

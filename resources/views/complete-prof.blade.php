@@ -75,18 +75,7 @@
                                     <input class="form-control" type="email" id="" name="email"  value="{{@$user->email}}">
                                 </div>
                             </div>
-                        <!--     <div class="form-group">
-                                <div class="col-sm-8 col-sm-offset-2">
-                                    <label for="">i'm ..</label>
-                                    <br>
-                                    <label class="css-input css-radio css-radio-info push-10-r">
-                                      <input type="radio" name="work_status" value="employee" <?php if(@$user->work_status == 'employee'){echo"checked";}?> ><span></span> Employee
-                                    </label>
-                                    <label class="css-input css-radio css-radio-info push-10-r">
-                                      <input type="radio" name="work_status" id="freelancer" value="freelancer"  <?php if(@$user->work_status == 'freelancer'){echo"checked";}?> ><span></span> Freelance
-                                    </label>
-                                </div>
-                            </div> -->
+                       
                           
                         </div>
                         <!-- END Step 1 -->
@@ -98,13 +87,13 @@
                               <div class="form-group">
                                 <label class="col-md-3 control-label">Title</label>
                                 <div class="col-md-7">
-                                  <input class="form-control" type="text" name="position[]">
+                                  <input class="form-control" type="text" id="position" name="position[]">
                                 </div>
                               </div>
                               <div class="form-group">
                                 <label class="col-md-3 control-label">Company Name</label>
                                 <div class="col-md-7">
-                                  <input class="form-control" type="text" name="company_name[]">
+                                  <input class="form-control" type="text" id="company_name" name="company_name[]">
                                 </div>
                               </div>
                               <div class="form-group">
@@ -112,10 +101,10 @@
                                 <div class="col-md-7">
                                 <div class="row">
                                 <div class="col-md-6">
-                                    <input class="form-control" type="text" name="start_date[]" placeholder="From" value="" >
+                                    <input class="form-control" type="text" id="start_date" name="start_date[]" placeholder="From" value="" >
                                 </div>
                                 <div class="col-md-6 endDate" id="endDate">
-                                    <input class="form-control " type="text" name="end_date[]" placeholder="To" value="" >
+                                    <input class="form-control " type="text" id="end_date" name="end_date[]" placeholder="To" value="" >
                                 </div>
                                 </div>
                                 </div>
@@ -131,7 +120,7 @@
                               <div class="form-group">
                                 <label class="col-md-3 control-label">Description</label>
                                 <div class="col-md-7">
-                                  <textarea name="description[]" rows="3" class="form-control"></textarea>
+                                  <textarea name="description[]" id="description" rows="3" class="form-control"></textarea>
                                 </div>
                               </div>
                               <button type="button" name="button" id="generate-new-step-tow" class="btn btn-primary addmore push-15">Add More</button>
@@ -146,7 +135,7 @@
                           <div class="form-group">
                             <div class="col-md-8 col-md-offset-2">
                               <h4 class="question">Title</h4>
-                              <input type="text" name="name_project[]" value="" class="form-control">
+                              <input type="text" name="name_project[]" id="name_project" value="" class="form-control">
                             </div>
                           </div>
                           <div class="form-group">
@@ -195,8 +184,35 @@
 
 @section('jsCode')
 <script>
-   
+  $(document).ready(function(){
+    //proje tab
+      $('#content, #name_project').each(function(){
+          // if($(this).val().length !=0 && $('#name_project').val().length !=0){
+          $(this).keyup(function(){
+            if($('#content').val().length !=0 && $('#name_project').val().length !=0){
+              $('#generate_new').show();       
+            }
+            else {
+              $('#generate_new').hide();
+            }
+          });
+      });
+      // exprince tab
+       $('#position, #company_name, #start_date, #description').each(function(){
+           $('#generate-new-step-tow').hide();
 
+          $(this).keyup(function(){
+            if($('#position').val().length !=0 && $('#company_name').val().length !=0  && $('#start_date').val().length !=0 && $('#description').val().length !=0){
+              $('#generate-new-step-tow').show();       
+            }
+            else {
+              $('#generate-new-step-tow').hide();
+            }
+          });
+      });
+    });
+
+ 
     $("#generate_new").on("click",function() {
       var htmlData = $("#dive").html();
         $('.child').append('<div id="dive"><div class="row"><div class="col-9"><div class="form-group"><div class="col-md-8 col-md-offset-2"><h4 class="question">Title</h4><input type="text" name="name_project[]" value="" class="form-control"></div></div><div class="form-group"><div class="col-md-8 col-md-offset-2"><h4 class="question">Upload Project Cover Image</h4><input type="file" name="project_cover[]" value="" class="form-control"></div></div><div class="form-group"><div class="col-md-8 col-md-offset-2"><h4 class="question">Content</h4><textarea name="project_details[]" id="content"></textarea></div></div><button id="remove" class="btn btn-danger">-</button></div></div></div></div>');
@@ -204,7 +220,7 @@
 
     $("#generate-new-step-tow").on("click",function() {
 
-       $('#simple-classic-step2').append(' <div class="step-tow-child"><div class="form-group"><label class="col-md-3 control-label">Title</label><div class="col-md-7"><input class="form-control" type="text" name="position[]"></div></div><div class="form-group"><label class="col-md-3 control-label">Company Name</label><div class="col-md-7"><input class="form-control" type="text" name="company_name[]"></div></div> <div class="form-group"><label class="col-md-3 control-label">Experience</label><div class="col-md-7"><div class="row"><div class="col-md-6"><input class="form-control" type="text" name="start_date[]" placeholder="From" value="" ></div><div class="col-md-6 endDate" id="endDate"><input class="form-control" type="text" name="end_date[]" placeholder="To" value="" ></div></div></div></div><div class="form-group"><label class="col-md-3 control-label">I Currently work here</label><div class="col-md-7"><label class="css-input switch switch-primary"><input type="checkbox" class="CurrentlyWork" name="CurrentlyWork[]" id="CurrentlyWork" ><span></span><span></span></label></div></div><div class="form-group"><label class="col-md-3 control-label">Description</label><div class="col-md-7"> <textarea name="description[]" rows="3" class="form-control"></textarea> </div></div><button id="remove" class="btn btn-danger addmore push-15">-</button></div>');
+       $('#simple-classic-step2').append('<div class="step-tow-child"><div class="form-group"><label class="col-md-3 control-label">Title</label><div class="col-md-7"><input class="form-control" type="text" name="position[]"></div></div><div class="form-group"><label class="col-md-3 control-label">Company Name</label><div class="col-md-7"><input class="form-control" type="text" name="company_name[]"></div></div> <div class="form-group"><label class="col-md-3 control-label">Experience</label><div class="col-md-7"><div class="row"><div class="col-md-6"><input class="form-control" type="text" name="start_date[]" placeholder="From" value="" ></div><div class="col-md-6 endDate" id="endDate"><input class="form-control" type="text" name="end_date[]" placeholder="To" value="" ></div></div></div></div><div class="form-group"><label class="col-md-3 control-label">I Currently work here</label><div class="col-md-7"><label class="css-input switch switch-primary"><input type="checkbox" class="CurrentlyWork" name="CurrentlyWork[]" id="CurrentlyWork" ><span></span><span></span></label></div></div><div class="form-group"><label class="col-md-3 control-label">Description</label><div class="col-md-7"> <textarea name="description[]" rows="3" class="form-control"></textarea> </div></div><button id="remove" class="btn btn-danger addmore push-15">-</button></div>');
      });
 
 

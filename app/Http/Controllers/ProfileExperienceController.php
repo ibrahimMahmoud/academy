@@ -27,16 +27,28 @@ class ProfileExperienceController extends Controller
     //as frelancer
     public function create()
     {
-      $user = User::find(Auth::id());
-      return view('complete-prof-freelancer',compact('user'));
+        // dd(Auth::user()->work_status =='freelancer');
+        if (Auth::user()->work_status =='freelancer') {
+          $user = User::find(Auth::id());
+          return view('complete-prof-freelancer',compact('user'));
+        }else{
+             return abort(404);
+
+        }
     }
 
      //as employee
      public function EmployeeCreate()
      {
-        $user = User::find(Auth::id());
-       
-        return view('complete-prof',compact('user'));
+
+        if (Auth::user()->work_status =='employee') {
+              $user = User::find(Auth::id());
+              return view('complete-prof',compact('user'));
+        }else{
+             return abort(404);
+
+        }
+   
      }
 
     public function store(ProfileExperienceRequest $request)
