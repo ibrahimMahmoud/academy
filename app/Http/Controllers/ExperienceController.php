@@ -7,6 +7,7 @@ use App\Http\Requests\ExperienceRequest;
 use App\Experience;
 use Auth;
 use Session;
+use Carbon\Carbon;
 
 class ExperienceController extends Controller
 {
@@ -26,16 +27,24 @@ class ExperienceController extends Controller
         if($request->CurrentlyWork == "on"){
             $currentlyWork = '1';
         }else{
-            $currentlyWork = '0';            
+            $currentlyWork = '0';    
+             if ($request->has('end_date')) {
+                    $endDate  = $request->end_date; 
+                    $end_date =  Carbon::parse($endDate)->format('Y-m-d');
+
+                }        
         }
         
+            $start_datee  = $request->start_date;
+            $start_date =  Carbon::parse($start_datee)->format('Y-m-d');
+
         Experience::create([
             'user_id'=>Auth::id(),
             'title'=>$request->title,
             'description'=>$request->description,
             'company_name'=>$request->company_name,
-            'from_date'=>$request->start_date,
-            'to_date'=>$request->end_date,
+            'from_date'=>@$start_date,
+            'to_date'=>@$end_date,
             'currentlyWork'=>$currentlyWork
         ]);
         
@@ -63,14 +72,25 @@ class ExperienceController extends Controller
         }else{
             $currentlyWork = '0';      
             $endDate  = $request->end_date;   
+              if ($request->has('end_date')) {
+                    $endDate  = $request->end_date; 
+                    $end_date =  Carbon::parse($endDate)->format('Y-m-d');
+                  
+                }      
+
         }
         
+            $start_datee  = $request->start_date;
+            $start_date =  Carbon::parse($start_datee)->format('Y-m-d');
+           
+
+         
         Experience::find($id)->update([
             'title'=>$request->title,
             'description'=>$request->description,
             'company_name'=>$request->company_name,
-            'from_date'=>$request->start_date,
-            'to_date'=>$endDate,
+            'from_date'=>@$start_date,
+            'to_date'=>@$end_date,
             'currentlyWork'=>$currentlyWork
         ]);
         

@@ -44,10 +44,10 @@
                       <div class="col-md-7">
                         <div class="row">
                           <div class="col-md-6">
-                            <input class="form-control" type="text" name="start_date" placeholder="From" value="{{Request::old('start_date')}}" >
+                            <input class="form-control datepicker" type="text" name="start_date" placeholder="From" value="{{Request::old('start_date')}}" >
                           </div>
                           <div class="col-md-6" id="endDate">
-                            <input class="form-control" type="text" name="end_date" placeholder="To" value="{{Request::old('end_date')}}" >
+                            <input class="form-control datepicker" type="text" name="end_date" placeholder="To" value="{{Request::old('end_date')}}" >
                           </div>
                         </div>
                       </div>
@@ -80,6 +80,10 @@
     </main>
   
 @stop 
-
+@section('jsCode')
+<script type="text/javascript">
+   $( ".datepicker" ).datepicker();
+</script>
+@stop
 
 

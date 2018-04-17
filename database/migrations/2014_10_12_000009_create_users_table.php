@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->integer('position_id')->nullable()->unsigned()->references('id')->on('positions')->onDelete('cascade');
             $table->string('facebook_id')->nullable();
-            $table->string('image')->default('img/avatar.png');
+            $table->string('image')->default('avatar.png');
             $table->boolean('is_active');
             $table->enum('work_status',['freelancer','employee']);
             $table->rememberToken();

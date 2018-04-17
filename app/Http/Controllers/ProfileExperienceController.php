@@ -10,6 +10,7 @@ use Auth;
 use Illuminate\Support\Facades\Input;
 use Hash;
 use Session;
+use Carbon\Carbon;
 
 class ProfileExperienceController extends Controller
 {
@@ -108,13 +109,20 @@ class ProfileExperienceController extends Controller
                     $currentlyWork[$key]  = '0';      
                     $endDate  = $request->end_date;   
                 }
-
+                $start_datee  = $request->start_date[$key];
+                $start_date =  Carbon::parse($start_datee)->format('Y-m-d');
+                
+             
+                if ($request->has('end_date')) {
+                    $endDate  = $request->end_date[$key]; 
+                    $end_date =  Carbon::parse($endDate)->format('Y-m-d');
+                }
                 Experience::create([
                     'title'=>$position,
                     'user_id'=>Auth::id(),
                     'company_name'=>$request->company_name[$key],
-                    'from_date'=>@$request->start_date[$key],
-                    'to_date'=>$request->end_date[$key],
+                    'from_date'=>@$start_date,
+                    'to_date'=>@$end_date,
                     'description'=>$request->description[$key],
                     'currentlyWork'=>$currentlyWork[$key] 
                 ]);

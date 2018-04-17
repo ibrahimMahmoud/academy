@@ -44,10 +44,10 @@
                       <div class="col-md-7">
                         <div class="row">
                           <div class="col-md-6">
-                            <input class="form-control" type="text" name="start_date" placeholder="From" value="{{@$experince->from_date}}" >
+                            <input class="form-control datepicker" type="text" name="start_date" placeholder="From" value="{{@$experince->from_date}}" >
                           </div>
                           <div class="col-md-6" id="endDate">
-                            <input class="form-control" type="text" name="end_date" placeholder="To" value="{{@$experince->to_date}}" >
+                            <input class="form-control datepicker" type="text" name="end_date" placeholder="To" value="{{@$experince->to_date}}" >
                           </div>
                         </div>
                       </div>
@@ -56,7 +56,7 @@
                       <label class="col-md-3 control-label">I Currently work here</label>
                       <div class="col-md-7">
                         <label class="css-input switch switch-primary">
-                            <input type="checkbox" id="CurrentlyWork"  name="CurrentlyWork" <?php if($experince->currentlyWork == '1'){echo 'checked';}?> ><span></span>
+                            <input type="checkbox" id="CurrentlyWork"  name="CurrentlyWork" <?php if(@$experince->currentlyWork == '1'){echo 'checked';}?> ><span></span>
                         </label>
                       </div>
                     </div>
@@ -82,11 +82,13 @@
 
   @stop  
   @section('jsCode')
-  @if($experince->currentlyWork == '1')
+  @if(@$experince->currentlyWork == '1')
   <script>
         $('#endDate').hide();
-         
+        $( ".datepicker" ).datepicker();
   </script>
   @endif
-
+<script>
+        $( ".datepicker" ).datepicker();
+  </script>
 @stop

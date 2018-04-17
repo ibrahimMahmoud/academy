@@ -26,6 +26,10 @@
 
         <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
         <!-- <link rel="stylesheet" id="css-theme" href="{{asset('assets/css/themes/flat.min.css"> -->
+
+          <!-- date piker libirary -->
+          <link  href="/path/to/datepicker.css" rel="stylesheet">
+
     </head>
     <body>
 

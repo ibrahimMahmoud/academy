@@ -100,11 +100,14 @@
                                 <label class="col-md-3 control-label">Experience</label>
                                 <div class="col-md-7">
                                 <div class="row">
-                                <div class="col-md-6">
-                                    <input class="form-control" type="text" id="start_date" name="start_date[]" placeholder="From" value="" >
+                                <div class="col-md-6" id="">
+
+                               
+                                  
+                                    <input class="form-control datepicker" type="text" id="start_date"  name="start_date[]" placeholder="From" value="" >
                                 </div>
                                 <div class="col-md-6 endDate" id="endDate">
-                                    <input class="form-control " type="text" id="end_date" name="end_date[]" placeholder="To" value="" >
+                                    <input class="form-control datepicker" type="text" id="end_date"  name="end_date[]" placeholder="To" value="" >
                                 </div>
                                 </div>
                                 </div>
@@ -184,6 +187,7 @@
 
 @section('jsCode')
 <script>
+   $( ".datepicker" ).datepicker();
   $(document).ready(function(){
     //proje tab
       $('#content, #name_project').each(function(){
@@ -220,7 +224,7 @@
 
     $("#generate-new-step-tow").on("click",function() {
 
-       $('#simple-classic-step2').append('<div class="step-tow-child"><div class="form-group"><label class="col-md-3 control-label">Title</label><div class="col-md-7"><input class="form-control" type="text" name="position[]"></div></div><div class="form-group"><label class="col-md-3 control-label">Company Name</label><div class="col-md-7"><input class="form-control" type="text" name="company_name[]"></div></div> <div class="form-group"><label class="col-md-3 control-label">Experience</label><div class="col-md-7"><div class="row"><div class="col-md-6"><input class="form-control" type="text" name="start_date[]" placeholder="From" value="" ></div><div class="col-md-6 endDate" id="endDate"><input class="form-control" type="text" name="end_date[]" placeholder="To" value="" ></div></div></div></div><div class="form-group"><label class="col-md-3 control-label">I Currently work here</label><div class="col-md-7"><label class="css-input switch switch-primary"><input type="checkbox" class="CurrentlyWork" name="CurrentlyWork[]" id="CurrentlyWork" ><span></span><span></span></label></div></div><div class="form-group"><label class="col-md-3 control-label">Description</label><div class="col-md-7"> <textarea name="description[]" rows="3" class="form-control"></textarea> </div></div><button id="remove" class="btn btn-danger addmore push-15">-</button></div>');
+       $('#simple-classic-step2').append('<div class="step-tow-child"><div class="form-group"><label class="col-md-3 control-label">Title</label><div class="col-md-7"><input class="form-control" type="text" name="position[]"></div></div><div class="form-group"><label class="col-md-3 control-label">Company Name</label><div class="col-md-7"><input class="form-control" type="text" name="company_name[]"></div></div> <div class="form-group"><label class="col-md-3 control-label">Experience</label><div class="col-md-7"><div class="row"><div class="col-md-6"><input class="form-control datepicker" type="date" name="start_date[]" placeholder="From" value="" ></div><div class="col-md-6 endDate" id="endDate"><input class="form-control datepicker" type="date" name="end_date[]" placeholder="To" value="" ></div></div></div></div><div class="form-group"><label class="col-md-3 control-label">I Currently work here</label><div class="col-md-7"><label class="css-input switch switch-primary"><input type="checkbox" class="CurrentlyWork" name="CurrentlyWork[]" id="CurrentlyWork" ><span></span><span></span></label></div></div><div class="form-group"><label class="col-md-3 control-label">Description</label><div class="col-md-7"> <textarea name="description[]" rows="3" class="form-control"></textarea> </div></div><button id="remove" class="btn btn-danger addmore push-15">-</button></div>');
      });
 
 
@@ -229,5 +233,7 @@
 			var da =$(this).closest('#dive').remove();
 
 		 });
+
     </script>
+       
 @stop
