@@ -42,4 +42,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Comment','user_id');
     }
+
+    public function User_Eveluation()
+    {
+        return $this->belongsTo('App\UserEveluation','id','user_id');
+    }
 }

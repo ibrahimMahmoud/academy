@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('evaluation', function () {
+    return view('evaluation');
+});
 
 Route::get('/', function () {
     return view('welcome');
@@ -53,6 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('complete','ProfileExperienceController');
     Route::get('complete_freelancer', 'ProfileExperienceController@create');
     Route::get('complete_employee', 'ProfileExperienceController@EmployeeCreate');
+
+    Route::resource('answers','UserEveluationAnswerController');
 
     Route::get('project', function () {
         return view('project.index');

@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use App\UserEveluation;
+use Carbon\Carbon;
 class RegisterController extends Controller
 {
     /*
@@ -68,16 +69,26 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'position_id' => $data['title'],
-            'first_name' => $data['fname'],
-            'last_name' => $data['lname'],
-            'phone' => $data['phone'],
-            'email' => $data['email'],
-            'user_type_id'=>'2', //as user 
-            'is_active'=>'0',
-            'work_status'=>$data['work_status'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $create =  User::create([
+                'position_id' => $data['title'],
+                'first_name' => $data['fname'],
+                'last_name' => $data['lname'],
+                'phone' => $data['phone'],
+                'email' => $data['email'],
+                'user_type_id'=>'2', //as user 
+                'is_active'=>'0',
+                'work_status'=>$data['work_status'],
+                'password' => Hash::make($data['password']),
+            ]);
+        $now = Carbon::now();
+        $date =  Carbon::parse($now)->format('Y-m-d');
+        $create_veluation = UserEveluation::create([
+                'scoure'=>'0',
+                'is_start'=>'0',
+                'start_date'=>$date,
+                'user_id'=>$create->id,
+                'position_id'=>$data['title'],
+            ]);
+        return $create;
     }
 }
