@@ -15,7 +15,11 @@ class ProfileExperienceController extends Controller
 {
     public function index()
     {
-        # code...
+         if (Auth()->user()->work_status == 'freelancer') {
+            return redirect('/complete_freelancer');
+          }else{
+            return redirect('/complete_employee');
+          }
     }
 
 
