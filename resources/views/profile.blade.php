@@ -19,13 +19,13 @@
                       <div class="block-content personal-info">
                         <div class="row">
                           <div class="col-md-2">
-                            <img src="{{asset('/')}}{{$user[0]->image}}" class="img-responsive">
+                            <img src="{{asset('/images/')}}{{$user->image}}" class="img-responsive">
                           </div>
                           <div class="col-md-10">
-                            <h4>{{$user[0]->first_name}}</h4>
-                            <p>{{$user[0]->position->EN_name}}</p>
-                            <p>{{$user[0]->phone}}</p>
-                            <p>{{$user[0]->email}}</p>
+                            <h4>{{$user->first_name}}</h4>
+                            <p>{{$user->position->EN_name}}</p>
+                            <p>{{$user->phone}}</p>
+                            <p>{{$user->email}}</p>
                           </div>
                         </div>
                       </div>
@@ -103,14 +103,14 @@
                           </div>
                           <div class="prof-wrap">
                             <div class="profile-img">
-                              <img src="{{asset('/')}}{{$user[0]->image}}">
+                              <img src="{{asset('/')}}{{$user->image}}">
                               <div class="upload-img">
                                 <input type="file" name="" value="">
                                 <i class="fa fa-image"></i>
                               </div>
                             </div>
-                            <a href="#">{{$user[0]->first_name}}</a>
-                            <span>{{$user[0]->position->EN_name}}</span>
+                            <a href="#">{{$user->first_name}}</a>
+                            <span>{{$user->position->EN_name}}</span>
                           </div>
                         </div>
                     </div>

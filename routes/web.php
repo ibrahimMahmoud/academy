@@ -66,10 +66,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('addproject', 'ProjectController@store');
     Route::get('post', 'PostController@index');
     Route::post('addpost', 'PostController@store');
-    Route::get('prof/{id}', 'HomeController@profile')->name("prof");
+    Route::get('prof', 'HomeController@profile')->name("prof");
     Route::get('blog', 'HomeController@timeline');
-    Route::post('sendmessage', 'ChatController@store');
-    Route::post('sendcomment', 'CommentController@store');
+
+    // Send Message 
+    Route::get('sendmessage', 'ChatController@store');
+
+    // Send Comment
+    Route::get('sendcomment', 'CommentController@store');
 
 
 });

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Chat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class ChatController extends Controller
 {
@@ -35,14 +37,28 @@ class ChatController extends Controller
      */
     public function store(Request $request)
     {
-        Chat::create([
-            'receiver_id' => $request->reciver,
-            'sender_id' => $request->sender,
-            'title' => $request->title,
-            'content' => $request->description,
-        ]);
+        // Chat::create([
+        //     'receiver_id' => $request->reciver,
+        //     'sender_id' => $request->sender,
+        //     'title' => $request->title,
+        //     'content' => $request->description,
+        // ]);
 
-        return redirect()->back();
+        // return redirect()->back();
+
+        $reciverid = Input::get("reciverid");
+        $messagetitle = Input::get("messagetitle");
+        $messagecontent = Input::get("messagecontent");
+        $userid = Auth::user()->id;
+
+        $chat = new Chat();
+        $chat->sender_id = $userid;
+        $chat->receiver_id = $reciverid;
+        $chat->title = $messagetitle;
+        $chat->content = $messagecontent;
+        $chat->save();
+
+        return $chat;
     }
 
     /**

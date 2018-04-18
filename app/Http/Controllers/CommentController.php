@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Comment;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+
 class CommentController extends Controller
 {
     /**
@@ -35,13 +38,38 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        Comment::create([
-            'post_id' => $request->reciver,
-            'user_id' => $request->sender,
-            'content' => $request->title,
-        ]);
+        // Comment::create([
+        //     'post_id' => $request->reciver,
+        //     'user_id' => $request->sender,
+        //     'content' => $request->title,
+        // ]);
 
-        return redirect()->back();
+        // return redirect()->back();
+
+        $postid = Input::get("postid");
+        $commentcontent = Input::get("commentcontent");
+        $userid = Auth::user()->id;
+
+        $comment = new Comment();
+        $comment->user_id = $userid;
+        $comment->post_id = $postid;
+        $comment->content = $commentcontent;
+        $comment->save();
+
+    //     foreach($comment as $row)
+    // {
+    //     $comment =  '<div class="comment row">
+    //                     <div class="col-xs-1">
+    //                       <img src="" class="img-responsive">
+    //                     </div>
+    //                     <div class="col-xs-9">
+    //                       <h4>'.$row->user->first_name.'</h4>
+    //                       <p>'.$row->content.'</p>
+    //                     </div>
+    //                   </div>';
+    // }
+
+        return $comment;
     }
 
     /**

@@ -21,12 +21,8 @@
                         <p>{{$p->user->position->EN_name}}</p>
                         <p>3 Days ago</p>
                       </div>
-                      <div>
-                        <button id="" name="" class="">Message</button>
-                        <a href="#" class="btn btn-sm btn-icon btn-success on-default edit-row"
-                      data-toggle="modal" data-target="#edit" data-original-title="Edit"><i class="icon md-edit" aria-hidden="true"></i></a>
-                      <a href="#" class="btn btn-sm btn-icon btn-success on-default edit-row"
-                      data-toggle="modal" data-target="#comment" data-original-title="comment"><i class="icon md-edit" aria-hidden="true"></i></a>
+                      <div align="right" id="messagediv"><input type="hidden" name="reciverid" class="reciverid" value="{{$p->user_id}}">
+                        <a href="#" data-toggle="modal" data-target="#message" data-original-title="Edit" id="messagemodel">Message</a>
                       </div>
                     </div>
                     <div class="clearfix"></div>
@@ -37,23 +33,25 @@
                     </div>
                     <div class="actions">
                       <ul class="nav">
-                        <li><a href="#"><i class="si si-like"></i> Like</a> </li>
-                        <li><a href="#"><i class="fa fa-comment-o"></i> Comment</a> </li>
-                        <li><a href="#"><i class="si si-share-alt"></i> Share</a> </li>
+                        <li><a href="#"><i class="si si-like"></i> Like</a> </li><input type="hidden" name="postid" id="postid" value="{{$p->id}}">
+                        <li><a href="#" data-toggle="modal" data-target="#comment" data-original-title="comment" id="commentmodel"><i class="fa fa-comment-o"></i> Comment</a> </li>
+                        <li><a href="#" id="shareBtn" class="share"><i class="si si-share-alt"></i> Share</a> </li>
                       </ul>
                     </div>
                     <div class="comments">
-                      @if(count($comment)>0)
+                      @if(count($comment)>0 )
                   @foreach($comment as $com)
+                  @if($p->id == $com->post_id )
                       <div class="comment row">
                         <div class="col-xs-1">
-                          <img src="assets/img/member.jpg" class="img-responsive">
+                          <img src="{{asset('/images')}}/{{$com->user->image}}" class="img-responsive">
                         </div>
                         <div class="col-xs-9">
-                          <h4>{{$com->id}}</h4>
+                          <h4>{{$com->user->first_name}}</h4>
                           <p>{{$com->content}}</p>
                         </div>
                       </div>
+                      @endif
                       @endforeach
                   @else <p>Be the first one to comment</p>
                   @endif
@@ -115,7 +113,7 @@
         </div>
         <!-- END Page Content -->
         <!-- send message model -->
-        <div class="modal fade" id="edit" aria-hidden="true" aria-labelledby="view"
+        <div class="modal fade" id="message" aria-hidden="true" aria-labelledby="view"
             role="dialog" tabindex="-1">
             <div class="modal-dialog modal-simple">
               <div class="modal-content">
@@ -131,27 +129,24 @@
           <!-- Start blcok -->
           <div class="block">
               <div class="block-content block-content-full bg-gray-lighter">
-                  <form class="form-horizontal" action="{{URL::to('/sendmessage')}}" method="post" >
-                  <input type="hidden" name="_token" value="{!! csrf_token() !!}">
-                  <input type="hidden" name="sender" value="{{$user->id}}">
-                  <input type="hidden" name="reciver" value="{{$p->user->id}}">
-                    
+                  <form class="form-horizontal" >
+                    <input type="hidden" name="reciverid" id="reciverid">
                     <div class="form-group">
                       <label class="col-md-3 control-label">Title</label>
                       <div class="col-md-7">
-                        <input class="form-control" type="text" name="title">
+                        <input class="form-control" type="text" name="messagetitle" id="messagetitle">
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-3 control-label">Content</label>
                       <div class="col-md-7">
-                        <textarea name="description" rows="3" class="form-control"></textarea>
+                        <textarea name="messagecontent" rows="3" class="form-control" id="messagecontent"></textarea>
                       </div>
                     </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-9 col-md-offset-3">
-                            <button class="btn btn-sm btn-primary" type="submit">Send</button>
+                            <li class="btn btn-sm btn-primary" id="submit">Send</li>
                         </div>
                     </div>
                   </form>
@@ -165,13 +160,17 @@
         <!-- END Page Content -->
     <!-- end model-->
 
+
+
+
+
     <!-- send message model -->
         <div class="modal fade" id="comment" aria-hidden="true" aria-labelledby="view"
             role="dialog" tabindex="-1">
             <div class="modal-dialog modal-simple">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">Your Comment</h4>
+                  <h4 class="modal-title">Write Your Comment</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                   </button>
@@ -182,18 +181,16 @@
           <!-- Start blcok -->
           <div class="block">
               <div class="block-content block-content-full bg-gray-lighter">
-                  <form class="form-horizontal" action="{{URL::to('/sendcomment')}}" method="post" >
-                  <input type="hidden" name="_token" value="{!! csrf_token() !!}">
-                  <input type="hidden" name="sender" value="{{$user->id}}">
-                  <input type="hidden" name="reciver" value="{{$p->id}}">
+                  <form class="form-horizontal">
+                  <input type="hidden" name="postidid" id="postidid">
                     <div class="form-group">
                       <div class="col-md-7">
-                        <input class="form-control" type="text" name="title" placeholder="Your Comment">
+                        <input class="form-control" type="text" name="commentcontent" id="commentcontent" placeholder="Your Comment">
                       </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-9 col-md-offset-3">
-                            <button class="btn btn-sm btn-primary" type="submit">Comment</button>
+                            <li class="btn btn-sm btn-primary" id="submitcomment">Comment</li>
                         </div>
                     </div>
                   </form>
@@ -206,8 +203,99 @@
         </div>
         <!-- END Page Content -->
     <!-- end model-->
+
+
+
     </main>
     <!-- END Main Container -->
 
 @endsection
+@section('jsCode')
+<script type="text/javascript" src="//connect.facebook.net/pl_PL/all.js"></script>
+<script type="text/javascript">
+  $(document).on('click','#messagemodel',function(){
+      var reciverid = $(this).closest('#messagediv').find('.reciverid').val();
+      
+//console.log(reciverid);
 
+  $('#submit').click(function(){
+      var id = $('#reciverid').val(reciverid);//console.log(id);
+      var messagetitle = $('#messagetitle').val();
+      var messagecontent = $('#messagecontent').val();
+    $.ajax({
+            url: 'sendmessage',
+            type: 'GET',
+            data: { reciverid: reciverid, messagetitle: messagetitle, messagecontent: messagecontent},
+            success: function(response)
+            {
+                console.log("Message sent");
+            }
+          });
+    $("#message").find("#messagetitle").val('');
+    $("#message").find("#messagecontent").val('');
+    $("#message").modal("hide");
+  });
+    });
+
+
+  $(document).on('click','#commentmodel',function(){
+      var pid = $(this).closest('.nav').find('#postid').val();
+      
+//console.log(pid);
+
+  $('#submitcomment').click(function(){
+      var posid = $('#postidid').val(pid);//console.log(pid);
+      var commentcontent = $('#commentcontent').val();
+    $.ajax({
+            url: 'sendcomment',
+            type: 'GET',
+            data: { commentcontent: commentcontent, postid: pid},
+            success: function(response)
+            {
+                console.log("Comment sent");
+                $('.comments').append(response);
+            }
+          });
+    $("#comment").find("#commentcontent").val('');
+    $("#comment").modal("hide");
+  });
+    });
+
+  // $(".share").click(
+  //     function openFbPopUp() {
+  //   var fburl = $(this).val();
+  //   var fbimgurl = 'https://blog.prototypr.io/how-contrast-works-in-ui-design-21bf75a5a2bf';
+  //   var fbtitle = 'title';
+  //   var fbsummary = "summry";
+  //   var sharerURL = "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=" + encodeURI(fburl) + "&p[images][0]=" + encodeURI(fbimgurl) + "&p[title]=" + encodeURI(fbtitle) + "&p[summary]=" + encodeURI(fbsummary);
+  //   window.open(
+  //     sharerURL,
+  //     'facebook-share-dialog', 
+  //     'width=626,height=436'); 
+  //   return  false;
+
+  //   });
+//     function openFbPopUp() {
+//       FB.init({
+//   appId      : '2044471722233082',
+//   status     : true,
+//   xfbml      : true,
+//   version    : 'v2.7' // or v2.6, v2.5, v2.4, v2.3
+// });
+//         FB.ui({
+//   method: 'share',
+//   link: 'https://developers.facebook.com/docs/',
+//   caption: 'An example caption',
+// }, function(response){});
+//     });
+
+// document.getElementById('shareBtn').onclick = function() {
+//   FB.ui({
+//     appId: '2044471722233082',
+//     method: 'share',
+//     display: 'popup',
+//     href: 'https://developers.facebook.com/docs/',
+//   }, function(response){});
+// }
+</script>
+@endsection
