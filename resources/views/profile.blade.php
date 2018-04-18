@@ -160,7 +160,7 @@
                     <div class="form-group">
                       <label class="col-md-3 control-label">Title</label>
                       <div class="col-md-7">
-                        <input class="form-control" type="text" name="title" id="title" value="aaaaa">
+                        <input class="form-control" type="text" name="title" id="title" value="">
                         <input type="hidden" name="id" id="exp_id">
                       </div>
                     </div>
@@ -214,7 +214,7 @@
 @endsection
 @section('jsCode')
 
-<script type="text/javascript">
+<script>
 
       $(document).on('click','#submit',function(){
         var id = $('#exp_id').val();
@@ -236,7 +236,6 @@
       $('#edit').find('#company_name').val(company);
       $('#edit').find('#start').val(start);
 
-console.log(end);
       if(end == ""){
         $('#end').empty();
                 var endD = '<input class="form-control end" type="date" name="end_date" id="endDate" placeholder="To" value="" >';
@@ -252,15 +251,5 @@ console.log(end);
       }
      
     });
-</script>
-  @if($expr->currentlyWork == '1')
-  <script>
-  
-
-    
-        $('#endDate').hide();
-         
-  </script>
-  @endif
 </script>
 @endsection

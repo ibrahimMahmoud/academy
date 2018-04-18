@@ -43,15 +43,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('complete_freelancer', 'ProfileExperienceController@create');
     Route::get('complete_employee', 'ProfileExperienceController@EmployeeCreate');
 
-<<<<<<< HEAD
-=======
     Route::resource('answers','UserEveluationAnswerController');
 
     Route::get('project', function () {
         return view('project.index');
     });
 
->>>>>>> c6b961021dcf35ae6c03aeee29f58176506079dc
     Route::post('addproject', 'ProjectController@store');
     Route::get('post', 'PostController@index');
     Route::post('addpost', 'PostController@store');
