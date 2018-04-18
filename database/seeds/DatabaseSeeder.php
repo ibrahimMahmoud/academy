@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UsersTableSeeder::class);
+        // $this->call(UsersTableSeeder::class);
             DB::table('user_type')->insert([
                 'id'=>'2',
                 'EN_name'=>'user',
