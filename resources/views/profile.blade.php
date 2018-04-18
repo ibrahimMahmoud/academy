@@ -19,7 +19,7 @@
                       <div class="block-content personal-info">
                         <div class="row">
                           <div class="col-md-2">
-                            <img src="{{asset('/images/')}}{{$user->image}}" class="img-responsive">
+                            <img src="{{asset('/images')}}/{{$user->image}}" class="img-responsive">
                           </div>
                           <div class="col-md-10">
                             <h4>{{$user->first_name}}</h4>
@@ -104,7 +104,7 @@
                           </div>
                           <div class="prof-wrap">
                             <div class="profile-img">
-                              <img src="{{asset('/')}}{{$user->image}}">
+                              <img src="{{asset('/images')}}/{{$user->image}}">
                               <div class="upload-img">
                                 <input type="file" name="" value="">
                                 <i class="fa fa-image"></i>
