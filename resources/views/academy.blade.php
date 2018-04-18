@@ -7,20 +7,23 @@
     <title>Digi-Sail Academy</title>
 
     <!-- fav icon -->
-    <link rel="shortcut icon" href="{{asset('assets/img/favicons/favicon.png')">
+    <link rel="shortcut icon" href="{{asset('assets/img/favicons/favicon.png')}}">
 
     <!-- Web fonts -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
 
     <!-- OneUI CSS framework -->
-    <link rel="stylesheet" href="{{asset('assets/css/oneui.css')">
-    <link rel="stylesheet" href="{{asset('assets/css/academy.css')">
+    <link rel="stylesheet" href="{{asset('assets/css/oneui.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/academy.css')}}">
   </head>
   <body>
 
     <section class="viedo">
       <iframe src="https://www.youtube.com/embed/i5qpS_D8Law?showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      <a class="btn" data-toggle="modal" data-target="#signup">Join Now</a>
+      <div class="btns-wrap">
+        <a class="btn" href="signup.php">Signup</a>
+        <a class="btn" data-toggle="modal" data-target="#login">Login</a>
+      </div>
     </section>
 
     <section class="about">
@@ -28,7 +31,7 @@
         <div class="about-block">
           <div class="row">
             <div class="col-md-3">
-              <img src="{{asset('assets/img/about.jpg" class="img-responsive')">
+              <img src="{{asset('assets/img/about.jpg')}}" class="img-responsive">
             </div>
             <div class="col-md-9">
               <h3>About Academy</h3>
@@ -43,7 +46,7 @@
       <div class="container">
         <h3 class="title">Majors</h3>
         <!-- <button class="btn btn-info"  type="button">Launch Modal</button> -->
-        <img src="{{asset('assets/img/structure.svg')" class="img-responsive svg" alt="Planets" usemap="#planetmap">
+        <img src="{{asset('assets/img/structure.svg')}}" class="img-responsive svg" alt="Planets" usemap="#planetmap">
         <map name="planetmap">
           <area shape="rect" coords="196,246,332,288" data-toggle="modal" data-target="#modal-large"/>
           <area shape="rect" coords="425,191,566,235" data-toggle="modal" data-target="#modal-large" />
@@ -108,7 +111,7 @@
           <div class="col-md-3">
             <div class="team-block">
               <div class="img-container">
-                <img src="{{asset('assets/img/member.jpg')" class="img-responsive">
+                <img src="{{asset('assets/img/member.jpg')}}" class="img-responsive">
               </div>
               <div class="desc">
                 <h4>Hassan Shawa</h4>
@@ -127,7 +130,7 @@
           <div class="col-md-3">
             <div class="team-block">
               <div class="img-container">
-                <img src="{{asset('assets/img/member.jpg')" class="img-responsive">
+                <img src="{{asset('assets/img/member.jpg')}}" class="img-responsive">
               </div>
               <div class="desc">
                 <h4>Mostafa Nagueb</h4>
@@ -146,7 +149,7 @@
           <div class="col-md-3">
             <div class="team-block">
               <div class="img-container">
-                <img src="{{asset('assets/img/member.jpg')" class="img-responsive">
+                <img src="{{asset('assets/img/member.jpg')}}" class="img-responsive">
               </div>
               <div class="desc">
                 <h4>Mostafa Nagueb</h4>
@@ -165,7 +168,7 @@
           <div class="col-md-3">
             <div class="team-block">
               <div class="img-container">
-                <img src="{{asset('assets/img/member.jpg')" class="img-responsive">
+                <img src="{{asset('assets/img/member.jpg')}}" class="img-responsive">
               </div>
               <div class="desc">
                 <h4>Mostafa Nagueb</h4>
@@ -266,16 +269,64 @@
         </div>
     </div>
     <!-- END Large Modal -->
+    <!-- Large Modal -->
+    <div class="modal" id="login" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="block block-themed block-transparent remove-margin-b">
+                    <div class="block-header bg-primary-dark">
+                        <ul class="block-options">
+                            <li>
+                                <button data-dismiss="modal" type="button"><i class="si si-close"></i></button>
+                            </li>
+                        </ul>
+                        <h3 class="block-title">Login</h3>
+                    </div>
+                    <div class="block-content">
+                      <div class="row">
+                        <form class="" action="" method="post">
+                          <div class="form-group row">
+                            <div class="col-sm-8 col-sm-offset-2">
+                              <button type="button" name="button" class="facebook-btn">Facebook</button>
+                              <label for="" class="push-15-t or">Or</label>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-8 col-sm-offset-2">
+                              <label for="">User Name</label>
+                              <input class="form-control" type="text" id="" name="">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-8 col-sm-offset-2">
+                              <label for="">Password</label>
+                              <input class="form-control" type="password" id="" name="">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-8 col-sm-offset-2">
+                              <button class="btn btn-sm m-btn btn-block" type="button" data-dismiss="modal">Signup</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Large Modal -->
 
-    <script src="{{asset('assets/js/core/jquery.min.js')"></script>
-    <script src="{{asset('assets/js/core/bootstrap.min.js')"></script>
-    <script src="{{asset('assets/js/core/jquery.slimscroll.min.js')"></script>
-    <script src="{{asset('assets/js/core/jquery.scrollLock.min.js')"></script>
-    <script src="{{asset('assets/js/core/jquery.appear.min.js')"></script>
-    <script src="{{asset('assets/js/core/jquery.countTo.min.js')"></script>
-    <script src="{{asset('assets/js/core/jquery.placeholder.min.js')"></script>
-    <script src="{{asset('assets/js/core/js.cookie.min.js')"></script>
-    <script src="{{asset('assets/js/app.js')"></script>
+    <script src="{{asset('assets/js/core/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/js/core/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/js/core/jquery.slimscroll.min.js')}}"></script>
+    <script src="{{asset('assets/js/core/jquery.scrollLock.min.js')}}"></script>
+    <script src="{{asset('assets/js/core/jquery.appear.min.js')}}"></script>
+    <script src="{{asset('assets/js/core/jquery.countTo.min.js')}}"></script>
+    <script src="{{asset('assets/js/core/jquery.placeholder.min.js')}}"></script>
+    <script src="{{asset('assets/js/core/js.cookie.min.js')}}"></script>
+    <script src="{{asset('assets/js/app.js')}}"></script>
 
 
   </body>

@@ -20,6 +20,9 @@
         <link rel="stylesheet" href="{{asset('assets/js/plugins/summernote/summernote.min.css')}}">
         <link rel="stylesheet" href="{{asset('assets/js/plugins/summernote/summernote-bs3.min.css')}}">
 
+        <link href="{{asset('froala_editor/css/froala_editor.min.css')}}" rel='stylesheet' type='text/css' />
+        <link href="{{asset('froala_editor/css/froala_style.min.css')}}" rel='stylesheet' type='text/css' />
+         
 
         <!-- OneUI CSS framework -->
         <link rel="stylesheet" id="css-main" href="{{asset('assets/css/oneui.css')}}">
@@ -28,7 +31,7 @@
         <!-- <link rel="stylesheet" id="css-theme" href="{{asset('assets/css/themes/flat.min.css"> -->
 
           <!-- date piker libirary -->
-          <link  href="/path/to/datepicker.css" rel="stylesheet">
+          <!-- <link  href="/path/to/datepicker.css" rel="stylesheet"> -->
 
     </head>
     <body>

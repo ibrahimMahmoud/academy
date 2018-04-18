@@ -20,25 +20,11 @@ Route::get('/', function () {
 Route::get('academy', function () {
     return view('academy');
 });
-Route::get('add_ex', function () {
-    return view('add-experience');
-});
-Route::get('add_pro', function () {
-    return view('add-project');
-});
 
-Route::get('edit_prof', function () {
-    return view('edit_profile');
-});
 Route::get('blog', function () {
     return view('index');
 });
-Route::get('prof', function () {
-    return view('profile');
-});
-Route::get('signup', function () {
-    return view('signup');
-});
+
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -50,9 +36,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('experince','ExperienceController');
     Route::get('editexper', 'ExperienceController@edit');
     Route::get('addexperience', 'ExperienceController@create');
-    Route::post('experince/{id}/update','ExperienceController@update');
+    Route::post('experince/update/{id}','ExperienceController@update');
     Route::get('experince/{id}/delete','ExperienceController@destroy');
-    
+
     Route::resource('complete','ProfileExperienceController');
     Route::get('complete_freelancer', 'ProfileExperienceController@create');
     Route::get('complete_employee', 'ProfileExperienceController@EmployeeCreate');
@@ -66,10 +52,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('addproject', 'ProjectController@store');
     Route::get('post', 'PostController@index');
     Route::post('addpost', 'PostController@store');
-    Route::get('prof', 'HomeController@profile')->name("prof");
+    Route::get('prof', 'HomeController@index');
     Route::get('blog', 'HomeController@timeline');
 
-    // Send Message 
+    // Send Message
     Route::get('sendmessage', 'ChatController@store');
 
     // Send Comment

@@ -20,7 +20,7 @@
 
 
         <script src="{{asset('assets/js/plugins/summernote/summernote.min.js')}}"></script>
-        <script src="{{asset('assets/js/plugins/ckeditor/ckeditor.js')}}"></script>
+        <!-- <script src="{{asset('assets/js/plugins/ckeditor/ckeditor.js')}}"></script> -->
 
         
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
@@ -41,7 +41,7 @@
         <script type="text/javascript" src="{{asset('froala_editor/js/plugins/file.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('froala_editor/js/plugins/url.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('froala_editor/js/plugins/entities.min.js')}}"></script>
-        <script type="text/javascript" src="{{asset('assets/js/plugins/ckeditor/ckeditor.js')}}"></script>
+        <!-- <script type="text/javascript" src="{{asset('assets/js/plugins/ckeditor/ckeditor.js')}}"></script> -->
         <script type="text/javascript" src="{{asset('assets/js/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
 
         <script src="{{asset('assets/js/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js')}}"></script>
@@ -53,12 +53,13 @@
         <!-- date piker libirary -->
    
         
-        <script>
-           // $(function() { $('textarea').froalaEditor();});
-           // $(function () {
-           //     App.initHelpers(['datepicker', 'colorpicker', 'select2', 'masked-inputs', 'tags-inputs', 'summernote']);
-           // });
-        </script>
+       <!--  <script>
+           $(function() { $('textarea').froalaEditor();});
+           $(function () {
+               App.initHelpers(['datepicker', 'colorpicker', 'select2', 'masked-inputs', 'tags-inputs', 'summernote']);
+           });
+        </script> -->
+        
         <script>
            $('#CurrentlyWork').on('click',function(){
                 $('#endDate').toggle();
@@ -73,15 +74,13 @@
             });
 
         
-        $("#datepicker" ).datepicker({
-    format: 'dd-mm-yyyy',
-    startDate: '-3d'
-});
+            $("#datepicker" ).datepicker({
+                format: 'dd-mm-yyyy',
+                startDate: '-3d'
+            });
         </script>
 
-        
 
-       
         @yield('jsCode')
     </body>
 

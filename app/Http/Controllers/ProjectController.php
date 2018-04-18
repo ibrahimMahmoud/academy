@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ProjectController extends Controller
 {
+
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+      
     }
 
     /**
@@ -35,6 +43,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+         $user = Auth::User();
       $image = $request->file('file');
       $input['filename'] = time().'.'.$image->getClientOriginalExtension();
       $destinationPath = public_path('/images');
@@ -42,7 +51,7 @@ class ProjectController extends Controller
 
 
         Project::create([
-          'user_id' => $request['user_id'],
+          'user_id' => $user->id,
           'project_name' => $request['title'],
           'caver_url' => $input['filename'],
           'description' => $request['content'],
@@ -50,7 +59,7 @@ class ProjectController extends Controller
         //  x = $request['user_id'];
         // return x;
         // return redirect()->to(url('prof/'));
-        return redirect()->route('prof', [$request['user_id']]);
+        return redirect('prof');
     }
 
     /**

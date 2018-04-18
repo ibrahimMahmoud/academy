@@ -50,7 +50,7 @@ class ExperienceController extends Controller
         
         Session::flash('success','created at');
         //return redirect()->back();
-        return redirect()->route('prof', [Auth::id()]);
+        return redirect('prof');
     }
 
     public function show($id)
@@ -96,7 +96,7 @@ class ExperienceController extends Controller
         
         Session::flash('success','updated at');
         //return redirect()->back();
-        return redirect()->route('prof', [Auth::id()]);
+        return redirect()->back();
     }
 
     public function destroy($id)

@@ -31,7 +31,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+           $user = Auth::User();
+         $experience = Experience::where('user_id', $user->id)->get();
+        $project = Project::where('user_id', $user->id)->get();
+     
+        return view('profile', compact('project', 'experience','user'));
     }
 
     public function profile()
