@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Positions,App\EveliationQuestions;
+use Validator;
 use Session;
 use Auth;
 class EveluationQuestions extends Controller
@@ -11,7 +12,6 @@ class EveluationQuestions extends Controller
     public function index()
     {
     	$questions = EveliationQuestions::with(['user','position'])->orderBy('created_at','desc')->get();
-    	// dd($questions);
     	return view('eveluation_question.index',compact('questions'));
     }
 
@@ -23,11 +23,24 @@ class EveluationQuestions extends Controller
 
     public function store(Request $request)
     {
-    	if ($request->has('position_id')) {
+         
+    	if (isset($request->position_id)) {
     		foreach ($request->position_id as $key => $position) {
+                if (!isset($request->scoure[$key])) {
+                    $scoure = 0;
+                }else{
+                    $scoure = $request->scoure[$key];
+                    if (is_numeric($scoure)) {
+                        $scoure=  $scoure;
+                    }else{
+                        Session::flash('error','scoure bust be float, try again');
+                        return redirect()->back();
+                    }
+                }
+
     			EveliationQuestions::create([
     				'question'=>$request->question[$key],
-			    	'scoure'=>$request->scoure[$key],
+			    	'scoure'=>$scoure,
 			    	'created_by'=>Auth::id(),
 			    	'position_id'=>$position,
     			]);
@@ -35,9 +48,13 @@ class EveluationQuestions extends Controller
 	    	Session::flash('success','question created');
 	        return redirect()->back();
     	}else{
-    		Session::flash('success','All faild is required , try again');
+    		Session::flash('error','All faild is required and scoure bust be float, try again');
        	 return redirect()->back();
     	}
+    }
+    public function show($id)
+    {
+        # code...
     }
 
      public function edit($id)
@@ -47,6 +64,36 @@ class EveluationQuestions extends Controller
     	// dd($question);
     	return view('eveluation_question.edit',compact('positions','question'));
     }
+
+    public function update(Request $request,$id)
+    {
+        if (isset($request->position_id)) {
+                if (!isset($request->scoure)) {
+                    $scoure = 0;
+                }else{
+                    $scoure = $request->scoure;
+                    if (is_numeric($scoure)) {
+                        $scoure=  $scoure;
+                    }else{
+                        Session::flash('error','scoure bust be float, try again');
+                        return redirect()->back();
+                    }
+                }
+// dd($request->all());
+                EveliationQuestions::find($id)->update([
+                    'question'=>$request->question,
+                    'scoure'=>$scoure,
+                    'created_by'=>Auth::id(),
+                    'position_id'=>$request->position_id,
+                ]);
+            Session::flash('success','question updated');
+            return redirect()->back();
+        }else{
+            Session::flash('error','All faild is required , try again');
+         return redirect()->back();
+        }
+    }
+
 
     public function destroy($id)
     {

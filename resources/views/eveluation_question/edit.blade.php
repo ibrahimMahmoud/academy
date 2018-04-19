@@ -11,7 +11,7 @@
                 <h3 class="block-title">edit question</h3>
               </div>
               <div class="block-content block-content-full bg-gray-lighter">
-                  <form class="form-horizontal" action="{{URL::to('/questions').'/'.@$question->id}}" method="post" >
+                  <form class="form-horizontal" action="{{URL::to('/questions').'/'.@$question->id.'/update'}}" method="post" >
                   <input type="hidden" name="_token" value="{!! csrf_token() !!}">
                     @if ($errors->any())
                     <div class="alert alert-danger">
@@ -22,7 +22,12 @@
                         </ul>
                     </div>
                     @endif
-                    @if(Session::flash('success'))
+                   @if(Session::has('error'))
+                    <div class="alert alert-danger">
+                    {{Session::get('error')}}
+                    </div>
+                    @endif
+                    @if(Session::has('success'))
                     <div class="alert alert-success">
                     {{Session::get('success')}}
                     </div>
@@ -30,7 +35,7 @@
                     <div class="form-group">
                       <label class="col-md-3 control-label">position</label>
                       <div class="col-md-7">
-                        <select class="form-control" name="position_id[]">
+                        <select class="form-control" name="position_id">
                           <option>Select One</option>
                           @foreach($positions as $position)
                           <option value="{{@$question->id}}" <?php if($question->position_id == $position->id ){echo 'selected';} ?> >{{@$position->EN_name}}</option>
@@ -41,7 +46,7 @@
                     <div class="form-group">
                       <label class="col-md-3 control-label"> Question </label>
                       <div class="col-md-7">
-                        <textarea name="question[]" rows="3" class="form-control">{!!@$question->question!!}</textarea>
+                        <textarea name="question" rows="3" class="form-control">{!!@$question->question!!}</textarea>
                       </div>
                     </div>
                     <div class="form-group">

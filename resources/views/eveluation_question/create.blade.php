@@ -22,7 +22,12 @@
                         </ul>
                     </div>
                     @endif
-                    @if(Session::flash('success'))
+                    @if(Session::has('error'))
+                    <div class="alert alert-danger">
+                    {{Session::get('error')}}
+                    </div>
+                    @endif
+                    @if(Session::has('success'))
                     <div class="alert alert-success">
                     {{Session::get('success')}}
                     </div>
@@ -41,7 +46,7 @@
                     <div class="form-group">
                       <label class="col-md-3 control-label"> Question </label>
                       <div class="col-md-7">
-                        <textarea name="question[]" rows="3" class="form-control">{{Request::old('question')}}</textarea>
+                        <textarea name="question[]" rows="3" class="form-control"></textarea>
                         
                       </div>
                     </div>
@@ -50,7 +55,7 @@
                       <div class="col-md-7">
                         <div class="row">
                           <div class="col-md-12">
-                            <input class="form-control" type="text" name="scoure" placeholder="Question Scoure" value="{{Request::old('scoure')}}" >
+                            <input class="form-control" type="text" name="scoure[]" placeholder="Question Scoure" value="" >
                           </div>
                          
                         </div>

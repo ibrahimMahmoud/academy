@@ -63,6 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //EveluationQuestions 
     Route::resource('questions','EveluationQuestions');
+    Route::post('questions/{id}/update','EveluationQuestions@update');
     Route::get('questions/{id}/delete','EveluationQuestions@destroy');
 
 
