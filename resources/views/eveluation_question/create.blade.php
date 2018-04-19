@@ -35,7 +35,7 @@
                     <div class="form-group">
                       <label class="col-md-3 control-label">position</label>
                       <div class="col-md-7">
-                        <select class="form-control" name="position_id[]">
+                        <select class="form-control" id="position" name="position_id[]">
                           <option>Select One</option>
                           @foreach($positions as $position)
                           <option value="{{@$position->id}}">{{@$position->EN_name}}</option>
@@ -46,7 +46,7 @@
                     <div class="form-group">
                       <label class="col-md-3 control-label"> Question </label>
                       <div class="col-md-7">
-                        <textarea name="question[]" rows="3" class="form-control"></textarea>
+                        <textarea name="question[]" id="question" rows="3" class="form-control"></textarea>
                         
                       </div>
                     </div>
@@ -55,16 +55,19 @@
                       <div class="col-md-7">
                         <div class="row">
                           <div class="col-md-12">
-                            <input class="form-control" type="text" name="scoure[]" placeholder="Question Scoure" value="" >
+                            <input class="form-control" type="text" id="scoure" name="scoure[]" placeholder="Question Scoure" value="" >
                           </div>
                          
                         </div>
                       </div>
                     </div>
-                   
+                   <div class="child">
+                     
+                   </div>
                     
                     <div class="form-group">
                         <div class="col-md-9 col-md-offset-3">
+                            <button class="btn btn-sm btn-info" id="generate-new" type="button">add more</button>
                             <button class="btn btn-sm btn-primary" type="submit">Done</button>
                         </div>
                     </div>
@@ -79,7 +82,24 @@
 @stop 
 @section('jsCode')
 <script type="text/javascript">
-   $( ".datepicker" ).datepicker();
+  //hide add more for add all
+    $('#generate-new').hide();
+    $(this).keyup(function(){
+        if($('#position').val().length !=0 && $('#scoure').val().length !=0  && $('#question').val().length !=0){
+          $('#generate-new').show();       
+        }
+        else {
+         $('#generate-new').hide();
+        }
+    });
+    //generate new add question
+      $("#generate-new").on("click",function() {
+        $('.child').append('<div id="dive"><div class="row"><div class="col-9"><div class="form-group"><label class="col-md-3 control-label">position</label><div class="col-md-7"><select class="form-control" id="position" name="position_id[]"><option>Select One</option>@foreach($positions as $position)<option value="{{@$position->id}}">{{@$position->EN_name}}</option>@endforeach</select></div></div><div class="form-group"><label class="col-md-3 control-label">Question</label> <div class="col-md-7"><textarea name="question[]" id="question" rows="3" class="form-control"></textarea></div></div><div class="form-group"><label class="col-md-3 control-label">Scoure</label><div class="col-md-7"><div class="row"><div class="col-md-12"><input class="form-control" type="text" id="scoure" name="scoure[]" placeholder="Question Scoure" value="" ></div></div></div></div><button id="remove" class="btn btn-danger">-</button></div></div></div>');
+    });
+
+  $(document).on("click", "#remove", function(e) {
+      var da =$(this).closest('#dive').remove();
+     });
 </script>
 @stop
 

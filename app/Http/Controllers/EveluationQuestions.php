@@ -54,7 +54,8 @@ class EveluationQuestions extends Controller
     }
     public function show($id)
     {
-        # code...
+        return view('eveluation_question.positions');
+
     }
 
      public function edit($id)
