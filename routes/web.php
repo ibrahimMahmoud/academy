@@ -40,22 +40,31 @@ Route::get('signup', function () {
     return view('signup');
 });
 Auth::routes();
+Route::get('logout','Auth\LoginManualyController@logout');
 Route::get('/home', 'HomeController@index')->name('home');
-
+//LoginManualyController
 Route::post('i/login/', 'Auth\LoginManualyController@postLogin');
+//SocialLoginController
 Route::get('login/fb', 'Api\SocialLoginController@redirectToProvider');
 Route::get('login/fb/callback', 'Api\SocialLoginController@handleProviderCallback');
 
+  
 Route::group(['middleware' => 'auth'], function () {
+    //ExperienceController
     Route::resource('experince','ExperienceController');
     Route::get('editexper', 'ExperienceController@edit');
     Route::get('addexperience', 'ExperienceController@create');
     Route::post('experince/{id}/update','ExperienceController@update');
     Route::get('experince/{id}/delete','ExperienceController@destroy');
-    
+    //ProfileExperienceController
     Route::resource('complete','ProfileExperienceController');
     Route::get('complete_freelancer', 'ProfileExperienceController@create');
     Route::get('complete_employee', 'ProfileExperienceController@EmployeeCreate');
+
+    //EveluationQuestions 
+    Route::resource('questions','EveluationQuestions');
+    Route::get('questions/{id}/delete','EveluationQuestions@destroy');
+
 
     Route::resource('answers','UserEveluationAnswerController');
 

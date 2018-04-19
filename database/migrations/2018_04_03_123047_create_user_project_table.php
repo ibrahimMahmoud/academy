@@ -18,7 +18,7 @@ class CreateUserProjectTable extends Migration
             $table->integer('user_id')->unsigned()->references('id')->on('users')->onDelete('cascade');
             $table->string('project_name');
             $table->string('caver_url');
-            $table->string('description');
+            $table->longText('description');
             $table->timestamps();
         });
     }
