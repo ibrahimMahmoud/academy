@@ -31,17 +31,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+           $user = Auth::User();
+         $experience = Experience::where('user_id', $user->id)->get();
+        $project = Project::where('user_id', $user->id)->get();
+     
+        return view('profile', compact('project', 'experience','user'));
     }
 
-    public function profile($id)
+    public function profile()
     {
-        $experience = Experience::where('user_id', $id)->get();
-        if (count($experience)) {
-        $project = Project::where('user_id', $id)->get();
-        $user = User::where('id', $id)->get();
-        }
-        //dd($experience);
+        $user = Auth::user();
+        $experience = Experience::where('user_id', $user->id)->get();
+        $project = Project::where('user_id', $user->id)->get();
+        
+        
         return view('profile', compact('project', 'experience','user'));
     }
 

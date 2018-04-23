@@ -53,12 +53,12 @@
         <!-- date piker libirary -->
    
         
-        <script>
+       <!--  <script>
            $(function() { $('textarea').froalaEditor();});
            $(function () {
                App.initHelpers(['datepicker', 'colorpicker', 'select2', 'masked-inputs', 'tags-inputs', 'summernote']);
            });
-        </script>
+        </script> -->
         
         <script>
            $('#CurrentlyWork').on('click',function(){
