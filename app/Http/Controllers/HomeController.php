@@ -51,7 +51,8 @@ class HomeController extends Controller
     public function timeline()
     {
         // $experience = Experience::where('user_id', $id)->get();
-         $post = Post::all();
+         $post = Post::orderBy('created_at','DESC')->get();
+         //$post = Post::orderBy('created_at','ASC')->get();
          $user = Auth::user();
          $comment = Comment::all();
         return view('index', compact('post', 'comment','user'));

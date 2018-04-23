@@ -46,7 +46,7 @@
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li class="dropdown-header">Profile</li>
                     <li>
-                        <a tabindex="-1" href="base_pages_inbox.html">
+                        <a tabindex="-1" href="{{Url('/chat')}}">
                             <i class="si si-envelope-open pull-right"></i>
                             <span class="badge badge-primary pull-right">3</span>Inbox
                         </a>

@@ -47,13 +47,13 @@
               <div class="form-group">
                 <div class="col-md-6 col-md-offset-3">
                   <h4 class="question">Content</h4>
-                  <input type="textarea" class="form-control" name="content" id="content" required="required"></textarea>
+                  <input type="textarea" class="form-control" name="content" id="content" required="required">
                 </div>
               </div>
 
               <div class="form-group">
                   <div class="col-md-9 col-md-offset-3">
-                      <input class="btn btn-sm btn-primary" type="submit" value="Done"></button>
+                      <input class="btn btn-sm btn-primary" type="submit" value="Done">
                   </div>
               </div>
             </form>

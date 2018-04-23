@@ -61,5 +61,13 @@ Route::group(['middleware' => 'auth'], function () {
     // Send Comment
     Route::get('sendcomment', 'CommentController@store');
 
+    //like post
+    Route::get('likepost', 'PostController@like');
+
+    //chat page
+    Route::get('chat', 'ChatController@index');
+
+    //get messages in chat page
+    Route::get('getmessages', 'ChatController@conversation');
 
 });

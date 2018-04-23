@@ -56,19 +56,6 @@ class CommentController extends Controller
         $comment->content = $commentcontent;
         $comment->save();
 
-    //     foreach($comment as $row)
-    // {
-    //     $comment =  '<div class="comment row">
-    //                     <div class="col-xs-1">
-    //                       <img src="" class="img-responsive">
-    //                     </div>
-    //                     <div class="col-xs-9">
-    //                       <h4>'.$row->user->first_name.'</h4>
-    //                       <p>'.$row->content.'</p>
-    //                     </div>
-    //                   </div>';
-    // }
-
         return $comment;
     }
 

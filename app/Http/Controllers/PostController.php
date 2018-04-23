@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Like_Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class PostController extends Controller
 {
@@ -28,6 +31,40 @@ class PostController extends Controller
         //
     }
 
+    public function like (Request $request)
+    {
+        $postid = Input::get("postid");
+        $userid = Auth::user()->id;
+        $like  = 0;
+        $t = Like_Post::where('user_id',$userid)->where('post_id', $postid)->first();
+
+        if(count($t) > 0 )
+            {
+                $p = Post::find($postid);
+                $p->nmoflikes = --$p->nmoflikes;
+                $p->save();
+
+               Like_Post::destroy($t->id);
+
+                return ['likes_count' => $p,'like_status'=> $like];
+            }
+            else
+            {
+                $p = Post::find($postid);
+                $p->nmoflikes = ++$p->nmoflikes;
+                $p->save();
+
+                $likepost = new Like_Post();
+                $likepost->user_id = $userid;
+                $likepost->post_id = $postid;
+                $likepost->save();
+
+                $like  = 1;
+
+                return ['likes_count' => $p,'like_status'=> $like];
+            }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -49,7 +86,7 @@ class PostController extends Controller
           'content' => $request['content'],
         ]);
 
-        return redirect()->to(url('post'));
+        return redirect()->to(url('blog'));
     }
 
     /**

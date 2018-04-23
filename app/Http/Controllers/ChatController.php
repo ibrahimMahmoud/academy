@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Chat;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -16,7 +17,38 @@ class ChatController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $message = Chat::all();
+        $chat = Chat::where('receiver_id',$user->id)->orWhere('sender_id',$user->id)->distinct()->where(function($query) 
+            use ($user) {
+                        $query->where('receiver_id','!=',$user->id);
+                        $query->orWhere('sender_id','!=',$user->id);
+                    })->select('receiver_id','sender_id')->get();
+
+        $receiver = $chat->pluck('receiver_id');
+        $sender   = $chat->pluck('sender_id');
+
+        $all = array();
+         array_push($all,$sender,$receiver);
+         [$keys, $all]  = array_divide(array_unique(array_collapse($all)));
+
+          $select_users = User::whereIn('id',$all)->select('first_name','last_name','image','id')->get();
+
+        return view('chat', compact('user','message','select_users'));
+    }
+
+    public function conversation ()
+    {
+        $user = Auth::user();
+        $reciverid = Input::get("usr2");
+        $userid = Auth::user()->id;
+
+        $con = Chat::where('receiver_id',$userid)->orWhere('sender_id',$userid)->where(function($query) 
+            use ($user, $reciverid) {
+                        $query->where('receiver_id',$reciverid);
+                        $query->orWhere('sender_id', $reciverid);
+                    })->orderBy('updated_at','ASC')->get();
+        return $con;
     }
 
     /**
