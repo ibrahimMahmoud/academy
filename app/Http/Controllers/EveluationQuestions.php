@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Positions,App\EveliationQuestions;
+use App\Positions,App\EveliationQuestions,App\PositionEveluation;
 use Validator;
 use Session;
 use Auth;
@@ -23,7 +23,7 @@ class EveluationQuestions extends Controller
 
     public function store(Request $request)
     {
-         
+         $sum  = 0;
     	if (isset($request->position_id)) {
     		foreach ($request->position_id as $key => $position) {
                 if (!isset($request->scoure[$key])) {
@@ -37,8 +37,29 @@ class EveluationQuestions extends Controller
                         return redirect()->back();
                     }
                 }
+                $positions = PositionEveluation::where('position_id',$position)->first();
+                // dd($positions);
 
-    			EveliationQuestions::create([
+                //start we are work here
+                if ($positions > 0) {
+                   
+                      $create_eveluation = PositionEveluation::find($positions->id)->update([
+                                            'position_id'=>$position,
+                                            'is_active'=>'1',
+                                            'updated_at'=>Auth::id(),
+                                            'scoure'=>$positions->scoure + $scoure
+                                        ]);
+                }else{
+                    $sum  += $scoure;
+                    $create_eveluation = PositionEveluation::create([
+                                            'position_id'=>$create_eveluation->id,
+                                            'is_active'=>'1',
+                                            'updated_at'=>Auth::id(),
+                                            'scoure'=>$scoure
+                                        ]);
+                }
+                //start we are work here
+                EveliationQuestions::create([
     				'question'=>$request->question[$key],
 			    	'scoure'=>$scoure,
 			    	'created_by'=>Auth::id(),
@@ -54,7 +75,7 @@ class EveluationQuestions extends Controller
     }
     public function show($id)
     {
-        return view('eveluation_question.positions');
+        // return view('eveluation_question.positions');
 
     }
 
