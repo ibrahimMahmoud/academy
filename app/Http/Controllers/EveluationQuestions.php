@@ -124,7 +124,7 @@ class EveluationQuestions extends Controller
                         return redirect()->back();
                     }
                 }
-// dd($request->all());
+
                 EveliationQuestions::find($id)->update([
                     'question'=>$request->question,
                     'scoure'=>$scoure,
@@ -134,8 +134,7 @@ class EveluationQuestions extends Controller
 
                   $positions = PositionEveluation::where('position_id',$request->position_id)->first();
                 $positions_count = PositionEveluation::where('position_id',$request->position_id)->get();
-                // dd($positions);
-
+            
                 //start we are work here
                 if (count($positions_count) > 0) {
                       $updateeveluation = PositionEveluation::find($request->position_id)->update([
@@ -153,7 +152,7 @@ class EveluationQuestions extends Controller
                                             'degree'=>$scoure
                                         ]);
                 }
-                
+
             Session::flash('success','question updated');
             return redirect()->back();
         }else{
