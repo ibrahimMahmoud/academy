@@ -5,10 +5,37 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Positions,App\EveliationQuestions,App\PositionEveluation;
 use Validator;
+use Response;
 use Session;
 use Auth;
 class EveluationQuestions extends Controller
 {
+    public function positions()
+    {
+        $positions = Positions::orderBy('created_at','DESC')->with(['questions','PostionEveluation'])->get();
+        return view('eveluation_question.position_eveluations.positions',compact('positions'));
+    } 
+
+    public function positionActive($id)
+    {
+       
+        $position_eveluation = PositionEveluation::find($id);
+        if ($position_eveluation->is_active == '1') {
+           $position_eveluation = PositionEveluation::find($id)->update([
+            'is_active'=>'0'
+           ]);
+        $responce = ['status'=>'OK','msg'=>'Active'];
+        return Response::json($responce);
+        }else{
+            $position_eveluation = PositionEveluation::find($id)->update([
+            'is_active'=>'1'
+           ]);
+            $responce = ['status'=>'OK','msg'=>'Deactivated'];
+            return Response::json($responce);
+        }
+
+    } 
+
     public function index()
     {
     	$questions = EveliationQuestions::with(['user','position'])->orderBy('created_at','desc')->get();
@@ -38,24 +65,24 @@ class EveluationQuestions extends Controller
                     }
                 }
                 $positions = PositionEveluation::where('position_id',$position)->first();
+                $positions_count = PositionEveluation::where('position_id',$position)->get();
                 // dd($positions);
 
                 //start we are work here
-                if ($positions > 0) {
-                   
-                      $create_eveluation = PositionEveluation::find($positions->id)->update([
+                if (count($positions_count) > 0) {
+                      $updateeveluation = PositionEveluation::find($positions->id)->update([
                                             'position_id'=>$position,
                                             'is_active'=>'1',
-                                            'updated_at'=>Auth::id(),
-                                            'scoure'=>$positions->scoure + $scoure
+                                            'updated_by'=>Auth::id(),
+                                            'degree'=>$positions->degree + $scoure
                                         ]);
                 }else{
                     $sum  += $scoure;
                     $create_eveluation = PositionEveluation::create([
-                                            'position_id'=>$create_eveluation->id,
+                                            'position_id'=>$position,
                                             'is_active'=>'1',
-                                            'updated_at'=>Auth::id(),
-                                            'scoure'=>$scoure
+                                            'updated_by'=>Auth::id(),
+                                            'degree'=>$scoure
                                         ]);
                 }
                 //start we are work here
@@ -73,11 +100,7 @@ class EveluationQuestions extends Controller
        	 return redirect()->back();
     	}
     }
-    public function show($id)
-    {
-        // return view('eveluation_question.positions');
-
-    }
+ 
 
      public function edit($id)
     {
@@ -108,6 +131,29 @@ class EveluationQuestions extends Controller
                     'created_by'=>Auth::id(),
                     'position_id'=>$request->position_id,
                 ]);
+
+                  $positions = PositionEveluation::where('position_id',$request->position_id)->first();
+                $positions_count = PositionEveluation::where('position_id',$request->position_id)->get();
+                // dd($positions);
+
+                //start we are work here
+                if (count($positions_count) > 0) {
+                      $updateeveluation = PositionEveluation::find($request->position_id)->update([
+                                            'position_id'=>$request->position_id,
+                                            'is_active'=>'1',
+                                            'updated_by'=>Auth::id(),
+                                            'degree'=>$positions->degree + $scoure
+                                        ]);
+                }else{
+                    $sum  += $scoure;
+                    $create_eveluation = PositionEveluation::create([
+                                            'position_id'=>$request->position_id,
+                                            'is_active'=>'1',
+                                            'updated_by'=>Auth::id(),
+                                            'degree'=>$scoure
+                                        ]);
+                }
+                
             Session::flash('success','question updated');
             return redirect()->back();
         }else{

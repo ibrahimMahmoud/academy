@@ -32,7 +32,11 @@
 
           <!-- date piker libirary -->
           <!-- <link  href="/path/to/datepicker.css" rel="stylesheet"> -->
-
+          <style type="text/css">
+            td{
+                text-align: center;
+            }
+        </style>
     </head>
     <body>
 
