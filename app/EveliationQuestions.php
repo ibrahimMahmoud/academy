@@ -17,6 +17,15 @@ class EveliationQuestions extends Model
     public function usereveluation()
     {
     	return $this->belongsTo('App\UserEveluation','id','question_id');
+    }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User','created_by','id');
+    }
+
+    public function position ()
+    {
+        return $this->belongsTo('App\Positions','position_id');
     }
 }

@@ -21,7 +21,7 @@ class CreateUserExperianceTable extends Migration
             $table->date('from_date');
             $table->enum('currentlyWork',['0','1']);
             $table->date('to_date')->nullable();
-            $table->text('description');
+            $table->longText('description');
             $table->timestamps();
         });
     }

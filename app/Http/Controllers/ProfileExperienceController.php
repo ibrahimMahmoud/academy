@@ -4,23 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use  App\Http\Requests\ProfileExperienceRequest;
-use Validator;
 use App\Experience,App\User,App\Project;
-use Auth;
 use Illuminate\Support\Facades\Input;
-use Hash;
-use Session;
 use Carbon\Carbon;
+use Validator;
+use Session;
+use Auth;
+use Hash;
 
 class ProfileExperienceController extends Controller
 {
     public function index()
     {
+        $find_user_exprince  = Experience::where('user_id',Auth()->id())->count();
+        $projects  = Project::where('user_id',Auth()->id())->count();
+        if ($find_user_exprince > 0 &&  $projects > 0) {
+            # if user add user expince action..
+            return redirect('/prof/'.Auth::id());
+        }else{
+            # redirect to complete profile
          if (Auth()->user()->work_status == 'freelancer') {
             return redirect('/complete_freelancer');
           }else{
             return redirect('/complete_employee');
           }
+        }
     }
 
 
@@ -58,37 +66,38 @@ class ProfileExperienceController extends Controller
 
     public function store(ProfileExperienceRequest $request)
     {
-        // dd($request->all());
         $inputs = [];
 
-		$nbr = count($request->get('name_project')) ;
+        $nbr = count($request->get('name_project')) ;
 
-		foreach(range(0, $nbr) as $index) {
+        foreach(range(0, $nbr) as $index) {
             // $rules['work_status'] = 'required';            
-		    $rules['fname'] = 'required|string';
-		    $rules['lname'] = 'required|string';
-		    $rules['phone'] = 'required|numeric';
+            $rules['fname'] = 'required|string';
+            $rules['lname'] = 'required|string';
+            $rules['phone'] = 'required|numeric';
             $rules['email'] = 'required|email';
             //seconed step
             // $rules['position' . $index] = 'required|string';
             // $rules['company_name' . $index] = 'required|string';
             // $rules['experience' . $index] = 'required|string';
             // $rules['start_date' . $index] = 'required|date';
-		    // $rules['end_date.' . $index] = 'required|date';
-		    // $rules['CurrentlyWork.' . $index] = 'required';
+            // $rules['end_date.' . $index] = 'required|date';
+            // $rules['CurrentlyWork.' . $index] = 'required';
             // $rules['description.' . $index] = 'required';
             //thired step  
             // $rules['name_project' . $index] = 'required|string';
             // $rules['project_cover' . $index] = 'required|string';
             // $rules['project_details' . $index] = 'required|string';
 
-		}
-	
-		$validator = Validator::make($data = $request->all(), $rules);
-
-		if($validator->fails()){
-			  return redirect()->back()->withErrors($validator)->withInput();
         }
+
+    
+        $validator = Validator::make($data = $request->all(), $rules);
+
+        if($validator->fails()){
+              return redirect()->back()->withErrors($validator)->withInput();
+        }
+        // dd($validator);
 
         User::find(Auth::id())->update([
             'first_name'=>$request->get('fname'),
@@ -99,15 +108,16 @@ class ProfileExperienceController extends Controller
 
         ]);
         // start positions create
+        // dd($request->CurrentlyWork != 'on');
         if($request->has('position')){
             foreach($request->position as $key => $position){
                 
-                if($request->CurrentlyWork[$key] == "on"){
-                    $currentlyWork[$key]  = '1';
-                    $endDate= NULL;
-                }else{
+                if( ! isset($request->CurrentlyWork[$key])){
                     $currentlyWork[$key]  = '0';      
                     $endDate  = $request->end_date;   
+                }else{
+                    $currentlyWork[$key]  = '1';
+                    $endDate= NULL;
                 }
                 $start_datee  = $request->start_date[$key];
                 $start_date =  Carbon::parse($start_datee)->format('Y-m-d');
@@ -117,16 +127,17 @@ class ProfileExperienceController extends Controller
                     $endDate  = $request->end_date[$key]; 
                     $end_date =  Carbon::parse($endDate)->format('Y-m-d');
                 }
-                Experience::create([
-                    'title'=>$position,
-                    'user_id'=>Auth::id(),
-                    'company_name'=>$request->company_name[$key],
-                    'from_date'=>@$start_date,
-                    'to_date'=>@$end_date,
-                    'description'=>$request->description[$key],
-                    'currentlyWork'=>$currentlyWork[$key] 
-                ]);
+               $create_ex = Experience::create([
+                        'title'=>$position,
+                        'user_id'=>Auth::id(),
+                        'company_name'=>$request->company_name[$key],
+                        'from_date'=>@$start_date,
+                        'to_date'=>@$end_date,
+                        'description'=>$request->description[$key],
+                        'currentlyWork'=>$currentlyWork[$key] 
+                    ]);
             }
+            // dd($create_ex);
         }
         // start User Projects 
         if($request->has('project_cover')){

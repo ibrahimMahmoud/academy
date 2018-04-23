@@ -15,14 +15,17 @@ class LoginManualyController extends Controller
         $password =$request->get('password');
 
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
-          if (Auth::user()->work_status == 'freelancer') {
-          	return redirect('/complete_freelancer');
-          }else{
-          	return redirect('/complete_employee');
-          }
+          	return redirect('/complete');
+         
         }else{
             Session::flash('error','please check your email and password');
             return redirect()->back();
         }
+    }
+
+    public function logout()
+    {
+      Auth::logout();
+      return redirect('/login');
     }
 }

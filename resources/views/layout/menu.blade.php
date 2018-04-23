@@ -18,11 +18,15 @@
             <div class="side-content">
                 <ul class="nav-main">
                   <li><a class="active" href="{{Url('/blog')}}"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Timeline</span></a></li>
-                  <li><a href="{{Url('/prof')}}"><i class="si si-user"></i><span class="sidebar-mini-hide">Profile</span></a></li>
-                  @if(App\UserEveluation::where('user_id',Auth::id())->where('is_start','0')->count() >0)
+                   <li><a class="active" href="{{Url('/positions')}}"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Postion Evaluation</span></a></li>
+                  <li><a href="profile.php"><i class="si si-user"></i><span class="sidebar-mini-hide">Profile</span></a></li>
+                  @if(App\UserEveluation::where('user_id',Auth::id())->where('is_start','0')->count() >0 )
                   <li><a href="{{URL::to('answers/create')}}"><i class="si si-question"></i><span class="sidebar-mini-hide">Evaluation</span></a></li>
+                  @endif
+                  <li><a href="{{URL::to('/questions')}}"><i class="si si-question"></i><span class="sidebar-mini-hide">questions </span></a></li>
+                  <li><a href="{{URL::to('/questions/create')}}"><i class="si si-question"></i><span class="sidebar-mini-hide">create questions eveluation</span></a></li>
+                  <li><a href="{{URL::to('/logout')}}"><i class="si si-question"></i><span class="sidebar-mini-hide">logout</span></a></li>
                   
-                   @endif
                 </ul>
             </div>
             <!-- END Side Content -->
