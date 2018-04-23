@@ -3,12 +3,11 @@
         </div>
         <!-- END Page Container -->
 
-        <!-- OneUI Core JS: jQuery, Bootstr
-            ap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->
+        OneUI Core JS: jQuery, Bootstr
+            <!-- ap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->
         <script src="{{asset('assets/js/core/jquery.min.js')}}"></script>
        
-        <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>  -->
-        
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> 
         <script src="{{asset('assets/js/core/bootstrap.min.js')}}"></script>
         <script src="{{asset('assets/js/core/jquery.slimscroll.min.js')}}"></script>
         <script src="{{asset('assets/js/core/jquery.scrollLock.min.js')}}"></script>
@@ -51,14 +50,6 @@
         <script src="{{asset('assets/js/pages/base_forms_wizard.js')}}"></script>
 
         <!-- date piker libirary -->
-   
-        
-       <!--  <script>
-           $(function() { $('textarea').froalaEditor();});
-           $(function () {
-               App.initHelpers(['datepicker', 'colorpicker', 'select2', 'masked-inputs', 'tags-inputs', 'summernote']);
-           });
-        </script> -->
         
         <script>
            $('#CurrentlyWork').on('click',function(){
@@ -71,18 +62,15 @@
             $(document).on('click','.CurrentlyWork',function(){
                 $(this).closest('.step-tow-child').find("#endDate").toggle();
             });
-            
-            $("#datepicker" ).datepicker({
-                format: 'dd-mm-yyyy',
-                startDate: '-3d'
+          
+
+            $(document).on("click", "#start_date", function(){
+                   $(this).datepicker();
             });
-
-             $(document).on('click', '#generate-new-step-tow', function() {
-              // $(this).datepicker();
-              console.log('gg');
-              // $('#step-tow-child').find('#datepicker').datepicker();
-             });
-
+       
+          $(document).on("click", ".datepicker", function(){
+                   $(this).datepicker();
+            });
         </script>
        
         @yield('jsCode')
