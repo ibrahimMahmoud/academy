@@ -78,18 +78,29 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('addproject', 'ProjectController@store');
     Route::get('post', 'PostController@index');
     Route::post('addpost', 'PostController@store');
-    Route::get('prof/{id}', 'HomeController@profile')->name("prof");
+    
+    //open profile
+    Route::get('prof', 'HomeController@profile')->name("prof");
+    
+    //open timeline
     Route::get('blog', 'HomeController@timeline');
-    Route::post('sendmessage', 'ChatController@store');
-    Route::post('sendcomment', 'CommentController@store');
+    
+    //send message using ajax
+    Route::get('sendmessage', 'ChatController@store');
+    
+    //send comment using ajax
+    Route::get('sendcomment', 'CommentController@store');
 
-    //like post
+    //like post using ajax
     Route::get('likepost', 'PostController@like');
 
     //chat page
     Route::get('chat', 'ChatController@index');
 
-    //get messages in chat page
+    //get messages in chat page using ajax
     Route::get('getmessages', 'ChatController@conversation');
+
+    //get more massages using ajax
+    Route::get('getmore', 'ChatController@more');
 
 });

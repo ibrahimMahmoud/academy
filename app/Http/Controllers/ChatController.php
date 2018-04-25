@@ -15,6 +15,7 @@ class ChatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $user = Auth::user();
@@ -37,18 +38,46 @@ class ChatController extends Controller
         return view('chat', compact('user','message','select_users'));
     }
 
+
     public function conversation ()
     {
         $user = Auth::user();
         $reciverid = Input::get("usr2");
         $userid = Auth::user()->id;
+         if($reciverid != $userid){
 
-        $con = Chat::where('receiver_id',$userid)->orWhere('sender_id',$userid)->where(function($query) 
-            use ($user, $reciverid) {
-                        $query->where('receiver_id',$reciverid);
-                        $query->orWhere('sender_id', $reciverid);
-                    })->orderBy('updated_at','ASC')->get();
-        return $con;
+        $z = array();
+        array_push($z,$reciverid ,$userid);
+
+        $x = Chat::whereIn('receiver_id',$z)->whereIn('sender_id', $z)->where(function($query) 
+            use ($user) {
+                        $query->where('receiver_id','!=',$user->id);
+                        $query->orWhere('sender_id','!=',$user->id);
+                    })->orderBy('created_at','DESC')->take(10)->get();
+        }else{
+
+            $x = Chat::where('receiver_id',$reciverid)->where('sender_id', $reciverid)->get(); 
+        }
+
+        return $x;
+    }
+
+    public function more(Request $request)
+    {
+        $id = Input::get("lastid");
+        $user = Auth::user();
+        $reciverid = Input::get("usr2");
+        $userid = Auth::user()->id;
+          $z = array();
+        array_push($z,$reciverid ,$userid);
+
+        $x = Chat::whereIn('receiver_id',$z)->whereIn('sender_id', $z)->where(function($query) 
+            use ($user) {
+                        $query->where('receiver_id','!=',$user->id);
+                        $query->orWhere('sender_id','!=',$user->id);
+                    })->orderBy('created_at','DESC')->where('id','<',$id)->take(10)->get();
+
+            return $x;
     }
 
     /**

@@ -12,14 +12,22 @@
                       <div class="block-header bg-gray-lighter">
                           <h3 class="block-title"> Messages </h3>
                       </div>
-                      <div class="block-content personal-info" id="bbb" style="overflow-y:scroll; overflow: auto; height:600px;">
-                      	<p>Select Conversations</p>
+                      <div class="block-content personal-info" id="bbb" style="overflow: auto;height:550px; position: relative; cursor: pointer;">
+                      	<p id="constatus">Select Conversations</p>
                       </div>
                   </div><!-- end personal information -->
+                  <div class="hidden block" id="trt">
+                    <div class="" align="right">
+                        <form class="messagemodel">
+                          <textarea id="messagecontent" class="form-control" rows="3" placeholder="Type Your Message" required="required"></textarea>
+                          <a id="send" class="form-control" href="#"> Replay</a>
+                        </form>
+                        </div>
+                      </div>
                 </div>
                 <div class="col-sm-5 col-lg-4">
                     <!-- Products -->
-                    <div class="block">
+                    <div class="block" style="overflow: auto;height:750px; position: relative; cursor: pointer;">
                         <div class="block-header bg-gray-lighter">
                             <h3 class="block-title"><i class="fa fa-fw fa-user"></i> Users</h3>
                         </div>
@@ -28,12 +36,12 @@
                         	@foreach($select_users as $su)
                           <a id="sendid" href="#"  class="test"><div class="prof-wrap">
                             <div class="profile-img"><input type="hidden" name="getmessage" class="getmessage" id="getmessage" value="{{$su->id}}">
-                              <img src="{{asset('/images')}}/{{$su->image}}">
+                              <img class="get_image" src="{{asset('/images')}}/{{$su->image}}">
                               <div class="upload-img">
                                 
                               </div>
                             </div>
-                            <a href="#">{{$su->first_name.' '.$su->last_name}}</a>
+                            <p class="recivername">{{$su->first_name.' '.$su->last_name}}</p>
                           </div></a><br><br>
                           @endforeach
                           @else <p>No Users</p>
@@ -51,30 +59,89 @@
 @endsection
 @section('jsCode')
 <script type="text/javascript">
+  var id = 0;
+  var title = "";
+  var lastone = 0;
+  var recivername ="";
+  var reciverImage = "";
   $(document).on('click','#sendid',function(){
-       var reciverid = $(this).closest('.test').find('#getmessage').val();
-       //console.log(reciverid);
 
+       var reciverid = $(this).closest('.test').find('#getmessage').val();
+        id = reciverid;
+        recivername = $(this).closest('#sendid').find('.recivername').text();
+        reciverImage = $(this).closest('#sendid').find('.get_image').attr('src');
+console.log(reciverid);
       $.ajax({
             url: 'getmessages',
             type: 'GET',
             data: { usr2: reciverid},
             success: function(response)
             {
-                console.log(response);
-                jQuery.each( response, function( i, val ) {
-                  if(reciverid == val.sender_id){
-                    var left_side = '<div align="right" class="row"><div class="col-md-2"><img src="{{asset("/images")}}/'+val.sender_id+'" class="img-responsive"></div><div class="col-md-10"><h4>'+val.sender_id+'</h4><p>'+val.content+'</p><p>sent at '+val.create_at+'</p></div></div>';
+                //console.log(response);
+                title = response[0].title;
+                $(".block").find("#bbb").empty();
+                $('#bbb').append('<a href="#" id="more" align="center">show more</a>');
+                for (var i = response.length - 1; i >= 0; i--) {
+                  if(reciverid == response[i].receiver_id){
+                    var left_side = '<div align="right" class="row"><div class="col-md-11"><div class="chat-wrap sender"><h4>{{Auth::User()->first_name}}</h4><p>'+response[i].content+'</p><p>sent at '+response[i].created_at+'</p></div></div><div class="col-md-1"><img src="{{asset("/images")}}/{{Auth::User()->image}}" class="img-responsive avatar"></div></div>';
                      $('#bbb').append(left_side);
                   }else{
-                   $('#bbb').append( '<div align="left" class="row"><div class="col-md-2"><img src="{{asset("/images")}}/'+val.sender_id+'" class="img-responsive"></div><div class="col-md-10"><h4>'+val.sender_id+'</h4><p>'+val.content+'</p><p>sent at '+val.create_at+'</p></div></div>');
+                   $('#bbb').append( '<div align="left" class="row"><div class="col-md-1"><img src="'+reciverImage+'" class="img-responsive avatar"></div><div class="col-md-11"><div class="chat-wrap"><h4>'+recivername+'</h4><p>'+response[i].content+'</p><p>sent at '+response[i].created_at+'</p></div></div></div>');
                   }
                   
-                });
-            }
-          });  
+                }lastone=response[response.length-1].id;
+                  $('#trt').removeClass('hidden');
+                  $("#bbb").animate({ scrollTop: 550 }, 0);
+                }
+            });
+            
   });
 
+  $(document).on('click', '#send', function(){
+var messagecontent = $(this).closest('.messagemodel').find('#messagecontent').val();
+//console.log(title);
+      $.ajax({
+            url: 'sendmessage',
+            type: 'GET',
+            data: { reciverid: id, messagecontent:messagecontent, messagetitle:title},
+            success: function(response)
+            {
+              //console.log(response);
+              $('#bbb').append('<div align="right" class="row"><div class="col-md-11"><div class="chat-wrap sender"><h4>{{Auth::User()->first_name}}</h4><p>'+response.content+'</p><p>sent at '+response.created_at+'</p></div></div><div class="col-md-1"><img src="{{asset("/images")}}/{{Auth::User()->image}}" class="img-responsive avatar"></div></div>');
+              $(".messagemodel").find("#messagecontent").val('');
+            }
+  });
+});
+
+  $(document).on('click','#more',function(){
+//console.log(lastone);
+      $.ajax({
+            url: 'getmore',
+            type: 'GET',
+            data: { lastid: lastone, usr2: id},
+            success: function(response)
+            {
+              //console.log(response);
+              if(response.length>0)
+              {
+                for (var i = response.length - 1; i >= 0; i--) {
+                  if(id == response[i].receiver_id){
+                    var left_side = '<div align="right" class="row"><div class="col-md-11"><div class="chat-wrap sender"><h4>{{Auth::User()->first_name}}</h4><p>'+response[i].content+'</p><p>sent at '+response[i].created_at+'</p></div></div><div class="col-md-1"><img src="{{asset("/images")}}/{{Auth::User()->image}}" class="img-responsive avatar"></div></div>';
+                     $('#more').after(left_side);
+                  }else{
+                   $('#more').after( '<div align="left" class="row"><div class="col-md-1"><img src="'+reciverImage+'" class="img-responsive avatar"></div><div class="col-md-11"><div class="chat-wrap"><h4>'+recivername+'</h4><p>'+response[i].content+'</p><p>sent at '+response[i].created_at+'</p></div></div></div>');
+                  }
+                  
+                }lastone=response[response.length-1].id;
+              }
+              else
+              {
+                $('#more').after( '<p align="center"> No More Messages </p><br>');
+                $('#more').hide();
+              }
+            }
+  });
+    });
 
 </script>
 @endsection
