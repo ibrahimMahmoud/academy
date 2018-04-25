@@ -28,7 +28,7 @@ Route::get('add_pro', function () {
 });
 
 Route::get('edit_prof', function () {
-    return view('edit_profile');
+    return view('edit-profile');
 });
 Route::get('blog', function () {
     return view('index');
@@ -102,5 +102,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     //get more massages using ajax
     Route::get('getmore', 'ChatController@more');
+
+    //get edit profile page
+    Route::get('edit_prof', 'HomeController@user');
+
+    //post new profile data
+    Route::post('edit', 'HomeController@edituser');
 
 });

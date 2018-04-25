@@ -11,7 +11,7 @@
                       <div class="block-header bg-gray-lighter">
                           <ul class="block-options">
                               <li>
-                                  <a href="edit-profile.php"><i class="fa fa-pencil"></i></a>
+                                  <a href="{{Url('/edit_prof')}}"><i class="fa fa-pencil"></i></a>
                               </li>
                           </ul>
                           <h3 class="block-title"><i class="fa fa-fw fa-user"></i> Personal Information</h3>
