@@ -34,7 +34,7 @@
                         <li  class="{{$p->id}}" >{{$p->nmoflikes}}</li>
                         <li><a href="#" data-toggle="modal" data-target="#comment" data-original-title="comment" id="commentmodel"><i class="fa fa-comment-o"></i> Comment</a> </li>
                         <li><a href="#" id="shareBtn" class="share"><i class="si si-share-alt"></i> Share</a> </li>
-                        <li><a href="http://www.facebook.com/sharer.php?u=" target="_blank">Fb</a></li>
+                       
                       </ul>
                     </div>
                     <div class="comments" id="{{$p->id}}">
@@ -341,20 +341,20 @@ var possid = 0;
     });
 
 
-  // $(".share").click(
-  //     function openFbPopUp() {
-  //   var fburl = $(this).val();
-  //   var fbimgurl = 'https://blog.prototypr.io/how-contrast-works-in-ui-design-21bf75a5a2bf';
-  //   var fbtitle = 'title';
-  //   var fbsummary = "summry";
-  //   var sharerURL = "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=" + encodeURI(fburl) + "&p[images][0]=" + encodeURI(fbimgurl) + "&p[title]=" + encodeURI(fbtitle) + "&p[summary]=" + encodeURI(fbsummary);
-  //   window.open(
-  //     sharerURL,
-  //     'facebook-share-dialog', 
-  //     'width=626,height=436'); 
-  //   return  false;
+  $(".share").click(
+      function openFbPopUp() {
+    var fburl = $(this).val();
+    var fbimgurl = 'https://blog.prototypr.io/how-contrast-works-in-ui-design-21bf75a5a2bf';
+    var fbtitle = 'title';
+    var fbsummary = "summry";
+    var sharerURL = "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=" + encodeURI(fburl) + "&p[images][0]=" + encodeURI(fbimgurl) + "&p[title]=" + encodeURI(fbtitle) + "&p[summary]=" + encodeURI(fbsummary);
+    window.open(
+      sharerURL,
+      'facebook-share-dialog', 
+      'width=626,height=436'); 
+    return  false;
 
-  //   });
+    });
 //     function openFbPopUp() {
 //       FB.init({
 //   appId      : '2044471722233082',
