@@ -18,7 +18,7 @@ class ProfileExperienceController extends Controller
     {
         $find_user_exprince  = Experience::where('user_id',Auth()->id())->count();
         $projects  = Project::where('user_id',Auth()->id())->count();
-        if ($find_user_exprince > 0 &&  $projects > 0) {
+        if ($projects > 0) {
             # if user add user expince action..
             return redirect('/prof/'.Auth::id());
         }else{

@@ -24,3 +24,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('upload/frolla','Api\UploadImageByFrollaController@upload');
 Route::post('position/{id}/activation','EveluationQuestions@positionActive');
+Route::post('questions/{id}/update','EveluationQuestions@update');
+Route::post('questions/{id}/delete','EveluationQuestions@destroy');

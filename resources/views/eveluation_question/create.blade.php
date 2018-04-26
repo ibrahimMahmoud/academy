@@ -33,14 +33,15 @@
                     </div>
                     @endif
                     <div class="form-group">
-                      <label class="col-md-3 control-label">position</label>
+                      <!-- <label class="col-md-3 control-label">position</label> -->
                       <div class="col-md-7">
-                        <select class="form-control" id="position" name="position_id[]">
+                        <input type="hidden" name="position_id[]" value="{{@$postion_id}}" >
+                       <!--  <select class="form-control" id="position" name="position_id[]">
                           <option>Select One</option>
                           @foreach($positions as $position)
-                          <option value="{{@$position->id}}">{{@$position->EN_name}}</option>
+                          <option value="{{@$position->id}}">{{@$position->EN_name.'-'.@$postion_id}}</option>
                           @endforeach
-                        </select>
+                        </select> -->
                       </div>
                     </div>
                     <div class="form-group">
@@ -94,7 +95,7 @@
     });
     //generate new add question
       $("#generate-new").on("click",function() {
-        $('.child').append('<div id="dive"><div class="row"><div class="col-9"><div class="form-group"><label class="col-md-3 control-label">position</label><div class="col-md-7"><select class="form-control" id="position" name="position_id[]"><option>Select One</option>@foreach($positions as $position)<option value="{{@$position->id}}">{{@$position->EN_name}}</option>@endforeach</select></div></div><div class="form-group"><label class="col-md-3 control-label">Question</label> <div class="col-md-7"><textarea name="question[]" id="question" rows="3" class="form-control"></textarea></div></div><div class="form-group"><label class="col-md-3 control-label">Scoure</label><div class="col-md-7"><div class="row"><div class="col-md-12"><input class="form-control" type="text" id="scoure" name="scoure[]" placeholder="Question Scoure" value="" ></div></div></div></div><button id="remove" class="btn btn-danger">-</button></div></div></div>');
+        $('.child').append('<div id="dive"><div class="row"><div class="col-9"><div class="form-group"><div class="col-md-7"><input type="hidden" name="position_id[]" value="{{@$postion_id}}" ></div></div><div class="form-group"><label class="col-md-3 control-label">Question</label> <div class="col-md-7"><textarea name="question[]" id="question" rows="3" class="form-control"></textarea></div></div><div class="form-group"><label class="col-md-3 control-label">Scoure</label><div class="col-md-7"><div class="row"><div class="col-md-12"><input class="form-control" type="text" id="scoure" name="scoure[]" placeholder="Question Scoure" value="" ></div></div></div></div><button id="remove" class="btn btn-danger">-</button></div></div></div>');
     });
 
   $(document).on("click", "#remove", function(e) {

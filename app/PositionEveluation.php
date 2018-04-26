@@ -13,4 +13,15 @@ class PositionEveluation extends Model
 		'degree',
 		'is_active',
     ];
+
+
+    public function questions()
+    {
+    	return $this->hasMany('App\EveliationQuestions','id','postion_id');
+    }
+
+   public function PostionEveluation()
+   {
+   	return $this->hasOne('App\PositionEveluation','id','postion_id');
+   }
 }

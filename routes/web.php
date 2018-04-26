@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('evaluation', function () {
     return view('evaluation');
 });
@@ -65,6 +66,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('positions','EveluationQuestions@positions');
     Route::post('position/{id}/activation','EveluationQuestions@positionActive');
     Route::resource('questions','EveluationQuestions');
+    Route::get('questions/{id}/eveluation','EveluationQuestions@index');
+    Route::get('questions/{id}/create','EveluationQuestions@create');
     Route::post('questions/{id}/update','EveluationQuestions@update');
     Route::get('questions/{id}/delete','EveluationQuestions@destroy');
 

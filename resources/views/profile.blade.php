@@ -80,7 +80,7 @@
                         <div class="col-md-4">
                             <a href="project.php" class="project-item">
                               <div class="img-container">
-                                <img src="{{asset('/images')}}/{{$pro->caver_url}}" class="img-responsive">
+                                <img src="{{asset('/')}}/{{$pro->caver_url}}" class="img-responsive">
                               </div>
                               <h5>{{$pro->project_name}}</h5>
                             </a>
@@ -215,7 +215,7 @@
 @section('jsCode')
 
 <script>
-
+       $('.datepicker').datepicker();
       $(document).on('click','#submit',function(){
         var id = $('#exp_id').val();
         $('form').attr("action",'{{URL("/experince/update")}}/'+id);

@@ -13,6 +13,7 @@ class EveluationQuestions extends Controller
     public function positions()
     {
         $positions = Positions::orderBy('created_at','DESC')->with(['questions','PostionEveluation'])->get();
+
         return view('eveluation_question.position_eveluations.positions',compact('positions'));
     } 
 
@@ -36,16 +37,19 @@ class EveluationQuestions extends Controller
 
     } 
 
-    public function index()
+    public function index($id)
     {
-    	$questions = EveliationQuestions::with(['user','position'])->orderBy('created_at','desc')->get();
-    	return view('eveluation_question.index',compact('questions'));
+    	$questions = EveliationQuestions::where('position_id',$id)->with(['user','position'])->orderBy('created_at','desc')->get();
+        $position = Positions::find($id);
+
+    	return view('eveluation_question.questions',compact('questions','position'));
     }
 
-    public function create()
+    public function create($id)
     {
     	$positions = Positions::all();
-    	return view('eveluation_question.create',compact('positions'));
+        $postion_id = $id;
+    	return view('eveluation_question.create',compact('positions','postion_id'));
     }
 
     public function store(Request $request)
@@ -66,8 +70,7 @@ class EveluationQuestions extends Controller
                 }
                 $positions = PositionEveluation::where('position_id',$position)->first();
                 $positions_count = PositionEveluation::where('position_id',$position)->get();
-                // dd($positions);
-
+                
                 //start we are work here
                 if (count($positions_count) > 0) {
                       $updateeveluation = PositionEveluation::find($positions->id)->update([
@@ -106,7 +109,6 @@ class EveluationQuestions extends Controller
     {
     	$positions = Positions::all();
     	$question = EveliationQuestions::find($id);
-    	// dd($question);
     	return view('eveluation_question.edit',compact('positions','question'));
     }
 
@@ -120,16 +122,16 @@ class EveluationQuestions extends Controller
                     if (is_numeric($scoure)) {
                         $scoure=  $scoure;
                     }else{
-                        Session::flash('error','scoure bust be float, try again');
-                        return redirect()->back();
+                       
+                   $responce = ['status'=>'NOT OK','error'=>'scoure bust be float, try again'];
+                    return Response::json($responce);
                     }
                 }
 
                 EveliationQuestions::find($id)->update([
                     'question'=>$request->question,
                     'scoure'=>$scoure,
-                    'created_by'=>Auth::id(),
-                    'position_id'=>$request->position_id,
+                    'created_by'=>$request->user_id,
                 ]);
 
                   $positions = PositionEveluation::where('position_id',$request->position_id)->first();
@@ -137,35 +139,41 @@ class EveluationQuestions extends Controller
             
                 //start we are work here
                 if (count($positions_count) > 0) {
-                      $updateeveluation = PositionEveluation::find($request->position_id)->update([
-                                            'position_id'=>$request->position_id,
-                                            'is_active'=>'1',
-                                            'updated_by'=>Auth::id(),
-                                            'degree'=>$positions->degree + $scoure
-                                        ]);
+
+
+                  $updateeveluation = PositionEveluation::where('position_id',$request->position_id)->update([
+                                        'is_active'=>'1',
+                                        'updated_by'=>$request->user_id,
+                                        'degree'=>$positions->degree + $scoure
+                                    ]);
+                    
+
                 }else{
-                    $sum  += $scoure;
+                  
                     $create_eveluation = PositionEveluation::create([
                                             'position_id'=>$request->position_id,
                                             'is_active'=>'1',
-                                            'updated_by'=>Auth::id(),
+                                            'updated_by'=>$request->user_id,
                                             'degree'=>$scoure
                                         ]);
                 }
 
-            Session::flash('success','question updated');
-            return redirect()->back();
+            
+        $responce = ['status'=>'OK','msg'=>'question updated'];
+        return Response::json($responce);
         }else{
-            Session::flash('error','All faild is required , try again');
-         return redirect()->back();
+        $responce = ['status'=>'NOT OK','error'=>'All faild is required , try again'];
+        return Response::json($responce);
         }
     }
 
 
     public function destroy($id)
     {
-    	EveliationQuestions::destroy($id);
-    	Session::flash('success','question deleted');
-	    return redirect()->back();
+     
+           
+        EveliationQuestions::destroy($id);
+        $responce = ['status'=>'OK','msg'=>'question deleted'];
+        return Response::json($responce);
     }
 }
