@@ -122,6 +122,7 @@ class EveluationQuestions extends Controller
 
     public function update(Request $request,$id)
     {
+        // dd($id);
         if (isset($request->position_id)) {
                 if (!isset($request->scoure)) {
                     $scoure = 0;
@@ -136,7 +137,7 @@ class EveluationQuestions extends Controller
                     }
                 }
 
-                EveliationQuestions::find($id)->update([
+                $questions = EveliationQuestions::find($id)->update([
                     'question'=>$request->question,
                     'scoure'=>$scoure,
                     'created_by'=>$request->user_id,
@@ -166,6 +167,7 @@ class EveluationQuestions extends Controller
                                         ]);
                 }
 
+                // dd(EveliationQuestions::find($id));
             
         $responce = ['status'=>'OK','msg'=>'question updated'];
         return Response::json($responce);

@@ -73,35 +73,35 @@
                                 </div>
                             </li>
                             <li>
-                              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editQuestion{{@$question->id}}"><i class="fa fa-pencil"></i></button>    
+                              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editQuestion{{@$question->id}} "><i class="fa fa-pencil"></i></button>    
                                 <!-- sTART model -->
                                 <div id="editQuestion{{@$question->id}}" class="modal fade" role="dialog">
-                                 {{Form::open(['method'=>'post'])}}
-                                 <input type="hidden" id="url" name="url" value="{{URL::to('api/questions').'/'.$question->id.'/update'}}">
-                                 <input type="hidden" id="position_id" name="position_id" value="{{@$question->position_id}}">
-                                 <input type="hidden" id="question_id" name="question_id" value="{{@$question->id}}">
+                                 {{Form::open(['method'=>'post','url'=>'api/questions'.'/'.@$question->id.'/update'])}}
+                                 <input type="hidden" id="updateurl" name="url" value="{{URL::to('api/questions').'/'.@$question->id.'/update'}}">
+                                   <input type="hidden" id="position_id" name="position_id" value="{{$question->position_id}}">
+                                   <input type="hidden" id="question_id" name="question_id" value="{{$question->id}}">
                                   <div class="modal-dialog">
                                   <div class="modal-dialog">
 
 
                                     <!-- Modal content-->
-                                    <div class="modal-content">
+                                    <div class="modal-content" id="formM">
                                       <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Edit Question</h4>
+                                        <h4 class="modal-title">Edit Question {{$question->position_id.$question->id}}- {{@$question->id}} </h4>
                                       </div>
                                       <div class="modal-body">
                                         <!-- start form inputs-->
                                        <div class="row">
                                           <div  id="content"></div>
                                            
-                                        <div class="form-group">
+                                        <div class="form-group" id="question">
                                             <label class="col-md-3 control-label"> Question </label>
-                                            <div class="col-md-7">
-                                                <textarea name="question" rows="3" id="question" class="form-control">{!!@$question->question!!}</textarea>
+                                            <div class="col-md-7" id="questionDiv">
+                                                <textarea name="question" rows="3" id="questionM" class="form-control">{!!@$question->question!!}</textarea>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" id="scoreDiv">
                                             <label class="col-md-3 control-label">Scoure</label>
                                             <div class="col-md-7">
                                                 <div class="row">
@@ -160,16 +160,24 @@
     //start update question
      $(document).ready(function() {
         $(document).on('click','#update',function(){
-                var  url = $('#url').val();
-                var  position_id = $('#position_id').val();
-                var  question = $('#question').val();
-                var  scoure = $('#scoure').val();
-                var  user_id = {{Auth::id()}};
-                var  question_id =  $('#question_id').val();;
+      var question_id = $(this).closest('.modal').find("#question_id").val();
+      var position_id = $(this).closest('.modal').find("#position_id").val();
+      var question = $(this).closest('#formM').find("#questionM").val();
+      var scoure = $(this).closest('#formM').find("#scoure").val();
+                // var  question = $('#question').val();
+                // var  scoure = $('#scoure').val();
+      var  user_id = {{Auth::id()}};
+                // var  url = $('#updateurl').val();
+      var url = $(this).closest('.modal').find("#updateurl").val();
+
                 var action =  $('form').attr('action', url);
+
+                console.log(url);
+                console.log(question_id);
                 var data =  {
                     position_id:position_id,
                     question:question,
+                    question_id:question_id,
                     scoure:scoure,
                     user_id:user_id
                 };
@@ -185,6 +193,8 @@
                         $('#question'+question_id).text(question);
                         $('#scoure'+question_id).text(scoure);
                         $('#content').append('<div class="alert alert-success" id="success">'+result.msg+'</div>');
+                        $('#editQuestion'+question_id).modal('hide');
+
                         console.log('done');
                     }else{
                          $('#content').append('<div class="alert alert-danger" id="error">'+result.error+'</div>');

@@ -162,6 +162,6 @@ class ProfileExperienceController extends Controller
         }
         
         Session::flash('success','created success..');
-        return redirect('prof/'.Auth::id());
+        return redirect('blog');
     }
 }
