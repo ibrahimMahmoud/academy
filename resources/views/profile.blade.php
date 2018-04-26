@@ -11,7 +11,7 @@
                       <div class="block-header bg-gray-lighter">
                           <ul class="block-options">
                               <li>
-                                  <a href="edit-profile.php"><i class="fa fa-pencil"></i></a>
+                                  <a href="{{Url('/edit_prof')}}"><i class="fa fa-pencil"></i></a>
                               </li>
                           </ul>
                           <h3 class="block-title"><i class="fa fa-fw fa-user"></i> Personal Information</h3>
@@ -46,7 +46,7 @@
                         <div class="block-item" id="edit_exp">
                           <ul class="block-options">
                             <li><a href="{{URL::to('/')}}/experince/{{@$expr->id}}/delete" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></li>
-                            <li><a href="{{URL::to('/')}}/experince/{{@$expr->id}}/edit"><i class="fa fa-pencil"></i></a></li>
+                            <!-- <li><a href="{{URL::to('/')}}/experince/{{@$expr->id}}/edit"><i class="fa fa-pencil"></i></a></li>if you wanna make edit with view -->
                             <li><a href="#" class="btn btn-sm btn-icon btn-success on-default edit-row editM"
                       data-toggle="modal" data-target="#edit" exp_id="{{$expr->id}}" data-original-title="Edit"><i class="icon md-edit" aria-hidden="true"></i></a></li>
                       <!-- <li><a href="{{action('ExperienceController@edit', ['id' => @$expr->id]) }}" class="btn btn-sm btn-icon btn-success on-default edit-row"
@@ -105,10 +105,6 @@
                           <div class="prof-wrap">
                             <div class="profile-img">
                               <img src="{{asset('/images')}}/{{$user->image}}">
-                              <div class="upload-img">
-                                <input type="file" name="" value="">
-                                <i class="fa fa-image"></i>
-                              </div>
                             </div>
                             <a href="#">{{$user->first_name}}</a>
                             <span>{{$user->position->EN_name}}</span>
@@ -218,7 +214,7 @@
        $('.datepicker').datepicker();
       $(document).on('click','#submit',function(){
         var id = $('#exp_id').val();
-        $('form').attr("action",'{{URL("/experince/update")}}/'+id);
+        $('form').attr("action",'{{URL("/experince")}}/'+id+'/update');
          $( "form" ).submit();
 
 });

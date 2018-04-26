@@ -95,8 +95,8 @@ class ExperienceController extends Controller
         ]);
         
         Session::flash('success','updated at');
-        //return redirect()->back();
         return redirect()->back();
+        //return redirect('prof');
     }
 
     public function destroy($id)

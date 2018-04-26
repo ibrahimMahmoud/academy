@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\UserEveluation','id','user_id');
     }
+
+    public function like ()
+    {
+        return $this->hasMany('App\Like_Post','id');
+    }
 }

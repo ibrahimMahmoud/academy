@@ -19,7 +19,7 @@
                 <ul class="nav-main">
                   <li><a class="active" href="{{Url('/blog')}}"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Timeline</span></a></li>
                    <li><a class="active" href="{{Url('/positions')}}"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Postion Evaluation</span></a></li>
-                  <li><a href="profile.php"><i class="si si-user"></i><span class="sidebar-mini-hide">Profile</span></a></li>
+                  <li><a href="{{Url('/prof')}}"><i class="si si-user"></i><span class="sidebar-mini-hide">Profile</span></a></li>
                   @if(App\UserEveluation::where('user_id',Auth::id())->where('is_start','0')->count() >0 )
                   <li><a href="{{URL::to('answers/create')}}"><i class="si si-question"></i><span class="sidebar-mini-hide">Evaluation</span></a></li>
                   @endif
@@ -49,7 +49,7 @@
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li class="dropdown-header">Profile</li>
                     <li>
-                        <a tabindex="-1" href="base_pages_inbox.html">
+                        <a tabindex="-1" href="{{Url('/chat')}}">
                             <i class="si si-envelope-open pull-right"></i>
                             <span class="badge badge-primary pull-right">3</span>Inbox
                         </a>
