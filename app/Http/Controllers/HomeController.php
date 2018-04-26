@@ -58,20 +58,4 @@ class HomeController extends Controller
         return view('index', compact('post', 'comment','user'));
     }
 
-    public function user ()
-    {
-        $user = Auth::User();
-        return view('edit-profile', compact('user'));
-    }
-
-    public function edituser(Request $request)
-    {
-        $user = Auth::user();
-        $experience = Experience::where('user_id', $user->id)->get();
-        $project = Project::where('user_id', $user->id)->get();
-        
-        
-        return view('profile', compact('project', 'experience','user'));
-    }
-
 }
