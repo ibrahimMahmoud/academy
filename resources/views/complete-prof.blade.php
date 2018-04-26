@@ -101,9 +101,6 @@
                                 <div class="col-md-7">
                                 <div class="row">
                                 <div class="col-md-6" id="">
-
-                               
-                                  
                                     <input class="form-control datepicker" type="text" id="start_date"  name="start_date[]" placeholder="From" value="" >
                                 </div>
                                 <div class="col-md-6 endDate" id="endDate">
@@ -150,7 +147,7 @@
                           <div class="form-group">
                             <div class="col-md-8 col-md-offset-2">
                               <h4 class="question">Content</h4>
-                              <textarea name="project_details[]" id="content"></textarea>
+                              <textarea name="project_details[]" id="content" class="content"></textarea>
                             </div>
                           </div>
                           <button type="button" name="button" value="2555" id="generate_new" class="btn btn-primary addmore push-15">Add More</button>
@@ -188,6 +185,7 @@
 @section('jsCode')
 <script>
    $( ".datepicker" ).datepicker();
+  
   $(document).ready(function(){
     //proje tab
       $('#content, #name_project').each(function(){
@@ -222,16 +220,25 @@
         $('.child').append('<div id="dive"><div class="row"><div class="col-9"><div class="form-group"><div class="col-md-8 col-md-offset-2"><h4 class="question">Title</h4><input type="text" name="name_project[]" value="" class="form-control"></div></div><div class="form-group"><div class="col-md-8 col-md-offset-2"><h4 class="question">Upload Project Cover Image</h4><input type="file" name="project_cover[]" value="" class="form-control"></div></div><div class="form-group"><div class="col-md-8 col-md-offset-2"><h4 class="question">Content</h4><textarea name="project_details[]" id="content"></textarea></div></div><button id="remove" type="button" class="btn btn-danger">-</button></div></div></div></div>');
     });
 
+   
     $("#generate-new-step-tow").on("click",function() {
+    
+      // console.log(sum);
+       $('#simple-classic-step2').append('<div id="dive" class="step-tow-child"><div class="form-group"><label class="col-md-3 control-label">Title</label><div class="col-md-7"><input class="form-control" type="text" name="position[]"></div></div><div class="form-group"><label class="col-md-3 control-label">Company Name</label><div class="col-md-7"><input class="form-control" type="text" name="company_name[]"></div></div> <div class="form-group"><label class="col-md-3 control-label">Experience</label><div class="col-md-7"><div class="row"><div class="col-md-6"><input class="form-control datepicker" id="start_date" type="text" name="start_date[]" placeholder="From" value="" ></div><div class="col-md-6  end_date" id="endDate"><input class="form-control datepicker" type="text" name="end_date[]" placeholder="To" value="" ></div></div></div></div><div class="form-group"><label class="col-md-3 control-label">I Currently work here</label><div class="col-md-7"><label class="css-input switch switch-primary"><input type="checkbox" class="CurrentlyWork" name="CurrentlyWork[]" id="CurrentlyWork" ><span></span><span></span></label></div></div><div class="form-group"><label class="col-md-3 control-label">Description</label><div class="col-md-7"> <textarea id="description" name="description[]" rows="3" class="form-control"></textarea> </div></div><button id="remove" type="button" class="btn btn-danger addmore push-15">-</button></div>');
 
-       $('#simple-classic-step2').append('<div id="dive" class="step-tow-child"><div class="form-group"><label class="col-md-3 control-label">Title</label><div class="col-md-7"><input class="form-control" type="text" name="position[]"></div></div><div class="form-group"><label class="col-md-3 control-label">Company Name</label><div class="col-md-7"><input class="form-control" type="text" name="company_name[]"></div></div> <div class="form-group"><label class="col-md-3 control-label">Experience</label><div class="col-md-7"><div class="row"><div class="col-md-6"><input class="form-control datepicker" id="start_date" type="text" name="start_date[]" placeholder="From" value="" ></div><div class="col-md-6  end_date" id="endDate"><input class="form-control datepicker" type="text" name="end_date[]" placeholder="To" value="" ></div></div></div></div><div class="form-group"><label class="col-md-3 control-label">I Currently work here</label><div class="col-md-7"><label class="css-input switch switch-primary"><input type="checkbox" class="CurrentlyWork" name="CurrentlyWork[]" id="CurrentlyWork" ><span></span><span></span></label></div></div><div class="form-group"><label class="col-md-3 control-label">Description</label><div class="col-md-7"> <textarea name="description[]" rows="3" class="form-control"></textarea> </div></div><button id="remove" type="button" class="btn btn-danger addmore push-15">-</button></div>');
+        $('.datepicker').datepicker();
+      
+     //end frola editor
      });
 
-		$(document).on("click", "#remove", function(e) {
+
+    $(document).on("click", "#remove", function(e) {
       var da =$(this).closest('#dive').remove();
 
-		 });
+     });
    
+    
     </script>
+     
        
 @stop

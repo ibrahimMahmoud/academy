@@ -24,7 +24,7 @@ Route::post('i/login/', 'Auth\LoginManualyController@postLogin');
 Route::get('login/fb', 'Api\SocialLoginController@redirectToProvider');
 Route::get('login/fb/callback', 'Api\SocialLoginController@handleProviderCallback');
 
-  
+
 Route::group(['middleware' => 'auth'], function () {
     //ExperienceController
     Route::resource('experince','ExperienceController');
@@ -37,10 +37,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('complete_freelancer', 'ProfileExperienceController@create');
     Route::get('complete_employee', 'ProfileExperienceController@EmployeeCreate');
 
-    //EveluationQuestions 
+    //EveluationQuestions
     Route::get('positions','EveluationQuestions@positions');
     Route::post('position/{id}/activation','EveluationQuestions@positionActive');
     Route::resource('questions','EveluationQuestions');
+    Route::get('questions/{id}/eveluation','EveluationQuestions@index');
+    Route::get('questions/{id}/create','EveluationQuestions@create');
     Route::post('questions/{id}/update','EveluationQuestions@update');
     Route::get('questions/{id}/delete','EveluationQuestions@destroy');
 
@@ -54,16 +56,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('addproject', 'ProjectController@store');
     Route::get('post', 'PostController@index');
     Route::post('addpost', 'PostController@store');
-    
+
     //open profile
     Route::get('prof', 'HomeController@profile')->name("prof");
-    
+
     //open timeline
     Route::get('blog', 'HomeController@timeline');
-    
+
     //send message using ajax
     Route::get('sendmessage', 'ChatController@store');
-    
+
     //send comment using ajax
     Route::get('sendcomment', 'CommentController@store');
 

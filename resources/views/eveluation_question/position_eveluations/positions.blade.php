@@ -12,33 +12,32 @@
           <!-- Start blcok -->
           <div class="block">
               <div class="block-header">
-                <h3 class="block-title">Add positions</h3>
+                <h3 class="block-title">Evaluation Postion</h3>
               </div>
               <div class="block-content block-content-full bg-gray-lighter">
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <center><li>{{ $error }}</li></center>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif
-                    @if(Session::flash('success'))
-                    <div class="alert alert-success">
-                    {{Session::get('success')}}
-                    </div>
-                    @endif
-                    
-                    <!-- start datatable -->
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <center><li>{{ $error }}</li></center>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                @if(Session::flash('success'))
+                <div class="alert alert-success">
+                {{Session::get('success')}}
+                </div>
+                @endif
+        <!-- start datatable -->
         <table id="example" class="display" style="width:100%; text-transform: capitalize; ">
         <thead>
             <tr>
                 <th>#</th>
                 <th>position</th>
                 <th>total scoure</th>
-                <th>Questions Number</th>
                 <th>active status</th>
+                <th>Questions Number</th>
                 <th>questions</th>
                 <th>Active / Not</th>
             </tr>
@@ -47,16 +46,22 @@
             @foreach($positions as $position)
             <tr >
                 <td>{{@$position->id}}</td>
-                <td>{{@$position->EN_name}}</td>
-                <td>{{@$position->PostionEveluation->degree}}</td>
+                <td> <a href="{{URL::to('questions').'/'.@$position->id.'/eveluation'}}">{{@$position->EN_name}}</a></td>
+                <td>
+                    {{@$position->questions->sum('scoure')}}
+                </td>
                 <td id="position_status{{@$position->PostionEveluation->id}}">
+                    @if(is_null($position->PostionEveluation))
+                    we are here
+                    @else
                     @if($position->PostionEveluation->is_active =='0')
                         Active 
                     @else
                        Deactivated
                     @endif
+                    @endif
                 </td>
-                <td>{{$position->questions->count()}}</td>
+                <td>{{@$position->questions->count()}}</td>
                 <td>
                      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#showQestions{{@$position->id}}">
                         <li class="fa fa-info"></li>
@@ -106,7 +111,11 @@
                 <div class="form-group">
                   <div class="col-md-7">
                     <label class="css-input switch switch-primary">
-                        <input type="checkbox" name="active" id="active" value="{{@$position->PostionEveluation->id}}" <?php if($position->PostionEveluation->is_active == '1' )echo "checked='checked'";?> ><span></span>
+                    @if(is_null($position->PostionEveluation))
+                     <input type="checkbox" name="active" id="active" value="{{@$position->PostionEveluation->id}}" ><span></span>
+                    @else
+                    <input type="checkbox" name="active" id="active" value="{{@$position->PostionEveluation->id}}" <?php if($position->PostionEveluation->is_active == '1' )echo "checked='checked'";?> ><span></span>
+                    @endif
                     </label>
                   </div>
                 </div>

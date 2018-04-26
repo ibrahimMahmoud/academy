@@ -81,8 +81,8 @@
   
 @stop 
 @section('jsCode')
-<script type="text/javascript">
-   $( ".datepicker" ).datepicker();
+<script type="text/javascript"> 
+  $('.datepicker').datepicker();
 </script>
 @stop
 

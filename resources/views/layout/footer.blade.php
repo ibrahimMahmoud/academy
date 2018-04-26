@@ -48,7 +48,30 @@
         <!-- Page JS Code wizard -->
         
         <script src="{{asset('assets/js/pages/base_forms_wizard.js')}}"></script>
+        <script>
+            $(function(){
+              $.FroalaEditor.DefineIcon('imageInfo', {NAME: 'info'});
+              $.FroalaEditor.RegisterCommand('imageInfo', {
+                title: 'Info',
+                focus: false,
+                undo: false,
+                refreshAfterCallback: false,
+                callback: function () {
+                  var $img = this.image.get();
+                  alert($img.attr('src'));
+                }
+              });
 
+              // $('textarea').froalaEditor({
+              //   imageEditButtons: ['imageDisplay', 'imageAlign', 'imageInfo', 'imageRemove']
+              // });
+               
+            
+
+            });
+
+     
+          </script>
         <!-- date piker libirary -->
         
         <script>
@@ -62,17 +85,20 @@
             $(document).on('click','.CurrentlyWork',function(){
                 $(this).closest('.step-tow-child').find("#endDate").toggle();
             });
-          
+            
+            
+        
+          //   $(document).on("click", "#start_date", function(){
+          //       $(this).datepicker();
+          //   });
+            
+          // $(document).on("click", ".datepicker", function(){
+          //       $(this).datepicker();
+          //   });
 
-            $(document).on("click", "#start_date", function(){
-                   $(this).datepicker();
-            });
-       
-          $(document).on("click", ".datepicker", function(){
-                   $(this).datepicker();
-            });
+
         </script>
-       
+        
         @yield('jsCode')
     </body>
 

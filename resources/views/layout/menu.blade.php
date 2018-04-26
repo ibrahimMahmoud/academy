@@ -24,7 +24,6 @@
                   <li><a href="{{URL::to('answers/create')}}"><i class="si si-question"></i><span class="sidebar-mini-hide">Evaluation</span></a></li>
                   @endif
                   <li><a href="{{URL::to('/questions')}}"><i class="si si-question"></i><span class="sidebar-mini-hide">questions </span></a></li>
-                  <li><a href="{{URL::to('/questions/create')}}"><i class="si si-question"></i><span class="sidebar-mini-hide">create questions eveluation</span></a></li>
                   <li><a href="{{URL::to('/logout')}}"><i class="si si-question"></i><span class="sidebar-mini-hide">logout</span></a></li>
                   
                 </ul>
