@@ -131,13 +131,13 @@
                     <div class="form-group">
                       <label class="col-md-3 control-label">Title</label>
                       <div class="col-md-7">
-                        <input class="form-control" type="text" name="messagetitle" id="messagetitle">
+                        <input class="form-control" type="text" name="messagetitle" id="messagetitle" required>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-3 control-label">Content</label>
                       <div class="col-md-7">
-                        <textarea name="messagecontent" rows="3" class="form-control" id="messagecontent"></textarea>
+                        <textarea name="messagecontent" rows="3" class="form-control" id="messagecontent" required></textarea>
                       </div>
                     </div>
                     

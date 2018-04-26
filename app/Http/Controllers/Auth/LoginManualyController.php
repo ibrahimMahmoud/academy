@@ -9,6 +9,11 @@ use Session;
 use Auth;
 class LoginManualyController extends Controller
 {
+    public function getLogin()
+    {
+     // return abort(404);
+        return redirect('/');
+    }
     public function postLogin(LoginRequest $request)
     {
         $email = $request->get('email');
@@ -26,6 +31,6 @@ class LoginManualyController extends Controller
     public function logout()
     {
       Auth::logout();
-      return redirect('/login');
+      return redirect('/');
     }
 }

@@ -45,6 +45,14 @@ class EveluationQuestions extends Controller
     	return view('eveluation_question.questions',compact('questions','position'));
     }
 
+     public function questions()
+    {
+        $questions = EveliationQuestions::with(['user','position'])->orderBy('created_at','desc')->get();
+        // $position = Positions::find($id);
+
+        return view('eveluation_question.questions',compact('questions'));
+    }
+
     public function create($id)
     {
     	$positions = Positions::all();
@@ -99,7 +107,7 @@ class EveluationQuestions extends Controller
 	    	Session::flash('success','question created');
 	        return redirect()->back();
     	}else{
-    		Session::flash('error','All faild is required and scoure bust be float, try again');
+    		Session::flash('error','All faild is required and score must be number, try again');
        	 return redirect()->back();
     	}
     }
@@ -114,6 +122,7 @@ class EveluationQuestions extends Controller
 
     public function update(Request $request,$id)
     {
+        // dd($id);
         if (isset($request->position_id)) {
                 if (!isset($request->scoure)) {
                     $scoure = 0;
@@ -128,7 +137,7 @@ class EveluationQuestions extends Controller
                     }
                 }
 
-                EveliationQuestions::find($id)->update([
+                $questions = EveliationQuestions::find($id)->update([
                     'question'=>$request->question,
                     'scoure'=>$scoure,
                     'created_by'=>$request->user_id,
@@ -158,6 +167,7 @@ class EveluationQuestions extends Controller
                                         ]);
                 }
 
+                // dd(EveliationQuestions::find($id));
             
         $responce = ['status'=>'OK','msg'=>'question updated'];
         return Response::json($responce);

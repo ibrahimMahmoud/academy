@@ -1,17 +1,24 @@
-.viedo {position: relative;}
+.viedo {
+  position: relative;
+  margin-bottom: 60px;
+}
 .viedo iframe {
   width: 100%;
   height: 500px;
   display: block;
 }
-.viedo .btn {
+.viedo .btns-wrap {
   position: absolute;
   left: 50%;
   bottom: 50px;
   transform: translateX(-50%);
+}
+.viedo .btn {
   background-color: #fff;
   color: #2c343f;
   padding: 10px 35px;
+  width: 135px;
+  margin: 0 5px;
   font-weight: 300;
   letter-spacing: .3px;
   font-size: 17px;
@@ -246,9 +253,29 @@ footer select {
   color: #fff;
   opacity: .5;
 }
-
-
-
+.facebook-btn {
+  -webkit-appearance: none;
+  background-color: #4267b2;
+  display: block;
+  color: #fff;
+  width: 100%;
+  padding: 7px 0;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  transition: all .2s ease;
+}
+.facebook-btn:hover {
+  background-color: #29487d;
+}
+.or {
+  display: block;
+  text-align: center;
+}
+.modal .m-btn {
+  background-color: #009aae;
+  color: #fff;
+}
 
 
 

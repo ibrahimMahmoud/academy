@@ -20,7 +20,7 @@ class ProfileExperienceController extends Controller
         $projects  = Project::where('user_id',Auth()->id())->count();
         if ($projects > 0) {
             # if user add user expince action..
-            return redirect('/prof/'.Auth::id());
+            return redirect('/blog');
         }else{
             # redirect to complete profile
          if (Auth()->user()->work_status == 'freelancer') {
@@ -71,7 +71,6 @@ class ProfileExperienceController extends Controller
         $nbr = count($request->get('name_project')) ;
 
         foreach(range(0, $nbr) as $index) {
-            // $rules['work_status'] = 'required';            
             $rules['fname'] = 'required|string';
             $rules['lname'] = 'required|string';
             $rules['phone'] = 'required|numeric';
@@ -163,6 +162,6 @@ class ProfileExperienceController extends Controller
         }
         
         Session::flash('success','created success..');
-        return redirect('prof/'.Auth::id());
+        return redirect('blog');
     }
 }

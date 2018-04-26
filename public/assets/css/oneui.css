@@ -17138,27 +17138,9 @@ Custom
 
 
 
-.chat-wrap {
-  background-color: #f5f5f5;
-  border: 1px solid #ccc;
-  padding: 5px 10px;
-  max-width: 75%;
-  border-radius: 5px;
-  margin: 5px 0;
-}
-.chat-wrap.sender {
-  background: #2c343f;
-  color: #fff;
-}
 
-.chat-wrap.sender h4 {
-  color: #fff;
-}
-.chat-wrap.sender p {
-  color: #fff;
-}
-.avatar {
 
-}
+
+
 
 /*  */

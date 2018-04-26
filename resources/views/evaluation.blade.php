@@ -14,6 +14,7 @@
             <h3 class="block-title">Evaluation</h3>
           </div>
           <div class="block-content block-content-full bg-gray-lighter">
+              <?php if (count($questions)>0): ?>
               <form class="form-horizontal" action="{{URL::to('/answers')}}" method="post" >
                 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
                 @if(Session::has('success'))
@@ -29,6 +30,7 @@
                           </ul>
                       </div>
                   @endif
+              
                 @foreach($questions as $question )
                 <div class="form-group">
                   <div class="col-md-8 col-md-offset-2">
@@ -38,14 +40,15 @@
                   </div>
                 </div>
                 @endforeach
-
-
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <button class="btn btn-sm btn-primary" type="submit">Done</button>
                     </div>
                 </div>
               </form>
+            <?php else: ?>
+              No Question On Your Position
+            <?php endif ?>
           </div>
       </div><!-- end blcok -->
 

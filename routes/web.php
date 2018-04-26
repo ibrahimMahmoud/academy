@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('/login',['uses'=>'Auth\LoginManualyController@getLogin','as'=>'login']);
 Route::get('logout','Auth\LoginManualyController@logout');
 Route::get('/home', 'HomeController@index')->name('home');
 //LoginManualyController
@@ -41,23 +42,21 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('positions','EveluationQuestions@positions');
     Route::post('position/{id}/activation','EveluationQuestions@positionActive');
     Route::resource('questions','EveluationQuestions');
+    Route::get('questions','EveluationQuestions@questions');
     Route::get('questions/{id}/eveluation','EveluationQuestions@index');
     Route::get('questions/{id}/create','EveluationQuestions@create');
     Route::post('questions/{id}/update','EveluationQuestions@update');
     Route::get('questions/{id}/delete','EveluationQuestions@destroy');
-
-
     Route::resource('answers','UserEveluationAnswerController');
-
+    Route::get('answers','UserEveluationAnswerController@index');
     Route::get('project', function () {
         return view('project.index');
     });
-
     Route::post('addproject', 'ProjectController@store');
 
     Route::get('editpro', 'ProjectController@edit');
 
-    
+
     Route::get('post', 'PostController@index');
     Route::post('addpost', 'PostController@store');
 
@@ -72,19 +71,14 @@ Route::group(['middleware' => 'auth'], function () {
 
     //send comment using ajax
     Route::get('sendcomment', 'CommentController@store');
-
     //like post using ajax
     Route::get('likepost', 'PostController@like');
-
     //chat page
     Route::get('chat', 'ChatController@index');
-
     //get messages in chat page using ajax
     Route::get('getmessages', 'ChatController@conversation');
-
     //get more massages using ajax
     Route::get('getmore', 'ChatController@more');
-
     //get edit profile page
     Route::get('edit_prof', 'UserController@edit');
 

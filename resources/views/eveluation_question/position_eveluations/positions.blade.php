@@ -29,13 +29,16 @@
                 {{Session::get('success')}}
                 </div>
                 @endif
+                <div class="active_error">
+                    
+                </div>
         <!-- start datatable -->
         <table id="example" class="display" style="width:100%; text-transform: capitalize; ">
         <thead>
             <tr>
                 <th>#</th>
                 <th>position</th>
-                <th>total scoure</th>
+                <th>total score</th>
                 <th>active status</th>
                 <th>Questions Number</th>
                 <th>questions</th>
@@ -52,7 +55,7 @@
                 </td>
                 <td id="position_status{{@$position->PostionEveluation->id}}">
                     @if(is_null($position->PostionEveluation))
-                    we are here
+                    active
                     @else
                     @if($position->PostionEveluation->is_active =='0')
                         Active 
@@ -83,7 +86,7 @@
                             <table class="table table-striped table-bordered table-hover table-condensed">
                                 <tr>
                                     <td>Question</td>
-                                    <td>Scoure</td>
+                                    <td>score</td>
                                 </tr>
                                 @foreach($position->questions as $question)
                                 <tr>
@@ -152,8 +155,13 @@
                 type: 'post',
                 success: function(result)
                 {
-                    $('#position_status'+id).html(result.msg)
-                    console.log('done');
+                  $('#position_status'+id).html(result.msg)
+                  console.log('OK');
+
+                },
+                error:function () {
+                    $('.active_error').append('<div class="alert alert-danger">should you add question to can make active position or not</div>');
+                  console.log('NOT OK');
 
                 }
             });

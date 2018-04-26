@@ -38,7 +38,7 @@ class PostController extends Controller
         $like  = 0;
         $t = Like_Post::where('user_id',$userid)->where('post_id', $postid)->first();
 
-        if(count($t) > 0 )
+        if(!empty($t) )
             {
                 $p = Post::find($postid);
                 $p->nmoflikes = --$p->nmoflikes;

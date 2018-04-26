@@ -85,19 +85,19 @@
                           <div class="tab-pane push-30-t push-50 field " id="simple-classic-step2">
                             <div class="step-tow-child">
                               <div class="form-group">
-                                <label class="col-md-3 control-label">Title</label>
+                                <label class="col-md-3 control-label">Title <span title="this field is required">*</span></label>
                                 <div class="col-md-7">
                                   <input class="form-control" type="text" id="position" name="position[]" required="">
                                 </div>
                               </div>
                               <div class="form-group">
-                                <label class="col-md-3 control-label">Company Name</label>
+                                <label class="col-md-3 control-label">Company Name <span title="this field is required">*</span></label>
                                 <div class="col-md-7">
                                   <input class="form-control" type="text" id="company_name" name="company_name[]"  >
                                 </div>
                               </div>
                               <div class="form-group">
-                                <label class="col-md-3 control-label">Experience</label>
+                                <label class="col-md-3 control-label">Experience <span title="this field is required">*</span></label>
                                 <div class="col-md-7">
                                 <div class="row">
                                 <div class="col-md-6" id="">
@@ -110,7 +110,7 @@
                                 </div>
                               </div>
                               <div class="form-group">
-                                <label class="col-md-3 control-label">I Currently work here</label>
+                                <label class="col-md-3 control-label">I Currently work here <span title="this field is required">*</span></label>
                                 <div class="col-md-7">
                                   <label class="css-input switch switch-primary">
                                   <input type="checkbox" class="CurrentlyWork" name="CurrentlyWork[]" id="CurrentlyWork" ><span></span><span></span>
@@ -118,7 +118,7 @@
                                 </div>
                               </div>
                               <div class="form-group">
-                                <label class="col-md-3 control-label">Description</label>
+                                <label class="col-md-3 control-label">Description <span title="this field is required">*</span></label>
                                 <div class="col-md-7">
                                   <textarea name="description[]" id="description" rows="3" class="form-control"></textarea>
                                 </div>
@@ -165,7 +165,7 @@
                             <div class="col-xs-6 text-right">
                                 <button class="wizard-next btn btn-default" type="button">Next <i class="fa fa-arrow-right"></i></button>
                                 <!-- done button action in assets/js/pages/base_forms_wizard.js -->
-                                <!-- <input  type="submit" valye="Done"> -->
+                              
                                 <button class="wizard-finish btn btn-primary" type="submit"><i class="fa fa-check"></i> Done</button>
                             </div>
                         </div>

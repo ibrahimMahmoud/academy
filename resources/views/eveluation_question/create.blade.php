@@ -8,7 +8,7 @@
           <!-- Start blcok -->
           <div class="block">
               <div class="block-header">
-                <h3 class="block-title">Add Experience</h3>
+                <h3 class="block-title">Add Question</h3>
               </div>
               <div class="block-content block-content-full bg-gray-lighter">
                   <form class="form-horizontal" action="{{URL::to('/questions')}}" method="post" >
@@ -52,11 +52,11 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-md-3 control-label">Scoure</label>
+                      <label class="col-md-3 control-label">score</label>
                       <div class="col-md-7">
                         <div class="row">
                           <div class="col-md-12">
-                            <input class="form-control" type="text" id="scoure" name="scoure[]" placeholder="Question Scoure" value="" >
+                            <input class="form-control" type="text" id="scoure" name="scoure[]" placeholder="Question score" value="" >
                           </div>
                          
                         </div>
