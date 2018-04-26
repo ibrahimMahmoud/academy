@@ -54,6 +54,10 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::post('addproject', 'ProjectController@store');
+
+    Route::get('editpro', 'ProjectController@edit');
+
+    
     Route::get('post', 'PostController@index');
     Route::post('addpost', 'PostController@store');
 
@@ -86,5 +90,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     //post new profile data
     Route::post('edit', 'UserController@update');
+
+    Route::post('pro/{id}/update','ProjectController@update');
+    Route::get('pro/{id}/delete','ProjectController@destroy');
 
 });

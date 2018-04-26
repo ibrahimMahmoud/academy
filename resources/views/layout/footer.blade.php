@@ -49,6 +49,7 @@
         
         <script src="{{asset('assets/js/pages/base_forms_wizard.js')}}"></script>
         <script>
+           
             $(function(){
               $.FroalaEditor.DefineIcon('imageInfo', {NAME: 'info'});
               $.FroalaEditor.RegisterCommand('imageInfo', {

@@ -80,18 +80,23 @@ class UserController extends Controller
         $user = Auth::User();
         $experience = Experience::where('user_id', $user->id)->get();
         $project = Project::where('user_id', $user->id)->get();
-
+        if(!empty($request->file('image')))
+        {
         $image = $request->file('image');
         $input['filename'] = time().'.'.$image->getClientOriginalExtension();
         $destinationPath = public_path('/images');
         $image->move($destinationPath, $input['filename']);
+        }
 
         $u = User::find($user->id);
         $u->first_name = $request->firstname;
         $u->last_name = $request->lastname;
         $u->phone = $request->phone;
-        $u->image = $input['filename'];
-        $u->password = Hash::make($request->password);
+        if(!empty($request->file('image')))
+        {
+        $u->image = $input['filename'];}
+        if(!empty($request->password)){
+        $u->password = Hash::make($request->password);}
         $u->save();
 
         // return view('profile', compact('user','experience','project'));

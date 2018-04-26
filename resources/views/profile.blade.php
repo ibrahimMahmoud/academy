@@ -74,17 +74,21 @@
                           <h3 class="block-title"><i class="fa fa-fw fa-user"></i> Projects</h3>
                       </div>
                       <div class="block-content personal-info">
-                        <div class="row">
+                        <div class="row" id="edit_project">
                           @if(count($project)>0)
                           @foreach($project as $pro)
-                        <div class="col-md-4">
-                            <a href="project.php" class="project-item">
-                              <div class="img-container">
-                                <img src="{{asset('/')}}/{{$pro->caver_url}}" class="img-responsive">
+                        <div class="col-md-4 project">
+                            <div class="project-item">
+                              <div class="row block-title">
+                              <a href="#" class="eproo proorp" data-toggle="modal" data-target="#editproject" pro_id="{{$pro->id}}" data-original-title="Edit">Edit</a><input type="hidden" class="kl" value="{{$pro->id}}" name="kl">
+                              <a href="{{URL::to('/')}}/pro/{{@$pro->id}}/delete" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a>
+                            </div><br>
+                              <div class="img-container"><input type="hidden" class="proimg" value="{{asset('/images')}}/{{$pro->caver_url}}" name="">
+                                <img class="proimg" src="{{asset('/images')}}/{{$pro->caver_url}}" class="img-responsive">
                               </div>
-                              <h5>{{$pro->project_name}}</h5>
-                            </a>
-                          </div>
+                              <h5 class="protit">{{$pro->project_name}}</h5>
+                            </div>
+                        </div>
                         @endforeach
                         @else <p>No Projects yet !</p>
                         @endif
@@ -139,20 +143,6 @@
               <div class="block-content block-content-full bg-gray-lighter">
                   <form id="form" class="form-horizontal"  method="post" >
                   <input type="hidden" name="_token" value="{!! csrf_token() !!}">
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <center><li>{{ $error }}</li></center>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif
-                    @if(Session::flash('success'))
-                    <div class="alert alert-success">
-                    {{Session::get('success')}}
-                    </div>
-                    @endif
                     <div class="form-group">
                       <label class="col-md-3 control-label">Title</label>
                       <div class="col-md-7">
@@ -171,7 +161,7 @@
                       <div class="col-md-7">
                         <div class="row">
                           <div class="col-md-6">
-                            <input class="form-control" type="date" name="start_date" id="start" placeholder="From" value="" >
+                            <input class="form-control datepicker" type="text" name="start_date" id="start" placeholder="From" value="" >
                           </div>
                           <div class="col-md-6" id="end">
                           </div>
@@ -192,13 +182,13 @@
                         <textarea name="description" id="description" rows="3" class="form-control"></textarea>
                       </div>
                     </div>
-
-                  </form>
 <div class="form-group" id="submit">
                         <div class="col-md-9 col-md-offset-3">
                             <button class="btn btn-sm btn-primary" type="submit">Update</button>
                         </div>
                     </div>
+                  </form>
+
               </div>
           </div><!-- end blcok -->
         </div>
@@ -207,17 +197,79 @@
         </div>
         <!-- END Page Content -->
     <!-- end model-->
+
+
+
+
+    <!-- edit project model -->
+        <div class="modal fade" id="editproject" aria-hidden="true" aria-labelledby="view"
+            role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-simple">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title"></h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+
+        <!-- Page Content -->
+        <div class="content">
+          <!-- Start blcok -->
+          <div class="block">
+              <div class="block-content block-content-full bg-gray-lighter">
+                  <form id="sendeditpro" class="ttt" class="form-horizontal"  method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+                    <div class="form-group">
+                      <label class="col-md-3 control-label">Project Name</label>
+                      <div class="col-md-7">
+                        <input class="form-control" type="text" name="proname" id="proname" value="">
+                        
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="profile-img">
+                      <img id="blah" src="">
+                      <div class="upload-img">
+                        <input type="file" name="proimage" id="proimage" value="" onchange="readURL(this);">
+                        <i class="fa fa-image"></i>
+                      </div>
+                  </div>
+                    </div>
+                        <div class="form-group" id="edpro">
+                        <div class="col-md-9 col-md-offset-3">
+                            <button class="btn btn-sm btn-primary" type="submit">Update</button>
+                        </div>
+                    </div>
+                  </form>
+                      
+              </div>
+          </div><!-- end blcok -->
+        </div>
+        </div>
+        </div>
+        </div>
+        <!-- END Page Content -->
+    <!-- end model-->
+
+
+
+
 @endsection
 @section('jsCode')
 
 <script>
-       $('.datepicker').datepicker();
+  var proporid=0;
+      
+      $(document).ready(function(){
+        $('.datepicker').datepicker();
+      });
       $(document).on('click','#submit',function(){
         var id = $('#exp_id').val();
         $('form').attr("action",'{{URL("/experince")}}/'+id+'/update');
          $( "form" ).submit();
 
-});
+      });
 
     $(document).on('click','.editM',function(){
      var id = $(this).attr('exp_id');
@@ -233,19 +285,56 @@
       $('#edit').find('#start').val(start);
 
       if(end == ""){
+        $('#CurrentlyWork').prop('checked', true);
         $('#end').empty();
-                var endD = '<input class="form-control end" type="date" name="end_date" id="endDate" placeholder="To" value="" >';
+        var endD = '<input class="form-control end datepicker" type="date" name="end_date" id="endDate" placeholder="To" value="'+end+'" >';
+        $('#end').append(endD);
+
+      }else{
+        
+        $('#end').empty();
+                var endD = '<input class="form-control end datepicker" type="date" name="end_date" id="endDate" placeholder="To" value="" >';
                 $('#end').append(endD);
 
         $('#CurrentlyWork').prop('checked', false);
-
-      }else{
-        $('#CurrentlyWork').prop('checked', true);
-        $('#end').empty();
-        var endD = '<input class="form-control end" type="date" name="end_date" id="endDate" placeholder="To" value="'+end+'" >';
-        $('#end').append(endD);
       }
 
     });
+
+    $(document).on('click','.eproo',function(){
+      var idd = $(this).closest('.row').find('.kl').val();
+      proporid = idd;
+        //var idd = $('#kl').val();
+        //console.log(idd);
+        $('.ttt').attr("action",'{{URL("/pro")}}/'+idd+'/update');
+         //$( "#sendeditpro" ).submit();
+
+      });
+
+
+    $(document).on('click','.proorp',function(){
+      var id = proporid; console.log(id);
+      var title = $(this).closest('.project-item').find(".protit").text();
+      var img = $(this).closest('.project-item').find(".proimg").val();
+      console.log(title);
+      $('#editproject').find('#proname').val();
+      $('#editproject').find('#kl').val(id);
+      $('#editproject').find('#blah').attr('src',img);
+      $('#editproject').find('#proname').val(title);
+
+    });
+
+     function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 </script>
 @endsection

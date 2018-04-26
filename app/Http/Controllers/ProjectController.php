@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 
 class ProjectController extends Controller
@@ -81,7 +82,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        $pro = Project::find($project->id);
+        return view('pro-edit',compact('pro'));
     }
 
     /**
@@ -91,9 +93,32 @@ class ProjectController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, $id)
     {
-        //
+        if(!empty($request->file('proimage')))
+        {
+        $image = $request->file('proimage');
+        $input['filename'] = time().'.'.$image->getClientOriginalExtension();
+        $destinationPath = public_path('/images');
+        $image->move($destinationPath, $input['filename']);
+
+            Project::find($id)->update([
+            'project_name'=>$request->proname,
+            'caver_url'=>$input['filename'],
+        ]);
+
+    }
+    else{
+        Project::find($id)->update([
+            'project_name'=>$request->proname,
+        ]);
+    }
+         
+        
+        
+        Session::flash('success','updated at');
+        return redirect()->back();
+        //return redirect('prof');
     }
 
     /**
@@ -102,8 +127,10 @@ class ProjectController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function destroy($id)
     {
-        //
+        Project::destroy($id);
+        Session::flash('success','deleted at');
+        return redirect()->back();
     }
 }

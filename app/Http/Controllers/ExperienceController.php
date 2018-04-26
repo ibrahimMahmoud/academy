@@ -64,19 +64,22 @@ class ExperienceController extends Controller
         return view('experince.edit',compact('experince'));
     }
 
-    public function update(ExperienceRequest $request,$id)
+    public function update( Request $request,$id)
     {
+        //dd($request);
         if($request->CurrentlyWork == "on"){
-            $currentlyWork = '1';
-            $endDate= NULL;
-        }else{
+              // return $request->end_date;
             $currentlyWork = '0';      
-            $endDate  = $request->end_date;   
+            $end_date  = $request->end_date;   
               if ($request->has('end_date')) {
                     $endDate  = $request->end_date; 
                     $end_date =  Carbon::parse($endDate)->format('Y-m-d');
                   
-                }      
+                }   
+        }else{
+             
+            $currentlyWork = '1';
+            $end_date= NULL;
 
         }
         
@@ -89,8 +92,8 @@ class ExperienceController extends Controller
             'title'=>$request->title,
             'description'=>$request->description,
             'company_name'=>$request->company_name,
-            'from_date'=>@$start_date,
-            'to_date'=>@$end_date,
+            'from_date'=>$start_date,
+            'to_date'=>$end_date,
             'currentlyWork'=>$currentlyWork
         ]);
         

@@ -74,7 +74,7 @@
                             70% Complete
                           </div>
                         </div>
-                        <a href="complete-prof.php" class="btn btn-block push-15">Complete Your Profile</a>
+                        <a href="{{Url('/complete_employee')}}" class="btn btn-block push-15">Complete Your Profile</a>
                       </div>
                     </div>
                   </div>
@@ -96,10 +96,7 @@
                         <div class="prof-wrap">
                           <div class="profile-img">
                             <img src="{{asset('/images')}}/{{$user->image}}">
-                            <div class="upload-img">
-                              <input type="file" name="" value="">
-                              <i class="fa fa-image"></i>
-                            </div>
+                            
                           </div>
                           <a href="#">{{$user->first_name}}</a>
                           <span>{{$user->position->EN_name}}</span>
@@ -326,7 +323,7 @@ var possid = 0;
 
   $(document).on('click','#likebutton',function(){
       var pid = $(this).closest('.nav').find('#postid').val();
-          possid = pid;//console.log(possid);
+          possid = pid;console.log(possid);
 
           $.ajax({
             url: 'likepost',
@@ -334,7 +331,7 @@ var possid = 0;
             data: { postid: possid},
             success: function(response)
             {
-                console.log(response.likes_count.nmoflikes);
+                //console.log(response.likes_count.nmoflikes);
                 $('.'+response.likes_count.id).text(response.likes_count.nmoflikes);
             }
           });
