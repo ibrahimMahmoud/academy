@@ -23,7 +23,7 @@
                   @if(App\UserEveluation::where('user_id',Auth::id())->where('is_start','0')->count() >0 )
                   <li><a href="{{URL::to('answers/create')}}"><i class="si si-question"></i><span class="sidebar-mini-hide">Evaluation</span></a></li>
                   @endif
-                  <li><a href="{{URL::to('/questions')}}"><i class="si si-question"></i><span class="sidebar-mini-hide">questions </span></a></li>
+                  <!-- <li><a href="{{URL::to('/questions')}}"><i class="si si-question"></i><span class="sidebar-mini-hide">questions </span></a></li> -->
                   <li><a href="{{URL::to('/logout')}}"><i class="si si-question"></i><span class="sidebar-mini-hide">logout</span></a></li>
                   
                 </ul>

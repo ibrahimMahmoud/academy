@@ -1,90 +1,3 @@
-    @extends('layout.master')
-    @section('content')
- <!-- Header Navbar-->
-<header id="header-navbar" class="content-mini content-mini-full">
-    <!-- Header Navigation Right -->
-    <ul class="nav-header pull-right">
-        <li>
-            <div class="btn-group">
-                <button class="btn btn-default btn-image dropdown-toggle" data-toggle="dropdown" type="button">
-                    <img src="{{asset('assets/img/avatars/avatar10.jpg')}}" alt="Avatar">
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-right">
-                    <li class="dropdown-header">Profile</li>
-                    <li>
-                        <a tabindex="-1" href="base_pages_inbox.html">
-                            <i class="si si-envelope-open pull-right"></i>
-                            <span class="badge badge-primary pull-right">3</span>Inbox
-                        </a>
-                    </li>
-                    <li>
-                        <a tabindex="-1" href="#">
-                            <i class="si si-user pull-right"></i>
-                            <span class="badge badge-success pull-right">1</span>Profile
-                        </a>
-                    </li>
-                    <li>
-                        <a tabindex="-1" href="javascript:void(0)">
-                            <i class="si si-settings pull-right"></i>Settings
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li class="dropdown-header">Actions</li>
-                    <li>
-                        <a tabindex="-1" href="#">
-                            <i class="si si-lock pull-right"></i>Lock Account
-                        </a>
-                    </li>
-                    <li>
-                        <a tabindex="-1" href="#">
-                            <i class="si si-logout pull-right"></i>Log out
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li>
-            <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
-            <button class="btn btn-default" data-toggle="layout" data-action="side_overlay_toggle" type="button">
-                <i class="fa fa-tasks"></i>
-            </button>
-        </li>
-    </ul>
-    <!-- END Header Navigation Right -->
-
-    <!-- Header Navigation Left -->
-    <ul class="nav-header pull-left">
-        <li class="hidden-md hidden-lg">
-            <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
-            <button class="btn btn-default" data-toggle="layout" data-action="sidebar_toggle" type="button">
-                <i class="fa fa-navicon"></i>
-            </button>
-        </li>
-        <li class="hidden-xs hidden-sm">
-            <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
-            <button class="btn btn-default" data-toggle="layout" data-action="sidebar_mini_toggle" type="button">
-                <i class="fa fa-ellipsis-v"></i>
-            </button>
-        </li>
-        <li class="visible-xs">
-            <!-- Toggle class helper (for .js-header-search below), functionality initialized in App() -> uiToggleClass() -->
-            <button class="btn btn-default" data-toggle="class-toggle" data-target=".js-header-search" data-class="header-search-xs-visible" type="button">
-                <i class="fa fa-search"></i>
-            </button>
-        </li>
-        <li class="js-header-search header-search">
-            <form class="form-horizontal" action="base_pages_search.html" method="post">
-                <div class="form-material form-material-primary input-group remove-margin-t remove-margin-b">
-                    <input class="form-control" type="text" id="base-material-text" name="base-material-text" placeholder="Search..">
-                    <span class="input-group-addon"><i class="si si-magnifier"></i></span>
-                </div>
-            </form>
-        </li>
-    </ul>
-    <!-- END Header Navigation Left -->
-</header>
-<!-- END Header -->
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -100,14 +13,17 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
 
     <!-- OneUI CSS framework -->
-    <link rel="stylesheet" href="assets/css/oneui.css">
-    <link rel="stylesheet" href="assets/css/academy.css">
+    <link rel="stylesheet" href="{{URL::to('/')}}/assets/css/oneui.css">
+    <link rel="stylesheet" href="{{URL::to('/')}}/assets/css/academy.css">
   </head>
   <body>
 
     <section class="viedo">
       <iframe src="https://www.youtube.com/embed/i5qpS_D8Law?showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      <a class="btn" data-toggle="modal" data-target="#signup">Join Now</a>
+      <div class="btns-wrap">
+        <a class="btn" href="{{URL::to('/register')}}">Signup</a>
+        <a class="btn" data-toggle="modal" data-target="#login">Login</a>
+      </div>
     </section>
 
     <section class="about">
@@ -353,21 +269,96 @@
         </div>
     </div>
     <!-- END Large Modal -->
+    <!-- Large Modal -->
+    <div class="modal" id="login" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="block block-themed block-transparent remove-margin-b">
+                    <div class="block-header bg-primary-dark">
+                        <ul class="block-options">
+                            <li>
+                                <button data-dismiss="modal" type="button"><i class="si si-close"></i></button>
+                            </li>
+                        </ul>
+                        <h3 class="block-title">Login</h3>
+                    </div>
+                    <div class="block-content">
+                      <div class="row">
+                        <form class="" action="{{ url('i/login/') }}" method="post">
+                           @csrf
 
-    <script src="assets/js/core/jquery.min.js"></script>
-    <script src="assets/js/core/bootstrap.min.js"></script>
-    <script src="assets/js/core/jquery.slimscroll.min.js"></script>
-    <script src="assets/js/core/jquery.scrollLock.min.js"></script>
-    <script src="assets/js/core/jquery.appear.min.js"></script>
-    <script src="assets/js/core/jquery.countTo.min.js"></script>
-    <script src="assets/js/core/jquery.placeholder.min.js"></script>
-    <script src="assets/js/core/js.cookie.min.js"></script>
-    <script src="assets/js/app.js"></script>
+                          <div class="form-group row">
+                            <div class="col-sm-8 col-sm-offset-2">
+                               <a href="{{URL::to('/login/fb')}}" class="btn btn-primary btn-block">Facebook</a>
+                              <!-- <button type="button" name="button" class="facebook-btn">Facebook</button> -->
+                              <label for="" class="push-15-t or">Or</label>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-8 col-sm-offset-2">
+                              <label for="">User Name</label>
+                              <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="email" value="{{ old('email') }}" required >
+                            </div>
+                          </div>
+                          @if ($errors->has('email'))
+                            <span class="invalid-feedback">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                          @endif
+                          <div class="form-group row">
+                            <div class="col-sm-8 col-sm-offset-2">
+                              <label for="">Password</label>
+                              <input  type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                            </div>
+                            @if ($errors->has('password'))
+                              <span class="invalid-feedback">
+                                  <strong>{{ $errors->first('password') }}</strong>
+                              </span>
+                              @endif
+                          </div>
+                            <div class="form-group row">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Remember Me') }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                          <div class="form-group row">
+                            <div class="col-sm-8 col-sm-offset-2">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <button class="btn btn-sm m-btn btn-block" type="button" data-dismiss="modal">close</button>
+                                </div>
+                                <div class="col-md-6">
+                                  <button type="submit" class="btn btn-sm m-btn btn-block btn-primary">{{ __('Login') }} </button>
+                                </div>
+                              </div>
+                              
+                              
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Large Modal -->
+
+    <script src="{{URL::to('/')}}/assets/js/core/jquery.min.js"></script>
+    <script src="{{URL::to('/')}}/assets/js/core/bootstrap.min.js"></script>
+    <script src="{{URL::to('/')}}/assets/js/core/jquery.slimscroll.min.js"></script>
+    <script src="{{URL::to('/')}}/assets/js/core/jquery.scrollLock.min.js"></script>
+    <script src="{{URL::to('/')}}/assets/js/core/jquery.appear.min.js"></script>
+    <script src="{{URL::to('/')}}/assets/js/core/jquery.countTo.min.js"></script>
+    <script src="{{URL::to('/')}}/assets/js/core/jquery.placeholder.min.js"></script>
+    <script src="{{URL::to('/')}}/assets/js/core/js.cookie.min.js"></script>
+    <script src="{{URL::to('/')}}/assets/js/app.js"></script>
 
 
   </body>
 </html>
-
-
-
-    @endsection        

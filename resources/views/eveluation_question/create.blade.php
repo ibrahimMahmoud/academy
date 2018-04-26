@@ -52,11 +52,11 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-md-3 control-label">Scoure</label>
+                      <label class="col-md-3 control-label">score</label>
                       <div class="col-md-7">
                         <div class="row">
                           <div class="col-md-12">
-                            <input class="form-control" type="text" id="scoure" name="scoure[]" placeholder="Question Scoure" value="" >
+                            <input class="form-control" type="text" id="scoure" name="scoure[]" placeholder="Question score" value="" >
                           </div>
                          
                         </div>

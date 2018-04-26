@@ -45,6 +45,14 @@ class EveluationQuestions extends Controller
     	return view('eveluation_question.questions',compact('questions','position'));
     }
 
+     public function questions()
+    {
+        $questions = EveliationQuestions::with(['user','position'])->orderBy('created_at','desc')->get();
+        // $position = Positions::find($id);
+
+        return view('eveluation_question.questions',compact('questions'));
+    }
+
     public function create($id)
     {
     	$positions = Positions::all();

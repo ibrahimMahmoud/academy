@@ -41,6 +41,7 @@
                           <h3 class="block-title"><i class="fa fa-fw fa-user"></i> Questions</h3>
                       </div>
                       <div class="block-content personal-info" >
+                        <?php if (count($questions) > 0): ?>
                         @foreach($questions as $question)
                         <div class="block-item" id="QuestionContent{{@$question->id}}">
                           <ul class="block-options">
@@ -137,6 +138,9 @@
                         </div>
                         <!-- <hr> -->
                         @endforeach
+                      <?php else: ?>
+                        This Position is Empty! 
+                        <?php endif ?>
                       </div>
                   </div><!-- end Experience  -->
    

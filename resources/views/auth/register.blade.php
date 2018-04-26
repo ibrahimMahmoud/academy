@@ -60,6 +60,7 @@
                                   <!-- <input class="form-control" type="text" id="" name="title" value="{{Request::old('title')}}"> -->
                                   <select name="title" class="form-control">
                                   @foreach($positions as $posision)
+                                    <option>select one</option>
                                     <option value="{{@$posision->id}}">{{@$posision->EN_name}}</option>
                                   @endforeach
                                   </select>
