@@ -66,21 +66,32 @@ class ExperienceController extends Controller
 
     public function update( Request $request,$id)
     {
-        //dd($request);
-        if($request->CurrentlyWork == "on"){
-              // return $request->end_date;
-            $currentlyWork = '0';      
-            $end_date  = $request->end_date;   
-              if ($request->has('end_date')) {
-                    $endDate  = $request->end_date; 
-                    $end_date =  Carbon::parse($endDate)->format('Y-m-d');
+        // dd($request);
+        // if($request->CurrentlyWork == "on"){
+        //       // return $request->end_date;
+        //     $currentlyWork = '0';      
+        //     $end_date  = $request->end_date;   
+        //       if ($request->has('end_date')) {
+        //             $endDate  = $request->end_date; 
+        //             $end_date =  Carbon::parse($endDate)->format('Y-m-d');
                   
-                }   
-        }else{
+        //         }   
+        // }else{
              
+        //     $currentlyWork = '1';
+        //     $end_date= NULL;
+
+        // }
+        if($request->CurrentlyWork == "on"){
             $currentlyWork = '1';
             $end_date= NULL;
+        }else{
+            $currentlyWork = '0';    
+             if ($request->has('end_date')) {
+                    $endDate  = $request->end_date; 
+                    $end_date =  Carbon::parse($endDate)->format('Y-m-d');
 
+                }        
         }
         
             $start_datee  = $request->start_date;

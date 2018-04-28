@@ -46,31 +46,7 @@
                         <div class="block-item" id="QuestionContent{{@$question->id}}">
                           <ul class="block-options">
                             <li>
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#deleteQuestion{{@$question->id}}"><i class="fa fa-trash"></i></button>
-                                <div id="deleteQuestion{{@$question->id}}" class="modal fade" role="dialog">
-                                 {{Form::open(['method'=>'POST','id'=>'deleteQestion'.@$question->id])}}  
-                                 <input type="hidden" id="url{{@$question->id}}" value="{{URL::to('/')}}/api/questions/{{@$question->id}}/delete">         
-                                 <input type="hidden" name="question_id" id="question_id" value="{{@$question->id}}">         
-                                  <div class="modal-dialog">
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-
-                                      <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Delete Question</h4>
-                                      </div>
-                                      <div class="modal-body">
-                                        <p>Are you Sure Delete This.</p>
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-danger" id="delete">Delete</button>
-                                      </div>
-                                    </div>
-
-                                  </div>
-                                {{Form::close()}}
-                                </div>
+                                <a href="{{URL::to('/')}}/questions/{{@$question->id}}/delete" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a>
                             </li>
                             <li>
                               <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editQuestion{{@$question->id}} "><i class="fa fa-pencil"></i></button>    
@@ -102,7 +78,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group" id="scoreDiv">
-                                            <label class="col-md-3 control-label">Scoure</label>
+                                            <label class="col-md-3 control-label">Score</label>
                                             <div class="col-md-7">
                                                 <div class="row">
                                                   <div class="col-md-12">
@@ -132,7 +108,7 @@
                     
                           </ul >
                           <p class="t" style="display: inline-block;">Queestion: <h5 style="display: inline-block;" id="question{{@$question->id}}">{{@strip_tags($question->question)}}</h5></p>
-                          <p class="d" style="display: inline-block;" >Scoure:<h5 id="scoure{{@$question->id}}" style="display: inline-block;" > {{@$question->scoure}}</h5></p>
+                          <p class="d" style="display: inline-block;" >Score:<h5 id="scoure{{@$question->id}}" style="display: inline-block;" > {{@$question->scoure}}</h5></p>
                           <p class="c" style="display: inline-block;" >created By: <h5 style="display: inline-block;" > {{$question->user->first_name.' '.$question->user->last_name}}</h5></p>
                       
                         </div>

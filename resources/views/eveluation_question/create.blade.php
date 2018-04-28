@@ -47,7 +47,7 @@
                     <div class="form-group">
                       <label class="col-md-3 control-label"> Question </label>
                       <div class="col-md-7">
-                        <textarea name="question[]" id="question" rows="3" class="form-control"></textarea>
+                        <textarea name="question[]" id="question" rows="3" class="form-control" required="required"></textarea>
                         
                       </div>
                     </div>
@@ -56,7 +56,7 @@
                       <div class="col-md-7">
                         <div class="row">
                           <div class="col-md-12">
-                            <input class="form-control" type="text" id="scoure" name="scoure[]" placeholder="Question score" value="" >
+                            <input class="form-control" type="text" id="scoure" name="scoure[]" placeholder="Question score" value="" required="required">
                           </div>
                          
                         </div>

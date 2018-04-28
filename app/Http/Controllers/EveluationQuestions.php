@@ -105,7 +105,8 @@ class EveluationQuestions extends Controller
     			]);
     		}
 	    	Session::flash('success','question created');
-	        return redirect()->back();
+	        //return redirect()->back();
+            return redirect('questions/'.$position.'/eveluation');
     	}else{
     		Session::flash('error','All faild is required and score must be number, try again');
        	 return redirect()->back();
@@ -184,6 +185,7 @@ class EveluationQuestions extends Controller
            
         EveliationQuestions::destroy($id);
         $responce = ['status'=>'OK','msg'=>'question deleted'];
-        return Response::json($responce);
+        //return Response::json($responce);
+        return redirect()->back();
     }
 }

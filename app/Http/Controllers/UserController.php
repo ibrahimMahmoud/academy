@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Experience;
 use App\Post;
 use App\Project;
+use App\Positions;
 use App\User;
 use App\Comment;
 use Hash;
@@ -65,7 +66,9 @@ class UserController extends Controller
     public function edit()
     {
         $user = Auth::User();
-        return view('edit-profile', compact('user'));
+        $position = Positions::all();//return $position;
+
+        return view('edit-profile', compact('user','position'));
     }
 
     /**
@@ -76,7 +79,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-    {
+    {//dd($request);
         $user = Auth::User();
         $experience = Experience::where('user_id', $user->id)->get();
         $project = Project::where('user_id', $user->id)->get();
@@ -97,6 +100,7 @@ class UserController extends Controller
         $u->image = $input['filename'];}
         if(!empty($request->password)){
         $u->password = Hash::make($request->password);}
+        $u->position_id = $request->position;
         $u->save();
 
         // return view('profile', compact('user','experience','project'));

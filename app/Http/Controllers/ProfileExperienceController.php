@@ -146,10 +146,10 @@ class ProfileExperienceController extends Controller
             $ext  =Input::file('project_cover')[$key]->getClientOriginalExtension();
             $skip_slash = str_replace('/','',$newname) . '.' . $ext;
             $fullname = str_replace('.','',$skip_slash) . '.' . $ext;
-            $move = $project->move(public_path() .'/uploads/images/project', $fullname);
+            $move = $project->move(public_path() .'/images', $fullname);
            
-            $path ='/uploads/images/project';
-            $this->attributes['image'] =$path.'/'.$fullname;
+            $path ='images';
+            $this->attributes['image'] =$fullname;
 
             Project::create([
                 'user_id'=>Auth::id(),

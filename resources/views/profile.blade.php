@@ -22,7 +22,7 @@
                             <img src="{{asset('/images')}}/{{$user->image}}" class="img-responsive">
                           </div>
                           <div class="col-md-10">
-                            <h4>{{$user->first_name}}</h4>
+                            <h4>{{$user->first_name}} {{$user->last_name}}</h4>
                             <p>{{$user->position->EN_name}}</p>
                             <p>{{$user->phone}}</p>
                             <p>{{$user->email}}</p>
@@ -84,7 +84,7 @@
                               <a href="{{URL::to('/')}}/pro/{{@$pro->id}}/delete" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a>
                             </div><br>
                               <div class="img-container"><input type="hidden" class="proimg" value="{{asset('/images')}}/{{$pro->caver_url}}" name="">
-                                <img class="proimg" src="{{asset('/images')}}/{{$pro->caver_url}}" class="img-responsive">
+                                <img class="proimg img-responsive" src="{{asset('/images')}}/{{$pro->caver_url}}">
                               </div>
                               <h5 class="protit">{{$pro->project_name}}</h5>
                             </div>
@@ -110,7 +110,7 @@
                             <div class="profile-img">
                               <img src="{{asset('/images')}}/{{$user->image}}">
                             </div>
-                            <a href="#">{{$user->first_name}}</a>
+                            <h4>{{$user->first_name}}  {{$user->last_name}}</h4>
                             <span>{{$user->position->EN_name}}</span>
                           </div>
                         </div>
@@ -277,7 +277,7 @@
       var descr = $(this).closest('#edit_exp').find(".d").text();
       var company = $(this).closest('#edit_exp').find(".c").text();
       var start = $(this).closest('#edit_exp').find(".s").text();
-      var end   = $(this).closest('#edit_exp').find(".e").text();
+      var end   = $(this).closest('#edit_exp').find(".e").text();console.log(end);
       $('#edit').find('#exp_id').val(id);
       $('#edit').find('#title').val(title);
       $('#edit').find('#description').text(descr);
@@ -293,7 +293,7 @@
       }else{
         
         $('#end').empty();
-                var endD = '<input class="form-control end datepicker" type="date" name="end_date" id="endDate" placeholder="To" value="" >';
+                var endD = '<input class="form-control end datepicker" type="date" name="end_date" id="endDate" placeholder="To" value="'+end+'" >';
                 $('#end').append(endD);
 
         $('#CurrentlyWork').prop('checked', false);

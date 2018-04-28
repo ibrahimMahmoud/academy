@@ -79,7 +79,15 @@
                   <div class="col-sm-10">
                     <label class="col-md-3 control-label">Position</label>
                     <div class="col-md-9">
-                      <input class="form-control" type="text" id="position" name="position" value="{{$user->position->EN_name}}">
+                      <select class="form-control" id="position" name="position">
+                        @foreach($position as $p)
+                        <option value="{{$p->id}}" 
+                          @if($p->id == $user->position_id) 
+                          selected="selected" 
+                          @endif
+                          >{{$p->EN_name}}</option>
+                        @endforeach
+                      </select>
                     </div>
                   </div>
                 </div>

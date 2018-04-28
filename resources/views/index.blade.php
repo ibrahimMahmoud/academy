@@ -1,8 +1,8 @@
 @extends('layout.master')
 @section('content')
     <!-- Main Container -->
-    <main id="main-container">
-<div align="center"><a href="#" data-toggle="modal" data-target="#createpost" data-original-title="Post" id="messagemodel">Write Post</a></div><br>
+    <main id="main-container"><br>
+<div align="center"><a href="#" data-toggle="modal" data-target="#createpost" data-original-title="Post" id="messagemodel"><strong><h3> Write Post </h3></strong></a></div>
         <!-- Page Content -->
         <div class="content content-boxed">
             <div class="row">
@@ -98,7 +98,7 @@
                             <img src="{{asset('/images')}}/{{$user->image}}">
                             
                           </div>
-                          <a href="#">{{$user->first_name}}</a>
+                          <h4>{{$user->first_name}} {{$user->last_name}}</h4>
                           <span>{{$user->position->EN_name}}</span>
                         </div>
                       </div>
