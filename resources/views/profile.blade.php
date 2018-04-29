@@ -47,8 +47,8 @@
                           <ul class="block-options">
                             <li><a href="{{URL::to('/')}}/experince/{{@$expr->id}}/delete" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a></li>
                             <!-- <li><a href="{{URL::to('/')}}/experince/{{@$expr->id}}/edit"><i class="fa fa-pencil"></i></a></li>if you wanna make edit with view -->
-                            <li><a href="#" class="btn btn-sm btn-icon btn-success on-default edit-row editM"
-                      data-toggle="modal" data-target="#edit" exp_id="{{$expr->id}}" data-original-title="Edit"><i class="icon md-edit" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="editM"
+                      data-toggle="modal" data-target="#edit" exp_id="{{$expr->id}}" data-original-title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
                       <!-- <li><a href="{{action('ExperienceController@edit', ['id' => @$expr->id]) }}" class="btn btn-sm btn-icon btn-success on-default edit-row"
                       data-target="#edit{{ @$expr->id }}" data-original-title="Edit"><i class="icon md-edit" aria-hidden="true"></i></a></li> -->
                           </ul >
@@ -80,7 +80,7 @@
                         <div class="col-md-4 project">
                             <div class="project-item">
                               <div class="row block-title">
-                              <a href="#" class="eproo proorp" data-toggle="modal" data-target="#editproject" pro_id="{{$pro->id}}" data-original-title="Edit">Edit</a><input type="hidden" class="kl" value="{{$pro->id}}" name="kl">
+                              <a href="#" class="eproo proorp" data-toggle="modal" data-target="#editproject" pro_id="{{$pro->id}}" data-original-title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a><input type="hidden" class="kl" value="{{$pro->id}}" name="kl">
                               <a href="{{URL::to('/')}}/pro/{{@$pro->id}}/delete" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a>
                             </div><br>
                               <div class="img-container"><input type="hidden" class="proimg" value="{{asset('/images')}}/{{$pro->caver_url}}" name="">
@@ -164,6 +164,7 @@
                             <input class="form-control datepicker" type="text" name="start_date" id="start" placeholder="From" value="" >
                           </div>
                           <div class="col-md-6" id="end">
+                            <input class="form-control datepicker" type="text" name="end_date" id="endDate" placeholder="To" value="">
                           </div>
                         </div>
                       </div>
@@ -264,6 +265,7 @@
       $(document).ready(function(){
         $('.datepicker').datepicker();
       });
+
       $(document).on('click','#submit',function(){
         var id = $('#exp_id').val();
         $('form').attr("action",'{{URL("/experince")}}/'+id+'/update');
@@ -283,20 +285,22 @@
       $('#edit').find('#description').text(descr);
       $('#edit').find('#company_name').val(company);
       $('#edit').find('#start').val(start);
+      $('#edit').find('#endDate').val(end);
 
       if(end == ""){
         $('#CurrentlyWork').prop('checked', true);
-        $('#end').empty();
-        var endD = '<input class="form-control end datepicker" type="date" name="end_date" id="endDate" placeholder="To" value="'+end+'" >';
-        $('#end').append(endD);
+        $('#endDate').hide();
+        $( ".datepicker" ).datepicker();
+        //$('#end').empty();
+        // var endD = '<input class="form-control end datepicker" type="date" name="end_date" id="endDate" placeholder="To" value="'+end+'" >';
+        // $('#end').append(endD);
 
       }else{
-        
-        $('#end').empty();
-                var endD = '<input class="form-control end datepicker" type="date" name="end_date" id="endDate" placeholder="To" value="'+end+'" >';
-                $('#end').append(endD);
-
         $('#CurrentlyWork').prop('checked', false);
+        $( ".datepicker" ).datepicker();
+        // $('#end').empty();
+        //   var endD = '<input class="form-control end datepicker" type="text" name="end_date" id="endDate" placeholder="To" value="'+end+'" >';
+        //   $('#end').append(endD);
       }
 
     });
